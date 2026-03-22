@@ -264,7 +264,7 @@ export default function AboutPage() {
           href="/"
           className="relative z-10 text-2xl font-bold tracking-[0.2em] text-white font-[family-name:var(--font-heading)]"
         >
-          HEAVEN
+          HEAVEN INTERACTIVE
         </Link>
         <div className="relative z-10 hidden sm:flex items-center gap-8">
           {[

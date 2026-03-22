@@ -515,7 +515,7 @@ export default function QuantumMindPage() {
           href="/"
           className="text-2xl font-bold tracking-[0.2em] text-white font-[family-name:var(--font-heading)]"
         >
-          HEAVEN
+          HEAVEN INTERACTIVE
         </Link>
         <Link
           href="/services"
@@ -841,7 +841,7 @@ export default function QuantumMindPage() {
         <div className="mx-auto max-w-6xl px-6 md:px-12 py-12 md:py-16">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <p className="text-sm text-gray-500">
-              <span className="text-gray-400">HEAVEN</span> / Quantum Mind
+              <span className="text-gray-400">HEAVEN INTERACTIVE</span> / Quantum Mind
             </p>
             <Link
               href="/"

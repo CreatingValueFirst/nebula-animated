@@ -350,23 +350,40 @@ export default function Home() {
           HERO SECTION
           ================================================================ */}
       <section className="relative h-dvh w-full overflow-hidden">
-        {/* Remotion Player -- fills hero */}
-        <div className="remotion-player-container">
-          <Player
-            component={CosmicComposition}
-            compositionWidth={1920}
-            compositionHeight={1080}
-            fps={30}
-            durationInFrames={600}
-            autoPlay
-            loop
-            style={{
-              width: '100%',
-              height: '100%',
-            }}
-            acknowledgeRemotionLicense
-          />
-        </div>
+        {/* Background Video - Runway Gen-4 cosmic animation */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          // @ts-expect-error -- fetchPriority is valid HTML on video but missing from React's VideoHTMLAttributes
+          fetchPriority="high"
+          className="absolute inset-0 w-full h-full object-cover"
+          poster="/nebula-4k.jpg"
+        >
+          <source src="/cosmic-video-1.mp4" type="video/mp4" />
+        </video>
+
+        {/* Remotion overlay -- stars, text reveals, black hole (screen-blended on top of video) */}
+        <Player
+          component={CosmicComposition}
+          compositionWidth={1920}
+          compositionHeight={1080}
+          fps={30}
+          durationInFrames={600}
+          autoPlay
+          loop
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            zIndex: 5,
+            mixBlendMode: 'screen',
+          }}
+          acknowledgeRemotionLicense
+        />
 
         {/* Gradient overlay */}
         <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/40 via-black/10 to-[#0a0a0f]" />

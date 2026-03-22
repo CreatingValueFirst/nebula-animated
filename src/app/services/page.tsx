@@ -289,7 +289,7 @@ export default function ServicesPage() {
           href="/"
           className="relative z-10 text-2xl font-bold tracking-[0.2em] text-white font-[family-name:var(--font-heading)]"
         >
-          HEAVEN
+          HEAVEN INTERACTIVE
         </Link>
         <div className="relative z-10 hidden sm:flex items-center gap-8">
           {[
@@ -473,7 +473,7 @@ export default function ServicesPage() {
               href="/"
               className="text-lg font-bold tracking-[0.2em] text-gray-500 hover:text-white transition-colors duration-300 font-[family-name:var(--font-heading)]"
             >
-              HEAVEN
+              HEAVEN INTERACTIVE
             </Link>
             <div className="flex items-center gap-6">
               <Link href="/services" className="text-sm text-gray-500 hover:text-[#2d8a8a] transition-colors duration-300">

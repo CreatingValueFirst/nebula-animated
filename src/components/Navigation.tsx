@@ -50,7 +50,7 @@ export default function Navigation() {
             {/* Logo */}
             <Link href="/" className="group flex items-center gap-2.5">
               <span className="text-xl md:text-2xl font-bold tracking-[0.2em] text-white font-[family-name:var(--font-heading)]">
-                HEAVEN
+                HEAVEN INTERACTIVE
               </span>
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2d8a8a] opacity-60" />

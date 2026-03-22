@@ -78,7 +78,7 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="group inline-flex items-center gap-2">
               <span className="text-xl font-bold tracking-[0.2em] text-white font-[family-name:var(--font-heading)]">
-                HEAVEN
+                HEAVEN INTERACTIVE
               </span>
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2d8a8a] opacity-50" />

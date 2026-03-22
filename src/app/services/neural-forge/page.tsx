@@ -249,7 +249,7 @@ export default function NeuralForgePage() {
       >
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-[#0a0a0f]/80 to-transparent pointer-events-none" />
         <Link href="/" className="relative z-10 text-2xl font-bold tracking-[0.2em] text-white font-[family-name:var(--font-heading)]">
-          HEAVEN
+          HEAVEN INTERACTIVE
         </Link>
         <div className="relative z-10 hidden sm:flex items-center gap-8">
           <Link href="/" className="relative text-sm tracking-widest uppercase text-gray-300 hover:text-white transition-colors duration-300 after:absolute after:bottom-[-4px] after:left-0 after:h-[1px] after:w-0 after:bg-[#2d8a8a] hover:after:w-full after:transition-all after:duration-300">
@@ -667,7 +667,7 @@ export default function NeuralForgePage() {
         <div className="mx-auto max-w-6xl px-6 md:px-12 py-12 md:py-16">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <Link href="/" className="text-lg font-bold tracking-[0.2em] text-gray-500 hover:text-white transition-colors duration-300 font-[family-name:var(--font-heading)]">
-              HEAVEN
+              HEAVEN INTERACTIVE
             </Link>
             <div className="flex items-center gap-6">
               <Link href="/services" className="text-sm text-gray-500 hover:text-[#2d8a8a] transition-colors duration-300">Services</Link>
