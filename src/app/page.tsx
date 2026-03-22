@@ -2,6 +2,7 @@
 
 import React, { useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import {
   motion,
@@ -18,7 +19,6 @@ const Player = dynamic(
   { ssr: false }
 );
 
-// The Remotion composition -- created by a separate agent
 import { NebulaComposition } from '../remotion/NebulaComposition';
 
 // ---------------------------------------------------------------------------
@@ -31,19 +31,10 @@ const fadeUp = {
     y: 0,
     transition: {
       duration: 0.6,
-      delay: i * 0.12,
+      delay: i * 0.1,
       ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
     },
   }),
-};
-
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.92 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
 };
 
 // ---------------------------------------------------------------------------
@@ -79,17 +70,232 @@ function AnimatedSection({
 }
 
 // ---------------------------------------------------------------------------
-// Feature Card
+// Animated Counter
 // ---------------------------------------------------------------------------
-function FeatureCard({
+function AnimatedStat({
+  value,
+  label,
+  index,
+}: {
+  value: string;
+  label: string;
+  index: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+
+  return (
+    <motion.div
+      ref={ref}
+      custom={index}
+      variants={fadeUp}
+      initial="hidden"
+      animate={isInView ? 'visible' : 'hidden'}
+      className="flex flex-col items-center text-center"
+    >
+      <span className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] text-white font-[family-name:var(--font-heading)]">
+        {value}
+      </span>
+      <span className="mt-2 text-xs sm:text-sm tracking-[0.15em] uppercase text-gray-500">
+        {label}
+      </span>
+    </motion.div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Service Card
+// ---------------------------------------------------------------------------
+const services = [
+  {
+    title: 'Neural Forge',
+    description: 'Custom AI model training and fine-tuning tailored to your unique data, delivering production-ready models with unmatched precision.',
+    href: '/services/neural-forge',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93" />
+        <path d="M8.24 4.35A4 4 0 0 1 12 2" />
+        <path d="M5 8a4 4 0 0 1 3.24-3.93" />
+        <path d="M5 8a4 4 0 0 0-.67 6.41" />
+        <path d="M9.13 17.34a4 4 0 0 1-4.8-2.93" />
+        <path d="M12 18a4 4 0 0 1-2.87-.66" />
+        <path d="M14.87 17.34A4 4 0 0 0 12 18" />
+        <path d="M19.67 14.41a4 4 0 0 1-4.8 2.93" />
+        <path d="M19 8a4 4 0 0 1 .67 6.41" />
+        <path d="M19 8a4 4 0 0 0-3.24-3.93" />
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Voice Cosmos',
+    description: 'Conversational AI agents that speak, listen, and understand context -- powering phone lines, web chat, and omnichannel support.',
+    href: '/services/voice-cosmos',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+        <line x1="12" x2="12" y1="19" y2="22" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Vision Nebula',
+    description: 'Computer vision and recognition systems for real-time object detection, quality inspection, and visual intelligence at scale.',
+    href: '/services/vision-nebula',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Data Singularity',
+    description: 'Predictive analytics engine that transforms raw data into actionable foresight -- demand forecasting, anomaly detection, and trend analysis.',
+    href: '/services/data-singularity',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+        <path d="m19 9-5 5-4-4-3 3" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Code Pulsar',
+    description: 'AI-powered development tools that accelerate your engineering velocity -- code generation, review automation, and intelligent refactoring.',
+    href: '/services/code-pulsar',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+        <line x1="14" y1="4" x2="10" y2="20" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Quantum Mind',
+    description: 'AI strategy and consulting for executive teams -- roadmap design, build-vs-buy analysis, and organizational AI readiness assessment.',
+    href: '/services/quantum-mind',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+        <path d="m15 5 4 4" />
+      </svg>
+    ),
+  },
+];
+
+function ServiceCard({
   title,
   description,
+  href,
   icon,
   index,
 }: {
   title: string;
   description: string;
+  href: string;
   icon: React.ReactNode;
+  index: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.25 });
+
+  return (
+    <motion.div
+      ref={ref}
+      custom={index}
+      variants={fadeUp}
+      initial="hidden"
+      animate={isInView ? 'visible' : 'hidden'}
+      whileHover={{ y: -6, transition: { duration: 0.3, ease: 'easeOut' } }}
+      className="group relative"
+    >
+      <Link href={href} className="block">
+        <div className="relative rounded-2xl glass glass-hover p-8 md:p-10 transition-all duration-500 h-full">
+          {/* Hover glow */}
+          <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-br from-[#2d8a8a]/[0.06] to-[#4a9eff]/[0.03]" />
+
+          {/* Hover shadow lift */}
+          <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none shadow-[0_8px_32px_rgba(45,138,138,0.08),0_2px_8px_rgba(0,0,0,0.12)]" />
+
+          <div className="relative z-10">
+            {/* Icon */}
+            <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[#2d8a8a]/10 text-[#2d8a8a] transition-colors duration-300 group-hover:bg-[#2d8a8a]/15 group-hover:text-[#3aafaf]">
+              {icon}
+            </div>
+
+            {/* Title */}
+            <h3 className="mb-3 text-xl font-semibold tracking-tight text-white font-[family-name:var(--font-heading)] group-hover:text-white transition-colors duration-300">
+              {title}
+            </h3>
+
+            {/* Description */}
+            <p className="text-[15px] leading-relaxed text-gray-400 mb-5">
+              {description}
+            </p>
+
+            {/* Learn More */}
+            <span className="inline-flex items-center gap-1.5 text-[13px] font-medium tracking-wide text-[#2d8a8a] opacity-70 group-hover:opacity-100 transition-all duration-300 group-hover:gap-2.5">
+              Learn More
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="transition-transform duration-300 group-hover:translate-x-0.5"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </span>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Testimonial Card
+// ---------------------------------------------------------------------------
+const testimonials = [
+  {
+    quote: "Heaven Interactive transformed our data pipeline. Their Neural Forge platform reduced our model training time by 73% while dramatically improving accuracy. The ROI was visible within the first month.",
+    name: 'Sarah Chen',
+    role: 'CTO at TechCorp',
+    initials: 'SC',
+  },
+  {
+    quote: "The Voice Cosmos agents handle 85% of our support calls autonomously now. Our customers can't tell the difference -- in fact, satisfaction scores went up. That's the definition of AI done right.",
+    name: 'Marcus Rodriguez',
+    role: 'VP Engineering at DataFlow',
+    initials: 'MR',
+  },
+  {
+    quote: "Working with the Quantum Mind consulting team was a masterclass in AI strategy. They helped us identify $2.4M in efficiency gains we were completely blind to before.",
+    name: 'Elena Kowalski',
+    role: 'Director of AI at CloudScale',
+    initials: 'EK',
+  },
+];
+
+function TestimonialCard({
+  quote,
+  name,
+  role,
+  initials,
+  index,
+}: {
+  quote: string;
+  name: string;
+  role: string;
+  initials: string;
   index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -102,108 +308,25 @@ function FeatureCard({
       variants={fadeUp}
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
-      whileHover={{ y: -4, transition: { duration: 0.25 } }}
-      className="group relative rounded-2xl glass glass-hover p-8 md:p-10 transition-colors duration-300"
+      className="relative rounded-2xl glass p-8 md:p-10"
     >
-      {/* Subtle glow on hover */}
-      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-br from-[#2d8a8a]/5 to-[#c4623a]/5" />
+      {/* Quote mark */}
+      <div className="mb-6 text-[#2d8a8a]/30 text-5xl font-serif leading-none select-none">&ldquo;</div>
 
-      <div className="relative z-10">
-        <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[#2d8a8a]/10 text-[#2d8a8a]">
-          {icon}
+      <p className="text-[15px] md:text-base leading-relaxed text-gray-300 mb-8">
+        {quote}
+      </p>
+
+      <div className="flex items-center gap-4">
+        {/* Avatar placeholder */}
+        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#2d8a8a]/10 text-[13px] font-semibold tracking-wider text-[#2d8a8a]">
+          {initials}
         </div>
-        <h3 className="mb-3 text-xl font-semibold tracking-tight text-white font-[family-name:var(--font-heading)]">
-          {title}
-        </h3>
-        <p className="text-[15px] leading-relaxed text-gray-400">
-          {description}
-        </p>
-      </div>
-    </motion.div>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Gallery Tile
-// ---------------------------------------------------------------------------
-function GalleryTile({
-  label,
-  description,
-  effect,
-  index,
-}: {
-  label: string;
-  description: string;
-  effect: string;
-  index: number;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.25 });
-
-  // Each tile applies a different CSS effect on hover
-  const effectClasses: Record<string, string> = {
-    zoom: 'group-hover:scale-110 transition-transform duration-700 ease-out',
-    colorShift:
-      'group-hover:[filter:hue-rotate(90deg)_saturate(1.4)] transition-[filter] duration-700 ease-out',
-    blur: 'group-hover:[clip-path:inset(0%)] [clip-path:inset(10%_10%_10%_10%)] transition-[clip-path] duration-700 ease-out',
-    particles: '',
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      custom={index}
-      variants={fadeUp}
-      initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
-      className="group relative aspect-[4/3] overflow-hidden rounded-2xl cursor-pointer"
-    >
-      {/* Image with effect */}
-      <div className="absolute inset-0">
-        <Image
-          src="/nebula.jpg"
-          alt={label}
-          fill
-          className={`object-cover ${effectClasses[effect] || ''}`}
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-        />
-      </div>
-
-      {/* Particle overlay for the particles tile */}
-      {effect === 'particles' && (
-        <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          {Array.from({ length: 30 }).map((_, i) => (
-            <span
-              key={i}
-              className="absolute rounded-full bg-white animate-twinkle"
-              style={{
-                width: `${1.5 + Math.random() * 2.5}px`,
-                height: `${1.5 + Math.random() * 2.5}px`,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${2 + Math.random() * 2}s`,
-              }}
-            />
-          ))}
+        <div>
+          <p className="text-sm font-medium text-white">{name}</p>
+          <p className="text-[13px] text-gray-500">{role}</p>
         </div>
-      )}
-
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-      {/* Text */}
-      <div className="absolute bottom-0 left-0 right-0 z-30 p-5 md:p-6">
-        <h4 className="text-base font-semibold text-white mb-1 font-[family-name:var(--font-heading)]">
-          {label}
-        </h4>
-        <p className="text-sm text-gray-300 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          {description}
-        </p>
       </div>
-
-      {/* Hover border glow */}
-      <div className="absolute inset-0 z-30 rounded-2xl border border-white/0 group-hover:border-[#2d8a8a]/30 transition-colors duration-500 pointer-events-none" />
     </motion.div>
   );
 }
@@ -245,72 +368,123 @@ export default function Home() {
           />
         </div>
 
-        {/* Gradient overlay -- transparent top, solid black bottom */}
-        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/30 via-transparent to-[#0a0a0f]" />
-
-        {/* Floating Navigation */}
-        <motion.nav
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-6 md:px-12 lg:px-16 py-6"
-        >
-          <a
-            href="#"
-            className="text-2xl font-bold tracking-[0.2em] text-white font-[family-name:var(--font-heading)]"
-          >
-            NEBULA
-          </a>
-          <div className="hidden sm:flex items-center gap-8">
-            {['Explore', 'Gallery', 'About'].map((link) => (
-              <a
-                key={link}
-                href={`#${link.toLowerCase()}`}
-                className="relative text-sm tracking-widest uppercase text-gray-300 hover:text-white transition-colors duration-300 after:absolute after:bottom-[-4px] after:left-0 after:h-[1px] after:w-0 after:bg-[#2d8a8a] hover:after:w-full after:transition-all after:duration-300"
-              >
-                {link}
-              </a>
-            ))}
-          </div>
-        </motion.nav>
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/40 via-black/10 to-[#0a0a0f]" />
 
         {/* Hero Text */}
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center px-6 text-center">
+          {/* Tagline */}
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="mb-4 text-xs sm:text-sm tracking-[0.3em] uppercase text-[#2d8a8a]"
+            className="mb-5 text-xs sm:text-sm tracking-[0.3em] uppercase text-[#2d8a8a]"
           >
-            Cinematic Space Visualization
+            Artificial Intelligence Services
           </motion.p>
+
+          {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.8 }}
-            className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-[-0.03em] text-white font-[family-name:var(--font-heading)] leading-[0.9]"
+            className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-[-0.04em] text-white font-[family-name:var(--font-heading)] leading-[0.9]"
           >
-            ELEPHANT&apos;S
+            HEAVEN
             <br />
-            <span className="gradient-text-nebula">TRUNK</span>
+            <span className="gradient-text-nebula">INTERACTIVE</span>
           </motion.h1>
+
+          {/* Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.1 }}
-            className="mt-6 max-w-md text-sm sm:text-base text-gray-400 leading-relaxed"
+            className="mt-6 max-w-lg text-base sm:text-lg text-gray-400 leading-relaxed"
           >
-            IC 1396 brought to life through programmatic animation.
-            <br className="hidden sm:block" />
-            Built with Remotion, Next.js, and Framer Motion.
+            Where Intelligence Meets the Infinite
           </motion.p>
+
+          {/* CTA buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.35 }}
+            className="mt-10 flex flex-col sm:flex-row items-center gap-4"
+          >
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-2 rounded-full bg-[#2d8a8a] px-8 py-3.5 text-sm font-medium tracking-wider uppercase text-white transition-all duration-300 hover:bg-[#3aafaf] hover:shadow-[0_0_24px_rgba(45,138,138,0.3),0_0_48px_rgba(45,138,138,0.1)] active:scale-[0.98]"
+            >
+              Explore Services
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </Link>
+            <Link
+              href="/explore"
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 px-8 py-3.5 text-sm font-medium tracking-wider uppercase text-gray-300 transition-all duration-300 hover:border-white/20 hover:text-white hover:bg-white/[0.04] active:scale-[0.98]"
+            >
+              See Demo
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+            </Link>
+          </motion.div>
+
+          {/* Stats Row */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.7 }}
+            className="mt-16 sm:mt-20 flex items-center gap-8 sm:gap-14"
+          >
+            {[
+              { value: '99.7%', label: 'Accuracy' },
+              { value: '50ms', label: 'Latency' },
+              { value: '1B+', label: 'Parameters' },
+            ].map((stat, i) => (
+              <div key={stat.label} className="flex items-center gap-8 sm:gap-14">
+                {i > 0 && (
+                  <div className="h-8 w-[1px] bg-white/10 -ml-8 sm:-ml-14" />
+                )}
+                <div className="text-center">
+                  <div className="text-lg sm:text-xl font-bold text-white font-[family-name:var(--font-heading)] tracking-tight">
+                    {stat.value}
+                  </div>
+                  <div className="mt-1 text-[10px] sm:text-xs tracking-[0.2em] uppercase text-gray-500">
+                    {stat.label}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
 
           {/* Scroll indicator */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.6 }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2"
+            transition={{ duration: 0.6, delay: 2.0 }}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2"
           >
             <motion.div
               animate={{ y: [0, 8, 0] }}
@@ -327,93 +501,32 @@ export default function Home() {
       </section>
 
       {/* ================================================================
-          FEATURES SECTION
+          SERVICES SECTION
           ================================================================ */}
-      <section id="explore" className="relative py-28 md:py-36 lg:py-44">
-        {/* Subtle radial background glow */}
+      <section className="relative py-28 md:py-36 lg:py-44">
+        {/* Radial glow */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full bg-[#2d8a8a]/[0.03] blur-[120px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[700px] rounded-full bg-[#2d8a8a]/[0.03] blur-[140px]" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
+        <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12 lg:px-16">
           <AnimatedSection className="mb-16 md:mb-20 text-center">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#2d8a8a]">
-              Features
+              Our Services
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              <span className="gradient-text-nebula">Cinematic Space</span>
-              <br />
-              Animations
+              Intelligence at{' '}
+              <span className="gradient-text-nebula">Every Scale</span>
             </h2>
+            <p className="mt-5 mx-auto max-w-xl text-base text-gray-400 leading-relaxed">
+              Six specialized AI practices, each built by domain experts, unified by a single mission: making intelligence your competitive advantage.
+            </p>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-            <FeatureCard
-              index={0}
-              title="Remotion Powered"
-              description="Programmatic video animations with React components. Write animations in code, render them as video or embed them live."
-              icon={
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polygon points="5 3 19 12 5 21 5 3" />
-                </svg>
-              }
-            />
-            <FeatureCard
-              index={1}
-              title="Deep Space Imagery"
-              description="High-resolution nebula photography brought to life with layered parallax, animated overlays, and cinematic color grading."
-              icon={
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <circle cx="12" cy="12" r="4" />
-                  <path d="M12 2v2" />
-                  <path d="M12 20v2" />
-                  <path d="m4.93 4.93 1.41 1.41" />
-                  <path d="m17.66 17.66 1.41 1.41" />
-                  <path d="M2 12h2" />
-                  <path d="M20 12h2" />
-                  <path d="m6.34 17.66-1.41 1.41" />
-                  <path d="m19.07 4.93-1.41 1.41" />
-                </svg>
-              }
-            />
-            <FeatureCard
-              index={2}
-              title="Interactive Experience"
-              description="Scroll-driven animations and parallax effects create depth. Every interaction is crafted to feel like exploring real space."
-              icon={
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
-                  <path d="m9 12 2 2 4-4" />
-                </svg>
-              }
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {services.map((service, i) => (
+              <ServiceCard key={service.title} {...service} index={i} />
+            ))}
           </div>
         </div>
       </section>
@@ -425,181 +538,166 @@ export default function Home() {
         ref={parallaxRef}
         className="relative h-[70vh] md:h-[80vh] overflow-hidden"
       >
-        {/* Parallax image */}
+        {/* Parallax image with responsive srcSet */}
         <motion.div
           className="absolute inset-[-20%] w-[140%] h-[140%]"
           style={{ y: parallaxY }}
         >
-          <Image
-            src="/nebula.jpg"
-            alt="Elephant's Trunk Nebula"
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
+          <picture>
+            <source media="(max-width: 828px)" srcSet="/nebula-mobile.jpg" />
+            <source media="(max-width: 1920px)" srcSet="/nebula-1080.jpg" />
+            <source media="(max-width: 2560px)" srcSet="/nebula-2k.jpg" />
+            <Image
+              src="/nebula-4k.jpg"
+              alt="Deep space nebula visualization"
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority
+            />
+          </picture>
         </motion.div>
 
         {/* Darkening overlay */}
         <motion.div
-          className="absolute inset-0 bg-black/40"
+          className="absolute inset-0 bg-black/50"
           style={{ opacity: parallaxOpacity }}
         />
 
         {/* Edge gradients for seamless blending */}
         <div className="absolute inset-0 z-10">
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#0a0a0f] to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0a0f] to-transparent" />
+          <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#0a0a0f] to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0a0a0f] to-transparent" />
         </div>
 
         {/* Text overlay */}
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center px-6 text-center">
           <AnimatedSection>
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#2d8a8a]/80">
-              Deep Space Object
+              Enterprise-Grade AI
             </p>
             <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.03em] text-white font-[family-name:var(--font-heading)] leading-[1.05]">
-              THE ELEPHANT&apos;S
+              POWERING THE
               <br />
-              TRUNK NEBULA
+              <span className="gradient-text-nebula">FUTURE OF AI</span>
             </h2>
-            <div className="mt-6 flex items-center justify-center gap-3 text-sm text-gray-300">
-              <span className="font-medium">IC 1396</span>
-              <span className="w-1 h-1 rounded-full bg-[#2d8a8a]" />
-              <span>2,400 light-years from Earth</span>
+          </AnimatedSection>
+
+          {/* Stats */}
+          <AnimatedSection delay={0.3} className="mt-12 md:mt-16">
+            <div className="flex flex-wrap items-center justify-center gap-10 sm:gap-16 md:gap-20">
+              <AnimatedStat value="500+" label="Models Deployed" index={0} />
+              <AnimatedStat value="99.9%" label="Uptime SLA" index={1} />
+              <AnimatedStat value="42" label="Countries Served" index={2} />
             </div>
           </AnimatedSection>
         </div>
       </section>
 
       {/* ================================================================
-          GALLERY SECTION
+          TESTIMONIALS SECTION
           ================================================================ */}
-      <section id="gallery" className="relative py-28 md:py-36 lg:py-44">
+      <section className="relative py-28 md:py-36 lg:py-44">
+        {/* Background glow */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute bottom-0 left-1/4 w-[600px] h-[400px] rounded-full bg-[#c4623a]/[0.02] blur-[100px]" />
+          <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[400px] rounded-full bg-[#c4623a]/[0.02] blur-[120px]" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
+        <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12 lg:px-16">
           <AnimatedSection className="mb-16 md:mb-20 text-center">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#c4623a]">
-              Gallery
+              Testimonials
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              Animation{' '}
-              <span className="gradient-text-nebula">Techniques</span>
+              Trusted by{' '}
+              <span className="gradient-text-nebula">Leaders</span>
             </h2>
+            <p className="mt-5 mx-auto max-w-xl text-base text-gray-400 leading-relaxed">
+              Industry leaders rely on Heaven Interactive to power their most critical systems.
+            </p>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-            <GalleryTile
-              index={0}
-              label="Zoom Effect"
-              description="CSS transform scale driven by hover interaction"
-              effect="zoom"
-            />
-            <GalleryTile
-              index={1}
-              label="Color Shift"
-              description="Hue-rotate and saturation filter animation"
-              effect="colorShift"
-            />
-            <GalleryTile
-              index={2}
-              label="Blur Reveal"
-              description="Clip-path animation reveals hidden regions"
-              effect="blur"
-            />
-            <GalleryTile
-              index={3}
-              label="Particle Overlay"
-              description="Animated CSS dots simulating stellar particles"
-              effect="particles"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            {testimonials.map((t, i) => (
+              <TestimonialCard key={t.name} {...t} index={i} />
+            ))}
           </div>
         </div>
       </section>
 
       {/* ================================================================
-          ABOUT SECTION
+          CTA SECTION
           ================================================================ */}
-      <section id="about" className="relative py-28 md:py-36">
+      <section className="relative py-24 md:py-32 lg:py-40 overflow-hidden">
+        {/* Background nebula image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/nebula-4k.jpg"
+            alt=""
+            fill
+            className="object-cover opacity-[0.06]"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-transparent to-[#0a0a0f]" />
+        </div>
+
+        {/* Glowing orb */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[#2d8a8a]/[0.04] blur-[100px] pointer-events-none" />
+
         <div className="relative z-10 mx-auto max-w-4xl px-6 md:px-12 text-center">
           <AnimatedSection>
-            <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#4a9eff]">
-              About
-            </p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)] mb-8">
-              Built for the{' '}
-              <span className="gradient-text-nebula">Cosmos</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] text-white font-[family-name:var(--font-heading)] leading-tight">
+              Ready to Transform
+              <br />
+              <span className="gradient-text-nebula">Your Business?</span>
             </h2>
-            <p className="text-base md:text-lg text-gray-400 leading-relaxed max-w-2xl mx-auto">
-              This project demonstrates how Remotion&apos;s programmatic video
-              engine can be embedded directly in a Next.js application, creating
-              interactive cinematic experiences. Every animation is driven by
-              React components and Framer Motion, rendering at 30fps with
-              real-time interactivity.
+            <p className="mt-6 mx-auto max-w-lg text-base md:text-lg text-gray-400 leading-relaxed">
+              Join hundreds of forward-thinking companies already leveraging Heaven Interactive to outpace their competition.
             </p>
-          </AnimatedSection>
-
-          {/* Tech badges */}
-          <AnimatedSection delay={0.2} className="mt-12">
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              {[
-                'Remotion',
-                'Next.js',
-                'Framer Motion',
-                'Tailwind CSS',
-                'TypeScript',
-              ].map((tech) => (
-                <span
-                  key={tech}
-                  className="glass rounded-full px-5 py-2 text-xs tracking-wider uppercase text-gray-300"
+            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href="/contact"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-[#2d8a8a] px-10 py-4 text-sm font-medium tracking-wider uppercase text-white transition-all duration-300 hover:bg-[#3aafaf] hover:shadow-[0_0_30px_rgba(45,138,138,0.35),0_0_60px_rgba(45,138,138,0.12)] active:scale-[0.98] animate-pulse-glow"
+              >
+                Get Started
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="transition-transform duration-300 group-hover:translate-x-0.5"
                 >
-                  {tech}
-                </span>
-              ))}
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </Link>
+              <Link
+                href="/services"
+                className="inline-flex items-center gap-2 text-sm tracking-wider uppercase text-gray-400 hover:text-[#2d8a8a] transition-colors duration-300"
+              >
+                View all services
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </Link>
             </div>
           </AnimatedSection>
         </div>
       </section>
-
-      {/* ================================================================
-          FOOTER
-          ================================================================ */}
-      <footer className="relative border-t border-white/[0.04]">
-        {/* Subtle gradient line along the top border */}
-        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#2d8a8a]/20 to-transparent" />
-
-        <div className="mx-auto max-w-6xl px-6 md:px-12 py-12 md:py-16">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <p className="text-sm text-gray-500 text-center md:text-left">
-              Built with{' '}
-              <span className="text-gray-400">Remotion</span> +{' '}
-              <span className="text-gray-400">Next.js</span> +{' '}
-              <span className="text-gray-400">Framer Motion</span>
-            </p>
-            <div className="flex items-center gap-6">
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-gray-500 hover:text-[#2d8a8a] transition-colors duration-300"
-              >
-                GitHub
-              </a>
-              <a
-                href="https://www.remotion.dev/docs"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-gray-500 hover:text-[#2d8a8a] transition-colors duration-300"
-              >
-                Remotion Docs
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }
