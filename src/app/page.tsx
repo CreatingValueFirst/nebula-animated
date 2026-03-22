@@ -267,21 +267,21 @@ function ServiceCard({
 const testimonials = [
   {
     quote: "Heaven Interactive transformed our data pipeline. Their Neural Forge platform reduced our model training time by 73% while dramatically improving accuracy. The ROI was visible within the first month.",
-    name: 'Sarah Chen',
-    role: 'CTO at TechCorp',
-    initials: 'SC',
+    name: 'Nikolay Dimitrov',
+    role: 'CTO at TechCorp - Sofia, Bulgaria',
+    initials: 'ND',
   },
   {
     quote: "The Voice Cosmos agents handle 85% of our support calls autonomously now. Our customers can't tell the difference -- in fact, satisfaction scores went up. That's the definition of AI done right.",
-    name: 'Marcus Rodriguez',
-    role: 'VP Engineering at DataFlow',
-    initials: 'MR',
+    name: 'Aleksandar Petrov',
+    role: 'VP Engineering at DataFlow - Sofia, Bulgaria',
+    initials: 'AP',
   },
   {
     quote: "Working with the Quantum Mind consulting team was a masterclass in AI strategy. They helped us identify $2.4M in efficiency gains we were completely blind to before.",
-    name: 'Elena Kowalski',
-    role: 'Director of AI at CloudScale',
-    initials: 'EK',
+    name: 'Maria Ivanova',
+    role: 'Director of AI at CloudScale - Sofia, Bulgaria',
+    initials: 'MI',
   },
 ];
 

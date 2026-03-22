@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useRef, useState, useCallback } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import {
   motion,
@@ -15,46 +14,51 @@ import {
 // ---------------------------------------------------------------------------
 const hotspots = [
   {
-    id: 'trunk',
-    label: "Elephant's Trunk",
+    id: 'savemytime',
+    label: 'SaveMyTime AI Lab',
     description:
-      'A dense column of interstellar gas and dust, approximately 20 light-years long. It acts as an incubator for new stars, shielding protostellar cores from the intense radiation of nearby massive stars.',
+      'Voice AI platform with 24/7 customer automation',
+    link: 'https://savemytime.dev/',
     x: 38,
     y: 55,
     color: '#2d8a8a',
   },
   {
-    id: 'stars',
-    label: 'Star Formation',
+    id: 'livetranslations',
+    label: 'LiveTranslations',
     description:
-      'New stars ignite in the densest regions where gravity overcomes thermal pressure. These protostars, some only hundreds of thousands of years old, will eventually clear their natal cocoons and shine freely.',
+      'AI video dubbing in 29 languages',
+    link: 'https://livetranslations.video/',
     x: 62,
     y: 30,
     color: '#4a9eff',
   },
   {
-    id: 'ionization',
-    label: 'Ionization Front',
+    id: 'yourdreams',
+    label: 'YourDreams.bio',
     description:
-      'UV radiation from the massive star HD 206267 sculpts the nebula, creating a sharp boundary between ionized and neutral gas. This front advances into the cloud at several kilometers per second.',
+      '3D DNA visualization meets AI dream analysis',
+    link: 'https://www.yourdreams.bio/',
     x: 75,
     y: 60,
     color: '#c4623a',
   },
   {
-    id: 'globules',
-    label: 'Dark Globules',
+    id: 'yourlongevity',
+    label: 'YourLongevity.bio',
     description:
-      'Dense pockets of molecular hydrogen and dust so thick they block all background light. These Bok globules may eventually collapse under their own gravity to form new stellar systems.',
+      'AI-powered longevity tracking platform',
+    link: 'https://www.yourlongevity.bio/dashboard',
     x: 28,
     y: 35,
     color: '#8b2020',
   },
   {
-    id: 'wind',
-    label: 'Stellar Wind',
+    id: 'dashboards',
+    label: 'SaveMyTime Dashboards',
     description:
-      'Powerful winds from hot young O-type and B-type stars blast outward at over 2,000 km/s, sculpting the surrounding gas into dramatic pillars, arcs, and filamentary structures visible across the nebula.',
+      'Real-time AI agent monitoring dashboards',
+    link: 'https://www.savemytime.cloud',
     x: 55,
     y: 15,
     color: '#c4847a',
@@ -160,7 +164,7 @@ export default function ExplorePage() {
             transition={{ duration: 0.6, delay: 0.9 }}
             className="mt-6 text-sm text-gray-400 max-w-md"
           >
-            Click the glowing hotspots to discover the hidden structures within IC 1396
+            Click the glowing hotspots to discover our projects across the universe
           </motion.p>
 
           {/* Scroll indicator */}
@@ -196,11 +200,11 @@ export default function ExplorePage() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="relative z-30 flex flex-wrap items-center justify-center gap-3 py-6 px-6 text-center"
         >
-          <span className="text-xs tracking-[0.2em] uppercase text-gray-500">IC 1396</span>
+          <span className="text-xs tracking-[0.2em] uppercase text-gray-500">Heaven Interactive</span>
           <span className="w-1 h-1 rounded-full bg-[#2d8a8a]/60" />
-          <span className="text-xs tracking-[0.15em] text-gray-500">2,400 light-years</span>
+          <span className="text-xs tracking-[0.15em] text-gray-500">Sofia, Bulgaria</span>
           <span className="w-1 h-1 rounded-full bg-[#2d8a8a]/60" />
-          <span className="text-xs tracking-[0.15em] text-gray-500">Constellation Cepheus</span>
+          <span className="text-xs tracking-[0.15em] text-gray-500">Explore Our Universe</span>
         </motion.div>
 
         {/* Main viewer container */}
@@ -213,17 +217,19 @@ export default function ExplorePage() {
                 transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="relative w-full h-full origin-center"
               >
-                <Image
-                  src="/nebula-4k.jpg"
-                  alt="Elephant's Trunk Nebula -- IC 1396"
-                  fill
-                  className="object-cover transition-[filter] duration-700 ease-out"
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover transition-[filter] duration-700 ease-out"
                   style={{
                     filter: filterPresets[activeFilter].filter,
                   }}
-                  sizes="100vw"
-                  priority
-                />
+                  poster="/nebula-4k.jpg"
+                >
+                  <source src="/cosmic-video-11.mp4" type="video/mp4" />
+                </video>
 
                 {/* Hotspots */}
                 {hotspots.map((hotspot) => (
@@ -302,7 +308,7 @@ export default function ExplorePage() {
               <div className="hidden md:flex items-center gap-2 text-gray-600">
                 <div className="w-1.5 h-1.5 rounded-full bg-[#2d8a8a] animate-pulse-glow" />
                 <span className="text-[10px] tracking-[0.15em] uppercase">
-                  Powered by Heaven Interactive Vision
+                  Powered by Heaven Interactive
                 </span>
               </div>
             </div>
@@ -341,17 +347,20 @@ export default function ExplorePage() {
             className="text-center mb-16"
           >
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#c4623a]">
-              Key Structures
+              Our Projects
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              What You&apos;re <span className="gradient-text-nebula">Seeing</span>
+              What We&apos;re <span className="gradient-text-nebula">Building</span>
             </h2>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {hotspots.map((hotspot, i) => (
-              <motion.div
+              <motion.a
                 key={hotspot.id}
+                href={hotspot.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -361,7 +370,7 @@ export default function ExplorePage() {
                   ease: [0.25, 0.46, 0.45, 0.94],
                 }}
                 whileHover={{ y: -4, transition: { duration: 0.25 } }}
-                className="group relative rounded-2xl glass glass-hover p-6 md:p-8 transition-colors duration-300"
+                className="group relative rounded-2xl glass glass-hover p-6 md:p-8 transition-colors duration-300 block"
               >
                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-br from-[rgba(45,138,138,0.05)] to-transparent" />
                 <div className="relative z-10">
@@ -376,7 +385,7 @@ export default function ExplorePage() {
                     {hotspot.description}
                   </p>
                 </div>
-              </motion.div>
+              </motion.a>
             ))}
           </div>
         </div>
@@ -511,22 +520,32 @@ function Hotspot({
                 className="h-[2px] w-10 rounded-full mb-3"
                 style={{ backgroundColor: hotspot.color }}
               />
-              <h4 className="text-sm font-semibold text-white font-[family-name:var(--font-heading)] mb-2">
+              <a href={hotspot.link} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-white font-[family-name:var(--font-heading)] mb-2 hover:text-[#2d8a8a] transition-colors duration-200 block">
                 {hotspot.label}
-              </h4>
+              </a>
               <p className="text-xs text-gray-400 leading-relaxed">
                 {hotspot.description}
               </p>
-              {/* Close hint */}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onToggle(hotspot.id);
-                }}
-                className="mt-3 text-[10px] tracking-[0.15em] uppercase text-gray-600 hover:text-gray-400 transition-colors duration-200"
-              >
-                Tap to close
-              </button>
+              <div className="mt-3 flex items-center justify-between">
+                <a
+                  href={hotspot.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[10px] tracking-[0.15em] uppercase text-[#2d8a8a] hover:text-[#3aafaf] transition-colors duration-200"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Visit Project
+                </a>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onToggle(hotspot.id);
+                  }}
+                  className="text-[10px] tracking-[0.15em] uppercase text-gray-600 hover:text-gray-400 transition-colors duration-200"
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </motion.div>
         )}

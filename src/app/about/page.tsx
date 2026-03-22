@@ -81,9 +81,9 @@ const timelineEvents = [
   {
     year: '2024',
     quarter: 'Q1',
-    title: 'Founded in San Francisco',
+    title: 'Founded in Sofia, Bulgaria',
     description:
-      'Three researchers from Stanford AI Lab founded Heaven Interactive with a vision to build artificial intelligence that amplifies human potential.',
+      'Two co-founders launched Heaven Interactive with a vision to build artificial intelligence that amplifies human potential across Eastern Europe and beyond.',
   },
   {
     year: '2024',
@@ -187,40 +187,28 @@ const values = [
 // ---------------------------------------------------------------------------
 const leadership = [
   {
-    name: 'Elena Vasquez',
-    title: 'Chief Executive Officer',
-    bio: 'Former VP of AI Research at DeepMind. PhD in Machine Learning from Stanford. Published 40+ papers on neural architecture search.',
+    name: 'Dimitar Roussev',
+    title: 'CEO & Co-Founder',
+    bio: 'Visionary entrepreneur driving AI innovation in Eastern Europe. Expert in voice AI, automation, and B2B solutions.',
     pattern: 'radial-gradient(circle at 30% 30%, #2d8a8a 0%, transparent 50%), radial-gradient(circle at 70% 70%, #c4623a 0%, transparent 50%)',
   },
   {
-    name: 'Marcus Chen',
-    title: 'Chief Technology Officer',
-    bio: 'Ex-Google Brain engineer. Architect of three production ML systems serving billions of requests. MIT CS alumnus.',
+    name: 'Denis Bozhkov',
+    title: 'Creative Director & Co-Founder',
+    bio: 'Award-winning designer blending art and technology. Specializes in 3D visualization, WebGL, and immersive digital experiences.',
     pattern: 'radial-gradient(circle at 60% 20%, #4a9eff 0%, transparent 50%), radial-gradient(circle at 30% 80%, #2d8a8a 0%, transparent 50%)',
   },
   {
-    name: 'Sarah Okonkwo',
-    title: 'VP of Engineering',
-    bio: 'Previously led infrastructure at Anthropic. Built distributed systems handling petabyte-scale data at Netflix.',
+    name: 'Head of Engineering',
+    title: 'Head of Engineering',
+    bio: 'Building robust, scalable AI infrastructure that powers real-time voice agents and intelligent automation pipelines.',
     pattern: 'radial-gradient(circle at 40% 60%, #c4623a 0%, transparent 50%), radial-gradient(circle at 80% 20%, #4a9eff 0%, transparent 50%)',
   },
   {
-    name: 'Dr. James Park',
-    title: 'Head of Research',
-    bio: 'Pioneer in multimodal learning. Former professor at CMU. Holds 12 patents in computer vision and natural language processing.',
+    name: 'AI Research Lead',
+    title: 'AI Research Lead',
+    bio: 'Advancing the frontier of conversational AI, computer vision, and multimodal learning for production-grade applications.',
     pattern: 'radial-gradient(circle at 70% 40%, #2d8a8a 0%, transparent 50%), radial-gradient(circle at 20% 70%, #c4623a 0%, transparent 50%)',
-  },
-  {
-    name: 'Amara Singh',
-    title: 'VP of Sales',
-    bio: 'Scaled enterprise revenue from zero to $100M at two AI startups. Former management consultant at McKinsey.',
-    pattern: 'radial-gradient(circle at 50% 30%, #4a9eff 0%, transparent 50%), radial-gradient(circle at 50% 80%, #2d8a8a 0%, transparent 50%)',
-  },
-  {
-    name: 'Liam Foster',
-    title: 'VP of Design',
-    bio: 'Led design at Figma and Stripe. Believes the best AI experiences feel invisible. Rhode Island School of Design graduate.',
-    pattern: 'radial-gradient(circle at 30% 50%, #c4623a 0%, transparent 50%), radial-gradient(circle at 80% 50%, #4a9eff 0%, transparent 50%)',
   },
 ];
 
