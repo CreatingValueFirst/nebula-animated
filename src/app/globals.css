@@ -1,0 +1,246 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-space-deep: #0a0a0f;
+  --color-space-dark: #0d0d14;
+  --color-nebula-teal: #2d8a8a;
+  --color-nebula-orange: #c4623a;
+  --color-star-blue: #4a9eff;
+  --color-nebula-crimson: #8b2020;
+  --color-nebula-pink: #c4847a;
+  --color-nebula-teal-light: #3aafaf;
+
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-space-grotesk);
+}
+
+/* =============================================
+   Base Styles
+   ============================================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0a0a0f;
+  color: #e8e8ec;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =============================================
+   Selection Colors
+   ============================================= */
+
+::selection {
+  background-color: rgba(45, 138, 138, 0.35);
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background-color: rgba(45, 138, 138, 0.35);
+  color: #ffffff;
+}
+
+/* =============================================
+   Custom Scrollbar
+   ============================================= */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(45, 138, 138, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(45, 138, 138, 0.5);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(45, 138, 138, 0.3) #0a0a0f;
+}
+
+/* =============================================
+   Custom Animations
+   ============================================= */
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(45, 138, 138, 0.2),
+                0 0 40px rgba(45, 138, 138, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(45, 138, 138, 0.4),
+                0 0 60px rgba(45, 138, 138, 0.2),
+                0 0 90px rgba(45, 138, 138, 0.1);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes nebula-drift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes text-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subtle-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* =============================================
+   Utility Animation Classes
+   ============================================= */
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.animate-nebula-drift {
+  background-size: 200% 200%;
+  animation: nebula-drift 15s ease-in-out infinite;
+}
+
+.animate-text-shimmer {
+  background-size: 200% auto;
+  animation: text-shimmer 4s linear infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+/* =============================================
+   Gradient Text Utility
+   ============================================= */
+
+.gradient-text-nebula {
+  background: linear-gradient(135deg, #2d8a8a 0%, #c4623a 50%, #4a9eff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #2d8a8a 0%,
+    #c4623a 25%,
+    #4a9eff 50%,
+    #c4623a 75%,
+    #2d8a8a 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: text-shimmer 6s linear infinite;
+}
+
+/* =============================================
+   Glass Morphism
+   ============================================= */
+
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-hover:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(45, 138, 138, 0.2);
+}
+
+/* =============================================
+   Remotion Player Container
+   ============================================= */
+
+.remotion-player-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.remotion-player-container > div {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.remotion-player-container video,
+.remotion-player-container canvas {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
