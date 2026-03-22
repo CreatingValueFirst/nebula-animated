@@ -1,17 +1,18 @@
 import { NextResponse } from 'next/server';
-import { getOAuth2Client } from '@/lib/google-calendar';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  const oauth2 = getOAuth2Client();
-  const url = oauth2.generateAuthUrl({
+  const params = new URLSearchParams({
+    client_id: '326035771916-hbcfh0en7pfg6hnjst06udqlkufvh59t.apps.googleusercontent.com',
+    redirect_uri: 'https://heaveninteractive.net/api/auth/callback',
+    response_type: 'code',
+    scope: 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events',
     access_type: 'offline',
     prompt: 'consent',
-    scope: [
-      'https://www.googleapis.com/auth/calendar',
-      'https://www.googleapis.com/auth/calendar.events',
-    ],
   });
-  return NextResponse.redirect(url);
+
+  return NextResponse.redirect(
+    `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`
+  );
 }
