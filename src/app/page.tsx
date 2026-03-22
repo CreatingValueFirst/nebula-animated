@@ -365,28 +365,27 @@ export default function Home() {
           <source src="/cosmic-video-4.mp4" type="video/mp4" />
         </video>
 
-        {/* Remotion overlay -- stars, text reveals, black hole (screen-blended on top of video) */}
-        <Player
-          component={CosmicComposition}
-          compositionWidth={1920}
-          compositionHeight={1080}
-          fps={30}
-          durationInFrames={600}
-          autoPlay
-          loop
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            zIndex: 5,
-            mixBlendMode: 'screen',
-          }}
-          acknowledgeRemotionLicense
-        />
+        {/* Gradient overlay - clean cinematic fade */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/50 via-transparent to-[#0a0a0f]" />
 
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/40 via-black/10 to-[#0a0a0f]" />
+        {/* Subtle animated star particles over video */}
+        <div className="absolute inset-0 z-[6] pointer-events-none">
+          {Array.from({ length: 40 }).map((_, i) => (
+            <span
+              key={i}
+              className="absolute rounded-full bg-white animate-twinkle"
+              style={{
+                width: `${1 + (i % 3)}px`,
+                height: `${1 + (i % 3)}px`,
+                left: `${(i * 17 + 13) % 100}%`,
+                top: `${(i * 23 + 7) % 100}%`,
+                animationDelay: `${(i * 0.37) % 5}s`,
+                animationDuration: `${2.5 + (i % 3)}s`,
+                opacity: 0.4 + (i % 5) * 0.12,
+              }}
+            />
+          ))}
+        </div>
 
         {/* Hero Text */}
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center px-6 text-center">
