@@ -151,7 +151,7 @@ export default function ExplorePage() {
           className="absolute inset-0 w-full h-full object-cover"
           poster="/nebula-4k.jpg"
         >
-          <source src="/cosmic-video-8.mp4" type="video/mp4" />
+          <source src="/cosmic-video-8-hd.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-[#0a0a0f]/60" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f]/40 via-transparent to-[#0a0a0f]" />
@@ -248,7 +248,7 @@ export default function ExplorePage() {
                   }}
                   poster="/nebula-4k.jpg"
                 >
-                  <source src="/cosmic-video-11.mp4" type="video/mp4" />
+                  <source src="/cosmic-video-ultimate.mp4" type="video/mp4" />
                 </video>
 
                 {/* Hotspots */}

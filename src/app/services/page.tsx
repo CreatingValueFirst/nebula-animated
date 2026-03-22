@@ -309,7 +309,7 @@ export default function ServicesPage() {
             className="absolute inset-0 w-full h-full object-cover"
             poster="/nebula-4k.jpg"
           >
-            <source src="/cosmic-video-9.mp4" type="video/mp4" />
+            <source src="/cosmic-video-9-hd.mp4" type="video/mp4" />
           </video>
         </motion.div>
 
