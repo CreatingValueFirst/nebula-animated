@@ -362,7 +362,7 @@ export default function Home() {
           className="absolute inset-0 w-full h-full object-cover"
           poster="/nebula-4k.jpg"
         >
-          <source src="/cosmic-video-1.mp4" type="video/mp4" />
+          <source src="/cosmic-video-4.mp4" type="video/mp4" />
         </video>
 
         {/* Remotion overlay -- stars, text reveals, black hole (screen-blended on top of video) */}
