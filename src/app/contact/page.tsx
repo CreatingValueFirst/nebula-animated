@@ -4,6 +4,7 @@ import React, { useRef, useState } from 'react';
 
 import Link from 'next/link';
 import { useLanguage } from '../../i18n/LanguageContext';
+import BookingModal from '../../components/BookingModal';
 import {
   motion,
   useScroll,
@@ -117,6 +118,7 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [bookingOpen, setBookingOpen] = useState(false);
 
   const contactInfo = [
     { label: t.contact.email, value: 'info@heaven-interactive.com', icon: emailIcon, href: 'mailto:info@heaven-interactive.com' },
@@ -448,18 +450,20 @@ export default function ContactPage() {
                   <p className="text-xs text-gray-500 mb-4">
                     Book a 30-minute discovery session with our team
                   </p>
-                  <motion.a
-                    href="#"
+                  <motion.button
+                    onClick={() => setBookingOpen(true)}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="inline-flex items-center gap-2 rounded-lg border border-[#2d8a8a]/30 px-5 py-2.5 text-xs font-semibold tracking-wider uppercase text-[#2d8a8a] transition-all duration-300 hover:bg-[#2d8a8a]/10 hover:border-[#2d8a8a]/50"
+                    className="inline-flex items-center gap-2 rounded-lg bg-[#2d8a8a]/10 border border-[#2d8a8a]/30 px-5 py-2.5 text-xs font-semibold tracking-wider uppercase text-[#2d8a8a] transition-all duration-300 hover:bg-[#2d8a8a]/20 hover:border-[#2d8a8a]/50 hover:shadow-[0_0_20px_rgba(45,138,138,0.15)]"
                   >
                     Book a Time
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M7 17 17 7" />
-                      <path d="M7 7h10v10" />
+                      <rect width="18" height="18" x="3" y="4" rx="2" />
+                      <line x1="16" x2="16" y1="2" y2="6" />
+                      <line x1="8" x2="8" y1="2" y2="6" />
+                      <line x1="3" x2="21" y1="10" y2="10" />
                     </svg>
-                  </motion.a>
+                  </motion.button>
                 </motion.div>
               </div>
             </AnimatedSection>
@@ -499,6 +503,7 @@ export default function ContactPage() {
         </div>
       </section>
 
+      <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
     </main>
   );
 }
