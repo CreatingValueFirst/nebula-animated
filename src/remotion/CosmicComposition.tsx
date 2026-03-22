@@ -131,69 +131,10 @@ export const CosmicComposition: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: '#000000', overflow: 'hidden' }}>
 
       {/* ================================================================
-          LAYER 1: Nebula background image with Ken Burns
+          LAYER 1: Transparent -- background comes from the Runway video
+          underneath via mix-blend-mode: screen on the Player.
+          Only effects (gas, stars, black hole, text) are rendered here.
           ================================================================ */}
-      <AbsoluteFill
-        style={{
-          opacity: fadeIn,
-          filter: `hue-rotate(${hueRotation}deg) saturate(${saturation})`,
-        }}
-      >
-        <img
-          src="/nebula.jpg"
-          alt=""
-          style={nebulaImageStyle}
-        />
-      </AbsoluteFill>
-
-      {/* Back parallax plane (blurred, lower opacity for depth) */}
-      <AbsoluteFill
-        style={{
-          opacity: fadeIn * 0.35,
-          filter: `blur(4px) hue-rotate(${hueRotation * 0.7}deg) saturate(${saturation})`,
-        }}
-      >
-        <img
-          src="/nebula.jpg"
-          alt=""
-          style={{
-            ...nebulaImageStyle,
-            transform: `scale(${zoomScale * 0.97}) translate(${panX * 0.6}%, ${panY * 0.6}%)`,
-          }}
-        />
-      </AbsoluteFill>
-
-      {/* Front parallax plane (screen blend, slight enhancement) */}
-      <AbsoluteFill
-        style={{
-          opacity: fadeIn * 0.12,
-          filter: `blur(1px) hue-rotate(${hueRotation * 1.3}deg) saturate(${saturation * 1.1}) brightness(1.3)`,
-          mixBlendMode: 'screen',
-        }}
-      >
-        <img
-          src="/nebula.jpg"
-          alt=""
-          style={{
-            ...nebulaImageStyle,
-            transform: `scale(${zoomScale * 1.04}) translate(${panX * 1.4}%, ${panY * 1.4}%)`,
-          }}
-        />
-      </AbsoluteFill>
-
-      {/* Color shift overlay */}
-      <AbsoluteFill
-        style={{
-          background: `linear-gradient(
-            ${120 + frame * 0.2}deg,
-            rgba(0, 40, 80, 0.06) 0%,
-            rgba(60, 20, 40, 0.04) 50%,
-            rgba(0, 60, 60, 0.06) 100%
-          )`,
-          mixBlendMode: 'overlay',
-          opacity: fadeIn,
-        }}
-      />
 
       {/* ================================================================
           LAYER 2: NebulaGas overlay -- drifting clouds
