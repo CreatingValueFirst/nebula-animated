@@ -19,7 +19,7 @@ const Player = dynamic(
   { ssr: false }
 );
 
-import { NebulaComposition } from '../remotion/NebulaComposition';
+import { CosmicComposition } from '../remotion/CosmicComposition';
 
 // ---------------------------------------------------------------------------
 // Animation Variants
@@ -353,11 +353,11 @@ export default function Home() {
         {/* Remotion Player -- fills hero */}
         <div className="remotion-player-container">
           <Player
-            component={NebulaComposition}
+            component={CosmicComposition}
             compositionWidth={1920}
             compositionHeight={1080}
             fps={30}
-            durationInFrames={300}
+            durationInFrames={600}
             autoPlay
             loop
             style={{
