@@ -1,8 +1,8 @@
 import { google } from 'googleapis';
 
-const CLIENT_ID = (process.env.GOOGLE_CLIENT_ID || '').trim();
-const CLIENT_SECRET = (process.env.GOOGLE_CLIENT_SECRET || '').trim();
-const REDIRECT_URI = (process.env.GOOGLE_REDIRECT_URI || 'https://heaveninteractive.net/api/auth/callback').trim();
+const CLIENT_ID = '326035771916-hbcfh0en7pfg6hnjst06udqlkufvh59t.apps.googleusercontent.com';
+const CLIENT_SECRET = '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';
+const REDIRECT_URI = 'https://heaveninteractive.net/api/auth/callback';
 
 export function getOAuth2Client() {
   return new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
