@@ -254,7 +254,7 @@ export default function AboutPage() {
             className="absolute inset-0 w-full h-full object-cover"
             poster="/nebula-4k.jpg"
           >
-            <source src="/cosmic-video-2.mp4" type="video/mp4" />
+            <source src="/cosmic-video-11.mp4" type="video/mp4" />
           </video>
         </motion.div>
 
