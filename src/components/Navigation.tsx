@@ -3,17 +3,21 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const navLinks = [
-  { label: 'Services', href: '/services' },
-  { label: 'Explore', href: '/explore' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
-];
+import { useLanguage } from '../i18n/LanguageContext';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { label: t.nav.services, href: '/services' },
+    { label: 'Projects', href: '/projects' },
+    { label: t.nav.explore, href: '/explore' },
+    { label: t.nav.about, href: '/about' },
+    { label: t.nav.contact, href: '/contact' },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -62,7 +66,7 @@ export default function Navigation() {
             <div className="hidden md:flex items-center gap-10">
               {navLinks.map((link) => (
                 <Link
-                  key={link.label}
+                  key={link.href}
                   href={link.href}
                   className="relative text-[13px] tracking-[0.15em] uppercase text-gray-400 hover:text-white transition-colors duration-300 after:absolute after:bottom-[-4px] after:left-0 after:h-[1px] after:w-0 after:bg-[#2d8a8a] hover:after:w-full after:transition-all after:duration-300"
                 >
@@ -70,12 +74,15 @@ export default function Navigation() {
                 </Link>
               ))}
 
+              {/* Language Switcher */}
+              <LanguageSwitcher />
+
               {/* CTA Button */}
               <Link
                 href="/contact"
                 className="relative ml-2 inline-flex items-center gap-2 rounded-full bg-[#2d8a8a]/10 px-6 py-2.5 text-[13px] font-medium tracking-wider uppercase text-[#2d8a8a] border border-[#2d8a8a]/20 transition-all duration-300 hover:bg-[#2d8a8a]/20 hover:border-[#2d8a8a]/40 hover:shadow-[0_0_20px_rgba(45,138,138,0.15),0_0_40px_rgba(45,138,138,0.05)]"
               >
-                <span>Get Started</span>
+                <span>{t.nav.getStarted}</span>
                 <svg
                   width="14"
                   height="14"
@@ -148,7 +155,7 @@ export default function Navigation() {
               <div className="flex flex-col pt-28 px-8">
                 {navLinks.map((link, i) => (
                   <motion.div
-                    key={link.label}
+                    key={link.href}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 + i * 0.08, duration: 0.4 }}
@@ -163,6 +170,16 @@ export default function Navigation() {
                   </motion.div>
                 ))}
 
+                {/* Mobile Language Switcher */}
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 + navLinks.length * 0.08, duration: 0.4 }}
+                  className="py-4 border-b border-white/[0.04]"
+                >
+                  <LanguageSwitcher />
+                </motion.div>
+
                 <motion.div
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -174,7 +191,7 @@ export default function Navigation() {
                     onClick={() => setMobileOpen(false)}
                     className="flex items-center justify-center gap-2 w-full rounded-full bg-[#2d8a8a]/15 px-6 py-3.5 text-sm font-medium tracking-wider uppercase text-[#2d8a8a] border border-[#2d8a8a]/25 transition-all duration-300 hover:bg-[#2d8a8a]/25"
                   >
-                    Get Started
+                    {t.nav.getStarted}
                     <svg
                       width="14"
                       height="14"

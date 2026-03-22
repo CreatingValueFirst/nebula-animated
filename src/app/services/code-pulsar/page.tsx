@@ -369,29 +369,6 @@ export default function CodePulsarPage() {
   return (
     <main className="flex flex-col">
       {/* ================================================================
-          NAVIGATION
-          ================================================================ */}
-      <motion.nav
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 lg:px-16 py-6"
-      >
-        <Link
-          href="/"
-          className="text-2xl font-bold tracking-[0.2em] text-white font-[family-name:var(--font-heading)]"
-        >
-          HEAVEN INTERACTIVE
-        </Link>
-        <Link
-          href="/services"
-          className="relative text-sm tracking-widest uppercase text-gray-300 hover:text-white transition-colors duration-300 after:absolute after:bottom-[-4px] after:left-0 after:h-[1px] after:w-0 after:bg-[#c4623a] hover:after:w-full after:transition-all after:duration-300"
-        >
-          All Services
-        </Link>
-      </motion.nav>
-
-      {/* ================================================================
           HERO
           ================================================================ */}
       <section className="relative min-h-dvh flex flex-col items-center justify-center overflow-hidden px-6 pt-24 pb-16">
@@ -622,25 +599,6 @@ export default function CodePulsarPage() {
         </div>
       </section>
 
-      {/* ================================================================
-          FOOTER
-          ================================================================ */}
-      <footer className="relative border-t border-white/[0.04]">
-        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#c4623a]/20 to-transparent" />
-        <div className="mx-auto max-w-6xl px-6 md:px-12 py-12 md:py-16">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <p className="text-sm text-gray-500">
-              <span className="text-gray-400">HEAVEN INTERACTIVE</span> / Code Pulsar
-            </p>
-            <Link
-              href="/"
-              className="text-sm text-gray-500 hover:text-[#c4623a] transition-colors duration-300"
-            >
-              Back to Home
-            </Link>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }

@@ -5,48 +5,49 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-
-const footerColumns = [
-  {
-    title: 'Company',
-    links: [
-      { label: 'About', href: '/about' },
-      { label: 'Careers', href: '/about' },
-      { label: 'Contact', href: '/contact' },
-    ],
-  },
-  {
-    title: 'Services',
-    links: [
-      { label: 'Neural Forge', href: '/services/neural-forge' },
-      { label: 'Voice Cosmos', href: '/services/voice-cosmos' },
-      { label: 'Vision Nebula', href: '/services/vision-nebula' },
-      { label: 'Data Singularity', href: '/services/data-singularity' },
-      { label: 'Code Pulsar', href: '/services/code-pulsar' },
-      { label: 'Quantum Mind', href: '/services/quantum-mind' },
-    ],
-  },
-  {
-    title: 'Resources',
-    links: [
-      { label: 'Blog', href: '/explore' },
-      { label: 'Documentation', href: '/explore' },
-      { label: 'API Reference', href: '/explore' },
-    ],
-  },
-  {
-    title: 'Connect',
-    links: [
-      { label: 'GitHub', href: 'https://github.com', external: true },
-      { label: 'Twitter', href: 'https://twitter.com', external: true },
-      { label: 'LinkedIn', href: 'https://linkedin.com', external: true },
-    ],
-  },
-];
+import { useLanguage } from '../i18n/LanguageContext';
 
 export default function Footer() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.15 });
+  const { t } = useLanguage();
+
+  const footerColumns = [
+    {
+      title: t.footer.company,
+      links: [
+        { label: t.nav.about, href: '/about' },
+        { label: t.nav.contact, href: '/contact' },
+      ],
+    },
+    {
+      title: t.nav.services,
+      links: [
+        { label: t.services.neuralForge, href: '/services/neural-forge' },
+        { label: t.services.voiceCosmos, href: '/services/voice-cosmos' },
+        { label: t.services.visionNebula, href: '/services/vision-nebula' },
+        { label: t.services.dataSingularity, href: '/services/data-singularity' },
+        { label: t.services.codePulsar, href: '/services/code-pulsar' },
+        { label: t.services.quantumMind, href: '/services/quantum-mind' },
+      ],
+    },
+    {
+      title: t.footer.resources,
+      links: [
+        { label: 'Blog', href: '/explore' },
+        { label: 'Documentation', href: '/explore' },
+        { label: 'API Reference', href: '/explore' },
+      ],
+    },
+    {
+      title: t.footer.connect,
+      links: [
+        { label: 'GitHub', href: 'https://github.com', external: true },
+        { label: 'Twitter', href: 'https://twitter.com', external: true },
+        { label: 'LinkedIn', href: 'https://linkedin.com', external: true },
+      ],
+    },
+  ];
 
   return (
     <footer ref={ref} className="relative overflow-hidden border-t border-white/[0.04]">
@@ -86,14 +87,14 @@ export default function Footer() {
               </span>
             </Link>
             <p className="mt-4 text-sm text-gray-500 leading-relaxed max-w-[200px]">
-              Where Intelligence Meets the Infinite
+              {t.hero.subtitle}
             </p>
           </div>
 
           {/* Link columns */}
           {footerColumns.map((column, colIndex) => (
             <motion.div
-              key={column.title}
+              key={colIndex}
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
               transition={{
@@ -141,20 +142,20 @@ export default function Footer() {
         >
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-[13px] text-gray-600">
-              &copy; 2026 Heaven Interactive. All rights reserved.
+              &copy; 2026 Heaven Interactive. {t.footer.rights}
             </p>
             <div className="flex items-center gap-6">
               <Link
                 href="/about"
                 className="text-[13px] text-gray-600 hover:text-gray-400 transition-colors duration-300"
               >
-                Privacy
+                {t.footer.privacy}
               </Link>
               <Link
                 href="/about"
                 className="text-[13px] text-gray-600 hover:text-gray-400 transition-colors duration-300"
               >
-                Terms
+                {t.footer.terms}
               </Link>
             </div>
           </div>

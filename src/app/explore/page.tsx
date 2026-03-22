@@ -116,44 +116,6 @@ export default function ExplorePage() {
   return (
     <main className="flex flex-col">
       {/* =============================================================
-          NAVIGATION
-          ============================================================= */}
-      <motion.nav
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 lg:px-16 py-6"
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-[#0a0a0f]/80 to-transparent pointer-events-none" />
-        <Link
-          href="/"
-          className="relative z-10 text-2xl font-bold tracking-[0.2em] text-white font-[family-name:var(--font-heading)]"
-        >
-          HEAVEN INTERACTIVE
-        </Link>
-        <div className="relative z-10 hidden sm:flex items-center gap-8">
-          {[
-            { label: 'Home', href: '/' },
-            { label: 'Explore', href: '/explore' },
-            { label: 'About', href: '/about' },
-            { label: 'Contact', href: '/contact' },
-          ].map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className={`relative text-sm tracking-widest uppercase transition-colors duration-300 after:absolute after:bottom-[-4px] after:left-0 after:h-[1px] after:w-0 after:bg-[#2d8a8a] hover:after:w-full after:transition-all after:duration-300 ${
-                link.label === 'Explore'
-                  ? 'text-white after:w-full after:bg-[#2d8a8a]'
-                  : 'text-gray-300 hover:text-white'
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-      </motion.nav>
-
-      {/* =============================================================
           HERO / INTRO
           ============================================================= */}
       <section ref={heroRef} className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
@@ -465,34 +427,6 @@ export default function ExplorePage() {
         </div>
       </section>
 
-      {/* =============================================================
-          FOOTER
-          ============================================================= */}
-      <footer className="relative border-t border-white/[0.04]">
-        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#2d8a8a]/20 to-transparent" />
-        <div className="mx-auto max-w-6xl px-6 md:px-12 py-12 md:py-16">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <p className="text-sm text-gray-500 text-center md:text-left">
-              &copy; 2026 <span className="text-gray-400">Heaven Interactive</span>. All rights reserved.
-            </p>
-            <div className="flex items-center gap-6">
-              {[
-                { label: 'Home', href: '/' },
-                { label: 'About', href: '/about' },
-                { label: 'Contact', href: '/contact' },
-              ].map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="text-sm text-gray-500 hover:text-[#2d8a8a] transition-colors duration-300"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }

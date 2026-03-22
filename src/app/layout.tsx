@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
+import { LanguageProvider } from "../i18n/LanguageContext";
 import "./globals.css";
 
 const inter = Inter({
@@ -71,9 +72,11 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className="min-h-dvh flex flex-col bg-[#0a0a0f] antialiased">
-        <Navigation />
-        <div className="flex-1">{children}</div>
-        <Footer />
+        <LanguageProvider>
+          <Navigation />
+          <div className="flex-1">{children}</div>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );
