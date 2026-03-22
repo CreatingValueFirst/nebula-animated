@@ -554,29 +554,26 @@ export default function Home() {
         ref={parallaxRef}
         className="relative h-[70vh] md:h-[80vh] overflow-hidden"
       >
-        {/* Parallax image with responsive srcSet */}
+        {/* Parallax video background */}
         <motion.div
           className="absolute inset-[-20%] w-[140%] h-[140%]"
           style={{ y: parallaxY }}
         >
-          <picture>
-            <source media="(max-width: 828px)" srcSet="/nebula-mobile.jpg" />
-            <source media="(max-width: 1920px)" srcSet="/nebula-1080.jpg" />
-            <source media="(max-width: 2560px)" srcSet="/nebula-2k.jpg" />
-            <Image
-              src="/nebula-4k.jpg"
-              alt="Deep space nebula visualization"
-              fill
-              className="object-cover"
-              sizes="100vw"
-              priority
-            />
-          </picture>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+            poster="/nebula-4k.jpg"
+          >
+            <source src="/cosmic-video-9.mp4" type="video/mp4" />
+          </video>
         </motion.div>
 
         {/* Darkening overlay */}
         <motion.div
-          className="absolute inset-0 bg-black/50"
+          className="absolute inset-0 bg-black/40"
           style={{ opacity: parallaxOpacity }}
         />
 

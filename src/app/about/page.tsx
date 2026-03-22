@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
-import Image from 'next/image';
+
 import Link from 'next/link';
 import {
   motion,
@@ -294,14 +294,16 @@ export default function AboutPage() {
       <section ref={heroRef} className="relative h-[80vh] min-h-[600px] w-full overflow-hidden">
         {/* Parallax nebula background */}
         <motion.div className="absolute inset-[-10%] w-[120%] h-[120%]" style={{ y: heroY }}>
-          <Image
-            src="/nebula-4k.jpg"
-            alt="Nebula background"
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            poster="/nebula-4k.jpg"
+          >
+            <source src="/cosmic-video-2.mp4" type="video/mp4" />
+          </video>
         </motion.div>
 
         {/* Overlays */}

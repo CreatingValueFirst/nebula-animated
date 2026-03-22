@@ -157,14 +157,16 @@ export default function ExplorePage() {
           HERO / INTRO
           ============================================================= */}
       <section ref={heroRef} className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
-        <Image
-          src="/nebula-4k.jpg"
-          alt="Nebula background"
-          fill
-          className="object-cover"
-          sizes="100vw"
-          priority
-        />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          poster="/nebula-4k.jpg"
+        >
+          <source src="/cosmic-video-8.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-[#0a0a0f]/60" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f]/40 via-transparent to-[#0a0a0f]" />
 
