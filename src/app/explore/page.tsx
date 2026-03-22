@@ -8,6 +8,7 @@ import {
   useTransform,
   AnimatePresence,
 } from 'framer-motion';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 // ---------------------------------------------------------------------------
 // Hotspot Data
@@ -90,6 +91,7 @@ const filterPresets: Record<string, { label: string; filter: string; description
 // PAGE
 // ===========================================================================
 export default function ExplorePage() {
+  const { t } = useLanguage();
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -100,6 +102,24 @@ export default function ExplorePage() {
   const [activeHotspot, setActiveHotspot] = useState<string | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>('normal');
   const [zoom, setZoom] = useState(1);
+
+  const filterPresetsLocal: Record<string, { label: string; filter: string; description: string }> = {
+    normal: {
+      label: t.explore.visible,
+      filter: 'none',
+      description: 'Standard visible-light composite',
+    },
+    infrared: {
+      label: t.explore.infrared,
+      filter: 'hue-rotate(180deg) saturate(1.5) brightness(1.1)',
+      description: 'Simulated near-infrared view',
+    },
+    hydrogen: {
+      label: t.explore.hAlpha,
+      filter: 'hue-rotate(-30deg) saturate(2) contrast(1.2) brightness(0.9)',
+      description: 'Simulated hydrogen-alpha emission',
+    },
+  };
 
   const handleZoomIn = useCallback(() => {
     setZoom((prev) => Math.min(prev + 0.25, 2.5));
@@ -146,7 +166,7 @@ export default function ExplorePage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mb-4 text-xs sm:text-sm tracking-[0.3em] uppercase text-[#2d8a8a]"
           >
-            Interactive Experience
+            {t.explore.badge}
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
@@ -154,9 +174,9 @@ export default function ExplorePage() {
             transition={{ duration: 0.7, delay: 0.6 }}
             className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] text-white font-[family-name:var(--font-heading)] leading-[0.9]"
           >
-            EXPLORE THE
+            {t.explore.title}
             <br />
-            <span className="gradient-text-nebula">NEBULA</span>
+            <span className="gradient-text-nebula">{t.explore.title2}</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 12 }}
@@ -224,7 +244,7 @@ export default function ExplorePage() {
                   playsInline
                   className="absolute inset-0 w-full h-full object-cover transition-[filter] duration-700 ease-out"
                   style={{
-                    filter: filterPresets[activeFilter].filter,
+                    filter: filterPresetsLocal[activeFilter].filter,
                   }}
                   poster="/nebula-4k.jpg"
                 >
@@ -252,7 +272,7 @@ export default function ExplorePage() {
               {/* Zoom controls */}
               <div className="flex items-center gap-2">
                 <span className="text-[10px] tracking-[0.2em] uppercase text-gray-500 mr-2 hidden sm:inline">
-                  Zoom
+                  {t.explore.zoom}
                 </span>
                 <button
                   onClick={handleZoomOut}
@@ -289,7 +309,7 @@ export default function ExplorePage() {
                 <span className="text-[10px] tracking-[0.2em] uppercase text-gray-500 mr-2 hidden sm:inline">
                   Filter
                 </span>
-                {Object.entries(filterPresets).map(([key, preset]) => (
+                {Object.entries(filterPresetsLocal).map(([key, preset]) => (
                   <button
                     key={key}
                     onClick={() => setActiveFilter(key)}
@@ -308,7 +328,7 @@ export default function ExplorePage() {
               <div className="hidden md:flex items-center gap-2 text-gray-600">
                 <div className="w-1.5 h-1.5 rounded-full bg-[#2d8a8a] animate-pulse-glow" />
                 <span className="text-[10px] tracking-[0.15em] uppercase">
-                  Powered by Heaven Interactive
+                  {t.explore.poweredBy}
                 </span>
               </div>
             </div>
@@ -324,7 +344,7 @@ export default function ExplorePage() {
               transition={{ duration: 0.3 }}
               className="mt-4 text-center text-xs text-gray-500 tracking-wider"
             >
-              {filterPresets[activeFilter].description}
+              {filterPresetsLocal[activeFilter].description}
             </motion.p>
           </AnimatePresence>
         </div>

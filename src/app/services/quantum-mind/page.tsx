@@ -3,6 +3,7 @@
 import React, { useRef } from 'react';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
+import { useLanguage } from '../../../i18n/LanguageContext';
 
 // ---------------------------------------------------------------------------
 // Animation Variants
@@ -404,6 +405,7 @@ function StatCard({
 // PAGE
 // ===========================================================================
 export default function QuantumMindPage() {
+  const { t } = useLanguage();
   const approach = [
     {
       step: '01',
@@ -786,7 +788,7 @@ export default function QuantumMindPage() {
                 href="/contact"
                 className="group relative inline-flex items-center gap-2 rounded-xl bg-[#4a9eff] px-8 py-4 text-sm font-semibold tracking-wider uppercase text-white transition-all duration-300 hover:bg-[#5aafff] hover:shadow-[0_0_30px_rgba(74,158,255,0.3)]"
               >
-                Book a Strategy Session
+                {t.contact.scheduleCall}
                 <svg
                   className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
                   viewBox="0 0 24 24"
@@ -803,7 +805,7 @@ export default function QuantumMindPage() {
                 href="/services"
                 className="inline-flex items-center gap-2 rounded-xl glass glass-hover px-8 py-4 text-sm font-medium tracking-wider uppercase text-gray-300 transition-colors duration-300 hover:text-white"
               >
-                Back to Services
+                {t.nav.services}
               </Link>
             </div>
           </AnimatedSection>

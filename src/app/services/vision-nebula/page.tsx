@@ -9,6 +9,7 @@ import {
   useTransform,
   useInView,
 } from 'framer-motion';
+import { useLanguage } from '../../../i18n/LanguageContext';
 
 // ---------------------------------------------------------------------------
 // Animation helpers
@@ -245,6 +246,7 @@ const accuracyStats = [
 // PAGE
 // ===========================================================================
 export default function VisionNebulaPage() {
+  const { t } = useLanguage();
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -285,9 +287,9 @@ export default function VisionNebulaPage() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="mb-8 flex items-center gap-2 text-xs tracking-widest uppercase text-gray-500"
           >
-            <Link href="/services" className="hover:text-[#4a9eff] transition-colors duration-300">Services</Link>
+            <Link href="/services" className="hover:text-[#4a9eff] transition-colors duration-300">{t.nav.services}</Link>
             <span>/</span>
-            <span className="text-[#4a9eff]">Vision Nebula</span>
+            <span className="text-[#4a9eff]">{t.services.visionNebula}</span>
           </motion.div>
 
           <motion.h1
@@ -594,7 +596,7 @@ export default function VisionNebulaPage() {
                 href="/contact"
                 className="group inline-flex items-center gap-3 rounded-full bg-[#4a9eff] px-8 py-4 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:bg-[#5ab0ff] hover:shadow-[0_0_30px_rgba(74,158,255,0.3)]"
               >
-                Enhance Your Vision
+                {t.nav.getStarted}
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover:translate-x-1">
                   <path d="M5 12h14" />
                   <path d="m12 5 7 7-7 7" />
@@ -608,7 +610,7 @@ export default function VisionNebulaPage() {
                   <path d="M19 12H5" />
                   <path d="m12 19-7-7 7-7" />
                 </svg>
-                Back to Services
+                {t.nav.services}
               </Link>
             </div>
           </AnimatedSection>

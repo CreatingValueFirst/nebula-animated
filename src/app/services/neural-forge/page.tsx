@@ -9,6 +9,7 @@ import {
   useTransform,
   useInView,
 } from 'framer-motion';
+import { useLanguage } from '../../../i18n/LanguageContext';
 
 // ---------------------------------------------------------------------------
 // Animation helpers
@@ -186,7 +187,7 @@ const pricingTiers = [
       'Monthly optimization report',
     ],
     highlighted: false,
-    cta: 'Get Started',
+    ctaKey: 'getStarted' as const,
   },
   {
     name: 'Professional',
@@ -203,7 +204,7 @@ const pricingTiers = [
       'Weekly strategy calls',
     ],
     highlighted: true,
-    cta: 'Start Training',
+    ctaKey: 'getStarted' as const,
   },
   {
     name: 'Enterprise',
@@ -220,7 +221,7 @@ const pricingTiers = [
       'Executive AI strategy sessions',
     ],
     highlighted: false,
-    cta: 'Contact Us',
+    ctaKey: 'contact' as const,
   },
 ];
 
@@ -228,6 +229,7 @@ const pricingTiers = [
 // PAGE
 // ===========================================================================
 export default function NeuralForgePage() {
+  const { t } = useLanguage();
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -266,9 +268,9 @@ export default function NeuralForgePage() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="mb-8 flex items-center gap-2 text-xs tracking-widest uppercase text-gray-500"
           >
-            <Link href="/services" className="hover:text-[#2d8a8a] transition-colors duration-300">Services</Link>
+            <Link href="/services" className="hover:text-[#2d8a8a] transition-colors duration-300">{t.nav.services}</Link>
             <span>/</span>
-            <span className="text-[#2d8a8a]">Neural Forge</span>
+            <span className="text-[#2d8a8a]">{t.services.neuralForge}</span>
           </motion.div>
 
           <motion.h1
@@ -580,7 +582,7 @@ export default function NeuralForgePage() {
                           : 'glass text-gray-300 hover:text-white hover:border-[#2d8a8a]/30'
                       }`}
                     >
-                      {tier.cta}
+                      {tier.ctaKey === 'getStarted' ? t.nav.getStarted : t.nav.contact}
                     </Link>
                   </div>
                 </div>
@@ -612,7 +614,7 @@ export default function NeuralForgePage() {
                 href="/contact"
                 className="group inline-flex items-center gap-3 rounded-full bg-[#2d8a8a] px-8 py-4 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:bg-[#3aafaf] hover:shadow-[0_0_30px_rgba(45,138,138,0.3)]"
               >
-                Start Training
+                {t.nav.getStarted}
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover:translate-x-1">
                   <path d="M5 12h14" />
                   <path d="m12 5 7 7-7 7" />
@@ -626,7 +628,7 @@ export default function NeuralForgePage() {
                   <path d="M19 12H5" />
                   <path d="m12 19-7-7 7-7" />
                 </svg>
-                Back to Services
+                {t.nav.services}
               </Link>
             </div>
           </AnimatedSection>

@@ -3,6 +3,7 @@
 import React, { useRef, useState } from 'react';
 
 import Link from 'next/link';
+import { useLanguage } from '../../i18n/LanguageContext';
 import {
   motion,
   useScroll,
@@ -75,71 +76,37 @@ const faqData = [
 ];
 
 // ---------------------------------------------------------------------------
-// Contact Info Data
+// Icons for contact info
 // ---------------------------------------------------------------------------
-const contactInfo = [
-  {
-    label: 'Email',
-    value: 'hello@heaveninteractive.net',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect width="20" height="16" x="2" y="4" rx="2" />
-        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-      </svg>
-    ),
-    href: 'mailto:hello@heaveninteractive.net',
-  },
-  {
-    label: 'Phone',
-    value: '+359 898 34 5752',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-      </svg>
-    ),
-    href: 'tel:+359898345752',
-  },
-  {
-    label: 'Headquarters',
-    value: 'Sofia, Lozenets, Bulgaria',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-        <circle cx="12" cy="10" r="3" />
-      </svg>
-    ),
-    href: 'https://maps.google.com/?q=Sofia+Lozenets+Bulgaria',
-  },
-  {
-    label: 'Hours',
-    value: 'Mon-Fri, 9:00-18:00 EET',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <polyline points="12 6 12 12 16 14" />
-      </svg>
-    ),
-    href: undefined,
-  },
-];
-
-// ---------------------------------------------------------------------------
-// Service options
-// ---------------------------------------------------------------------------
-const serviceOptions = [
-  'Neural Forge',
-  'Voice Cosmos',
-  'Vision Nebula',
-  'Data Singularity',
-  'Code Pulsar',
-  'Quantum Mind',
-  'Not Sure Yet',
-];
+const emailIcon = (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect width="20" height="16" x="2" y="4" rx="2" />
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+  </svg>
+);
+const phoneIcon = (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+  </svg>
+);
+const hqIcon = (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+    <circle cx="12" cy="10" r="3" />
+  </svg>
+);
+const hoursIcon = (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
+  </svg>
+);
 
 // ===========================================================================
 // PAGE
 // ===========================================================================
 export default function ContactPage() {
+  const { t } = useLanguage();
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -151,14 +118,54 @@ export default function ContactPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const contactInfo = [
+    { label: t.contact.email, value: 'info@heaven-interactive.com', icon: emailIcon, href: 'mailto:info@heaven-interactive.com' },
+    { label: t.contact.phone, value: '+359 898 34 5752', icon: phoneIcon, href: 'tel:+359898345752' },
+    { label: t.contact.hq, value: 'Sofia, Lozenets, Bulgaria', icon: hqIcon, href: 'https://maps.google.com/?q=Sofia+Lozenets+Bulgaria' },
+    { label: t.contact.hours, value: t.contact.hoursValue, icon: hoursIcon, href: undefined },
+  ];
+
+  const serviceOptions = [
+    t.services.neuralForge,
+    t.services.voiceCosmos,
+    t.services.visionNebula,
+    t.services.dataSingularity,
+    t.services.codePulsar,
+    t.services.quantumMind,
+    t.contact.notSure,
+  ];
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate submission
-    setTimeout(() => {
+
+    const formData = new FormData(e.currentTarget);
+    const payload = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      company: formData.get('company') as string,
+      service: formData.get('service') as string,
+      message: formData.get('message') as string,
+    };
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        setIsSubmitted(true);
+      } else {
+        const data = await res.json();
+        alert(data.error || 'Failed to send. Please try again.');
+      }
+    } catch {
+      alert('Network error. Please try again.');
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 1500);
+    }
   }
 
   return (
@@ -190,7 +197,7 @@ export default function ContactPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mb-4 text-xs sm:text-sm tracking-[0.3em] uppercase text-[#2d8a8a]"
           >
-            Get In Touch
+            {t.contact.badge}
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
@@ -198,9 +205,9 @@ export default function ContactPage() {
             transition={{ duration: 0.7, delay: 0.6 }}
             className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] text-white font-[family-name:var(--font-heading)] leading-[0.9]"
           >
-            LET&apos;S BUILD
+            {t.contact.title}
             <br />
-            <span className="gradient-text-nebula">THE FUTURE</span>
+            <span className="gradient-text-nebula">{t.contact.title2}</span>
           </motion.h1>
         </div>
       </section>
@@ -220,10 +227,10 @@ export default function ContactPage() {
             <AnimatedSection className="lg:col-span-3">
               <div className="rounded-2xl glass p-8 md:p-10 lg:p-12">
                 <h2 className="text-2xl md:text-3xl font-bold tracking-[-0.02em] text-white font-[family-name:var(--font-heading)] mb-2">
-                  Send us a message
+                  {t.contact.formTitle}
                 </h2>
                 <p className="text-sm text-gray-400 mb-8">
-                  Tell us about your project and we&apos;ll get back to you within 24 hours.
+                  {t.contact.formSubtitle}
                 </p>
 
                 <AnimatePresence mode="wait">
@@ -243,10 +250,10 @@ export default function ContactPage() {
                         </svg>
                       </div>
                       <h3 className="text-xl font-semibold text-white font-[family-name:var(--font-heading)] mb-2">
-                        Message Sent
+                        {t.contact.sent}
                       </h3>
                       <p className="text-sm text-gray-400 max-w-sm">
-                        Thank you for reaching out. Our team will review your inquiry and respond within one business day.
+                        {t.contact.sentDesc}
                       </p>
                       <button
                         onClick={() => setIsSubmitted(false)}
@@ -270,27 +277,27 @@ export default function ContactPage() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                           <label htmlFor="name" className="block text-xs tracking-[0.15em] uppercase text-gray-400 mb-2">
-                            Name
+                            {t.contact.name}
                           </label>
                           <input
                             type="text"
                             id="name"
                             name="name"
                             required
-                            placeholder="Your full name"
+                            placeholder={t.contact.namePlaceholder}
                             className="w-full rounded-xl bg-white/[0.04] border border-white/[0.06] px-4 py-3.5 text-sm text-white placeholder-gray-600 outline-none transition-all duration-300 focus:border-[#2d8a8a]/40 focus:bg-white/[0.06] focus:ring-2 focus:ring-[#2d8a8a]/10"
                           />
                         </div>
                         <div>
                           <label htmlFor="email" className="block text-xs tracking-[0.15em] uppercase text-gray-400 mb-2">
-                            Email
+                            {t.contact.email}
                           </label>
                           <input
                             type="email"
                             id="email"
                             name="email"
                             required
-                            placeholder="you@company.com"
+                            placeholder={t.contact.emailPlaceholder}
                             className="w-full rounded-xl bg-white/[0.04] border border-white/[0.06] px-4 py-3.5 text-sm text-white placeholder-gray-600 outline-none transition-all duration-300 focus:border-[#2d8a8a]/40 focus:bg-white/[0.06] focus:ring-2 focus:ring-[#2d8a8a]/10"
                           />
                         </div>
@@ -300,19 +307,19 @@ export default function ContactPage() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                           <label htmlFor="company" className="block text-xs tracking-[0.15em] uppercase text-gray-400 mb-2">
-                            Company
+                            {t.contact.company}
                           </label>
                           <input
                             type="text"
                             id="company"
                             name="company"
-                            placeholder="Your company name"
+                            placeholder={t.contact.companyPlaceholder}
                             className="w-full rounded-xl bg-white/[0.04] border border-white/[0.06] px-4 py-3.5 text-sm text-white placeholder-gray-600 outline-none transition-all duration-300 focus:border-[#2d8a8a]/40 focus:bg-white/[0.06] focus:ring-2 focus:ring-[#2d8a8a]/10"
                           />
                         </div>
                         <div>
                           <label htmlFor="service" className="block text-xs tracking-[0.15em] uppercase text-gray-400 mb-2">
-                            Service Interest
+                            {t.contact.serviceInterest}
                           </label>
                           <div className="relative">
                             <select
@@ -322,7 +329,7 @@ export default function ContactPage() {
                               className="w-full appearance-none rounded-xl bg-white/[0.04] border border-white/[0.06] px-4 py-3.5 text-sm text-white outline-none transition-all duration-300 focus:border-[#2d8a8a]/40 focus:bg-white/[0.06] focus:ring-2 focus:ring-[#2d8a8a]/10 [&:invalid]:text-gray-600"
                             >
                               <option value="" disabled className="bg-[#0d0d14] text-gray-500">
-                                Select a service
+                                {t.contact.selectService}
                               </option>
                               {serviceOptions.map((opt) => (
                                 <option key={opt} value={opt} className="bg-[#0d0d14] text-white">
@@ -342,14 +349,14 @@ export default function ContactPage() {
                       {/* Message */}
                       <div>
                         <label htmlFor="message" className="block text-xs tracking-[0.15em] uppercase text-gray-400 mb-2">
-                          Message
+                          {t.contact.message}
                         </label>
                         <textarea
                           id="message"
                           name="message"
                           required
                           rows={5}
-                          placeholder="Tell us about your project, goals, and timeline..."
+                          placeholder={t.contact.messagePlaceholder}
                           className="w-full resize-none rounded-xl bg-white/[0.04] border border-white/[0.06] px-4 py-3.5 text-sm text-white placeholder-gray-600 outline-none transition-all duration-300 focus:border-[#2d8a8a]/40 focus:bg-white/[0.06] focus:ring-2 focus:ring-[#2d8a8a]/10"
                         />
                       </div>
@@ -363,7 +370,7 @@ export default function ContactPage() {
                         className="relative w-full sm:w-auto rounded-xl bg-[#2d8a8a] px-8 py-4 text-sm font-semibold tracking-wider uppercase text-white transition-all duration-300 hover:bg-[#2d8a8a]/90 hover:shadow-[0_0_30px_rgba(45,138,138,0.3)] disabled:opacity-60 disabled:cursor-not-allowed overflow-hidden"
                       >
                         <span className={`inline-flex items-center gap-2 transition-opacity duration-300 ${isSubmitting ? 'opacity-0' : 'opacity-100'}`}>
-                          Send Message
+                          {t.contact.send}
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M5 12h14" />
                             <path d="m12 5 7 7-7 7" />
@@ -436,7 +443,7 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <p className="text-sm font-medium text-white mb-1">
-                    Or schedule a call
+                    {t.contact.scheduleCall}
                   </p>
                   <p className="text-xs text-gray-500 mb-4">
                     Book a 30-minute discovery session with our team
@@ -471,10 +478,10 @@ export default function ContactPage() {
         <div className="relative z-10 mx-auto max-w-3xl px-6 md:px-12">
           <AnimatedSection className="mb-12 md:mb-16 text-center">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#4a9eff]">
-              FAQ
+              {t.contact.faq}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              Frequently <span className="gradient-text-nebula">Asked</span>
+              {t.contact.faq}
             </h2>
           </AnimatedSection>
 
@@ -499,7 +506,7 @@ export default function ContactPage() {
 // ---------------------------------------------------------------------------
 // Contact Info Content (shared between link and div)
 // ---------------------------------------------------------------------------
-function ContactInfoContent({ info }: { info: (typeof contactInfo)[number] }) {
+function ContactInfoContent({ info }: { info: { label: string; value: string; icon: React.ReactNode; href: string | undefined } }) {
   return (
     <div className="flex items-start gap-4">
       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#2d8a8a]/10 text-[#2d8a8a]">

@@ -3,6 +3,7 @@
 import React, { useRef } from 'react';
 
 import Link from 'next/link';
+import { useLanguage } from '../../i18n/LanguageContext';
 import {
   motion,
   useScroll,
@@ -228,6 +229,7 @@ const partners = [
 // PAGE
 // ===========================================================================
 export default function AboutPage() {
+  const { t } = useLanguage();
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -271,7 +273,7 @@ export default function AboutPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mb-4 text-xs sm:text-sm tracking-[0.3em] uppercase text-[#2d8a8a]"
           >
-            Our Story
+            {t.about.badge}
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
@@ -279,9 +281,9 @@ export default function AboutPage() {
             transition={{ duration: 0.7, delay: 0.6 }}
             className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-[-0.03em] text-white font-[family-name:var(--font-heading)] leading-[0.9]"
           >
-            ABOUT
+            {t.about.title}
             <br />
-            <span className="gradient-text-nebula">HEAVEN INTERACTIVE</span>
+            <span className="gradient-text-nebula">{t.about.title2}</span>
           </motion.h1>
           <motion.div
             initial={{ opacity: 0 }}
@@ -322,13 +324,13 @@ export default function AboutPage() {
         <div className="relative z-10 mx-auto max-w-4xl px-6 md:px-12 text-center">
           <AnimatedSection>
             <p className="mb-6 text-xs tracking-[0.3em] uppercase text-[#2d8a8a]">
-              Our Mission
+              {t.about.badge}
             </p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-medium tracking-[-0.02em] text-white font-[family-name:var(--font-heading)] leading-[1.3]">
-              We believe artificial intelligence should amplify human potential, not replace it.
+              {t.about.mission}
             </h2>
             <p className="mt-8 text-lg md:text-xl text-gray-400 leading-relaxed max-w-3xl mx-auto">
-              We build AI that serves humanity&apos;s greatest ambitions -- tools that make experts more powerful, organizations more effective, and breakthroughs more achievable.
+              {t.about.missionSub}
             </p>
           </AnimatedSection>
         </div>
@@ -342,10 +344,10 @@ export default function AboutPage() {
           <AnimatedSection>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
               {[
-                { value: '2024', label: 'Founded' },
-                { value: '150+', label: 'Team Members' },
-                { value: '12', label: 'Countries' },
-                { value: '$50M+', label: 'Revenue' },
+                { value: '2024', label: t.about.founded },
+                { value: '150+', label: t.about.teamMembers },
+                { value: '12', label: t.about.countries },
+                { value: '$50M+', label: t.about.revenue },
               ].map((stat, i) => (
                 <motion.div
                   key={stat.label}
@@ -386,7 +388,7 @@ export default function AboutPage() {
         <div className="relative z-10 mx-auto max-w-4xl px-6 md:px-12">
           <AnimatedSection className="mb-16 md:mb-20 text-center">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#c4623a]">
-              Our Journey
+              {t.about.timeline}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
               Building the{' '}
@@ -425,10 +427,10 @@ export default function AboutPage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <AnimatedSection className="mb-16 md:mb-20 text-center">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#4a9eff]">
-              What We Stand For
+              {t.about.values}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              Our <span className="gradient-text-nebula">Values</span>
+              {t.about.values}
             </h2>
           </AnimatedSection>
 
@@ -451,11 +453,10 @@ export default function AboutPage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <AnimatedSection className="mb-16 md:mb-20 text-center">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#2d8a8a]">
-              Leadership
+              {t.about.leadership}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              The Team Behind{' '}
-              <span className="gradient-text-nebula">Heaven</span>
+              {t.about.leadership}
             </h2>
           </AnimatedSection>
 
@@ -474,7 +475,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-6xl px-6 md:px-12">
           <AnimatedSection className="text-center">
             <p className="mb-12 text-xs tracking-[0.3em] uppercase text-gray-500">
-              Backed By
+              {t.about.partners}
             </p>
             <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 md:gap-x-16">
               {partners.map((partner, i) => (
@@ -508,10 +509,10 @@ export default function AboutPage() {
         <div className="relative z-10 mx-auto max-w-3xl px-6 md:px-12 text-center">
           <AnimatedSection>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] text-white font-[family-name:var(--font-heading)] mb-6">
-              Join Our <span className="gradient-text-nebula">Team</span>
+              {t.about.joinTeam}
             </h2>
             <p className="text-lg text-gray-400 leading-relaxed mb-10 max-w-xl mx-auto">
-              We&apos;re looking for exceptional people who want to shape the future of artificial intelligence. If that&apos;s you, we&apos;d love to hear from you.
+              {t.about.missionSub}
             </p>
             <Link href="/contact">
               <motion.span
@@ -519,7 +520,7 @@ export default function AboutPage() {
                 whileTap={{ scale: 0.98 }}
                 className="inline-flex items-center gap-3 rounded-full bg-[#2d8a8a] px-8 py-4 text-sm font-semibold tracking-wider uppercase text-white transition-all duration-300 hover:bg-[#2d8a8a]/90 hover:shadow-[0_0_30px_rgba(45,138,138,0.3)]"
               >
-                Get In Touch
+                {t.about.joinTeam}
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14" />
                   <path d="m12 5 7 7-7 7" />

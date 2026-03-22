@@ -9,6 +9,7 @@ import {
   useTransform,
   useInView,
 } from 'framer-motion';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 // ---------------------------------------------------------------------------
 // Animation helpers
@@ -178,9 +179,27 @@ const services: ServiceItem[] = [
 // ---------------------------------------------------------------------------
 // Service Card
 // ---------------------------------------------------------------------------
+const serviceTranslationMap: Record<string, { titleKey: string; descKey: string }> = {
+  'neural-forge': { titleKey: 'neuralForge', descKey: 'neuralForgeDesc' },
+  'voice-cosmos': { titleKey: 'voiceCosmos', descKey: 'voiceCosmosDesc' },
+  'vision-nebula': { titleKey: 'visionNebula', descKey: 'visionNebulaDesc' },
+  'data-singularity': { titleKey: 'dataSingularity', descKey: 'dataSingularityDesc' },
+  'code-pulsar': { titleKey: 'codePulsar', descKey: 'codePulsarDesc' },
+  'quantum-mind': { titleKey: 'quantumMind', descKey: 'quantumMindDesc' },
+};
+
 function ServiceCard({ service, index }: { service: ServiceItem; index: number }) {
+  const { t } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.15 });
+
+  const mapping = serviceTranslationMap[service.slug];
+  const translatedTitle = mapping
+    ? (t.services as Record<string, string>)[mapping.titleKey] ?? service.title
+    : service.title;
+  const translatedDesc = mapping
+    ? (t.services as Record<string, string>)[mapping.descKey] ?? service.description
+    : service.description;
 
   return (
     <motion.div
@@ -213,12 +232,12 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
 
             {/* Title */}
             <h3 className="mb-3 text-xl md:text-2xl font-bold tracking-[-0.02em] text-white font-[family-name:var(--font-heading)]">
-              {service.title}
+              {translatedTitle}
             </h3>
 
             {/* Description */}
             <p className="mb-8 text-[15px] leading-relaxed text-gray-400">
-              {service.description}
+              {translatedDesc}
             </p>
 
             {/* Stats */}
@@ -241,7 +260,7 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
                 className="transition-colors duration-300"
                 style={{ color: service.iconColor }}
               >
-                Explore
+                {t.services.learnMore}
               </span>
               <motion.span
                 className="inline-block transition-colors duration-300"
@@ -265,6 +284,7 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
 // PAGE
 // ===========================================================================
 export default function ServicesPage() {
+  const { t } = useLanguage();
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -308,7 +328,7 @@ export default function ServicesPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mb-5 text-xs sm:text-sm tracking-[0.3em] uppercase text-[#2d8a8a]"
           >
-            What We Build
+            {t.services.subtitle}
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
@@ -316,9 +336,7 @@ export default function ServicesPage() {
             transition={{ duration: 0.7, delay: 0.6 }}
             className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-[-0.03em] text-white font-[family-name:var(--font-heading)] leading-[0.9]"
           >
-            OUR
-            <br />
-            <span className="gradient-text-nebula">SERVICES</span>
+            <span className="gradient-text-nebula">{t.services.title}</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -344,7 +362,7 @@ export default function ServicesPage() {
               className="flex flex-col items-center gap-2"
             >
               <span className="text-[10px] tracking-[0.3em] uppercase text-gray-500">
-                Explore
+                {t.services.learnMore}
               </span>
               <div className="h-8 w-[1px] bg-gradient-to-b from-gray-500 to-transparent" />
             </motion.div>
@@ -397,21 +415,19 @@ export default function ServicesPage() {
         <div className="relative z-10 mx-auto max-w-4xl px-6 md:px-12 text-center">
           <AnimatedSection>
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#c4623a]">
-              Not Sure Where to Start?
+              {t.cta.title}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)] mb-6">
-              Can&apos;t decide?{' '}
-              <span className="gradient-text-nebula">Let us help.</span>
+              <span className="gradient-text-nebula">{t.cta.subtitle}</span>
             </h2>
             <p className="max-w-xl mx-auto text-base text-gray-400 leading-relaxed mb-10">
-              Book a free 30-minute consultation. We will map your challenges
-              to the right AI solution -- no commitment, no jargon.
+              {t.contact.scheduleCall}
             </p>
             <Link
               href="/contact"
               className="group inline-flex items-center gap-3 rounded-full bg-[#2d8a8a] px-8 py-4 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:bg-[#3aafaf] hover:shadow-[0_0_30px_rgba(45,138,138,0.3)]"
             >
-              Book a Consultation
+              {t.cta.button}
               <svg
                 width="16"
                 height="16"

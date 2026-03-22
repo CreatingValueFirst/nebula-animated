@@ -10,6 +10,7 @@ import {
   useTransform,
   useInView,
 } from 'framer-motion';
+import { useLanguage } from '../i18n/LanguageContext';
 
 // ---------------------------------------------------------------------------
 // Dynamic import: Remotion Player (no SSR)
@@ -106,84 +107,54 @@ function AnimatedStat({
 // ---------------------------------------------------------------------------
 // Service Card
 // ---------------------------------------------------------------------------
-const services = [
-  {
-    title: 'Neural Forge',
-    description: 'Custom AI model training and fine-tuning tailored to your unique data, delivering production-ready models with unmatched precision.',
-    href: '/services/neural-forge',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93" />
-        <path d="M8.24 4.35A4 4 0 0 1 12 2" />
-        <path d="M5 8a4 4 0 0 1 3.24-3.93" />
-        <path d="M5 8a4 4 0 0 0-.67 6.41" />
-        <path d="M9.13 17.34a4 4 0 0 1-4.8-2.93" />
-        <path d="M12 18a4 4 0 0 1-2.87-.66" />
-        <path d="M14.87 17.34A4 4 0 0 0 12 18" />
-        <path d="M19.67 14.41a4 4 0 0 1-4.8 2.93" />
-        <path d="M19 8a4 4 0 0 1 .67 6.41" />
-        <path d="M19 8a4 4 0 0 0-3.24-3.93" />
-        <circle cx="12" cy="12" r="3" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Voice Cosmos',
-    description: 'Conversational AI agents that speak, listen, and understand context -- powering phone lines, web chat, and omnichannel support.',
-    href: '/services/voice-cosmos',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
-        <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-        <line x1="12" x2="12" y1="19" y2="22" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Vision Nebula',
-    description: 'Computer vision and recognition systems for real-time object detection, quality inspection, and visual intelligence at scale.',
-    href: '/services/vision-nebula',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
-        <circle cx="12" cy="12" r="3" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Data Singularity',
-    description: 'Predictive analytics engine that transforms raw data into actionable foresight -- demand forecasting, anomaly detection, and trend analysis.',
-    href: '/services/data-singularity',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 3v16a2 2 0 0 0 2 2h16" />
-        <path d="m19 9-5 5-4-4-3 3" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Code Pulsar',
-    description: 'AI-powered development tools that accelerate your engineering velocity -- code generation, review automation, and intelligent refactoring.',
-    href: '/services/code-pulsar',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="16 18 22 12 16 6" />
-        <polyline points="8 6 2 12 8 18" />
-        <line x1="14" y1="4" x2="10" y2="20" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Quantum Mind',
-    description: 'AI strategy and consulting for executive teams -- roadmap design, build-vs-buy analysis, and organizational AI readiness assessment.',
-    href: '/services/quantum-mind',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
-        <path d="m15 5 4 4" />
-      </svg>
-    ),
-  },
+const serviceIcons = [
+  (
+    <svg key="nf" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93" />
+      <path d="M8.24 4.35A4 4 0 0 1 12 2" />
+      <path d="M5 8a4 4 0 0 1 3.24-3.93" />
+      <path d="M5 8a4 4 0 0 0-.67 6.41" />
+      <path d="M9.13 17.34a4 4 0 0 1-4.8-2.93" />
+      <path d="M12 18a4 4 0 0 1-2.87-.66" />
+      <path d="M14.87 17.34A4 4 0 0 0 12 18" />
+      <path d="M19.67 14.41a4 4 0 0 1-4.8 2.93" />
+      <path d="M19 8a4 4 0 0 1 .67 6.41" />
+      <path d="M19 8a4 4 0 0 0-3.24-3.93" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  ),
+  (
+    <svg key="vc" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+      <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+      <line x1="12" x2="12" y1="19" y2="22" />
+    </svg>
+  ),
+  (
+    <svg key="vn" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  ),
+  (
+    <svg key="ds" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+      <path d="m19 9-5 5-4-4-3 3" />
+    </svg>
+  ),
+  (
+    <svg key="cp" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="16 18 22 12 16 6" />
+      <polyline points="8 6 2 12 8 18" />
+      <line x1="14" y1="4" x2="10" y2="20" />
+    </svg>
+  ),
+  (
+    <svg key="qm" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+      <path d="m15 5 4 4" />
+    </svg>
+  ),
 ];
 
 function ServiceCard({
@@ -192,12 +163,14 @@ function ServiceCard({
   href,
   icon,
   index,
+  learnMoreLabel,
 }: {
   title: string;
   description: string;
   href: string;
   icon: React.ReactNode;
   index: number;
+  learnMoreLabel: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.25 });
@@ -238,7 +211,7 @@ function ServiceCard({
 
             {/* Learn More */}
             <span className="inline-flex items-center gap-1.5 text-[13px] font-medium tracking-wide text-[#2d8a8a] opacity-70 group-hover:opacity-100 transition-all duration-300 group-hover:gap-2.5">
-              Learn More
+              {learnMoreLabel}
               <svg
                 width="14"
                 height="14"
@@ -335,6 +308,17 @@ function TestimonialCard({
 // PAGE
 // ===========================================================================
 export default function Home() {
+  const { t } = useLanguage();
+
+  const services = [
+    { title: t.services.neuralForge, description: t.services.neuralForgeDesc, href: '/services/neural-forge', icon: serviceIcons[0] },
+    { title: t.services.voiceCosmos, description: t.services.voiceCosmosDesc, href: '/services/voice-cosmos', icon: serviceIcons[1] },
+    { title: t.services.visionNebula, description: t.services.visionNebulaDesc, href: '/services/vision-nebula', icon: serviceIcons[2] },
+    { title: t.services.dataSingularity, description: t.services.dataSingularityDesc, href: '/services/data-singularity', icon: serviceIcons[3] },
+    { title: t.services.codePulsar, description: t.services.codePulsarDesc, href: '/services/code-pulsar', icon: serviceIcons[4] },
+    { title: t.services.quantumMind, description: t.services.quantumMindDesc, href: '/services/quantum-mind', icon: serviceIcons[5] },
+  ];
+
   // Parallax refs
   const parallaxRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -396,7 +380,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="mb-5 text-xs sm:text-sm tracking-[0.3em] uppercase text-[#2d8a8a]"
           >
-            Artificial Intelligence Services
+            {t.hero.tagline}
           </motion.p>
 
           {/* Headline */}
@@ -406,9 +390,9 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.8 }}
             className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-[-0.04em] text-white font-[family-name:var(--font-heading)] leading-[0.9]"
           >
-            HEAVEN
+            {t.hero.headline1}
             <br />
-            <span className="gradient-text-nebula">INTERACTIVE</span>
+            <span className="gradient-text-nebula">{t.hero.headline2}</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -418,7 +402,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 1.1 }}
             className="mt-6 max-w-lg text-base sm:text-lg text-gray-400 leading-relaxed"
           >
-            Where Intelligence Meets the Infinite
+            {t.hero.subtitle}
           </motion.p>
 
           {/* CTA buttons */}
@@ -432,7 +416,7 @@ export default function Home() {
               href="/services"
               className="inline-flex items-center gap-2 rounded-full bg-[#2d8a8a] px-8 py-3.5 text-sm font-medium tracking-wider uppercase text-white transition-all duration-300 hover:bg-[#3aafaf] hover:shadow-[0_0_24px_rgba(45,138,138,0.3),0_0_48px_rgba(45,138,138,0.1)] active:scale-[0.98]"
             >
-              Explore Services
+              {t.hero.exploreServices}
               <svg
                 width="16"
                 height="16"
@@ -451,7 +435,7 @@ export default function Home() {
               href="/explore"
               className="inline-flex items-center gap-2 rounded-full border border-white/10 px-8 py-3.5 text-sm font-medium tracking-wider uppercase text-gray-300 transition-all duration-300 hover:border-white/20 hover:text-white hover:bg-white/[0.04] active:scale-[0.98]"
             >
-              See Demo
+              {t.hero.seeDemo}
               <svg
                 width="16"
                 height="16"
@@ -475,9 +459,9 @@ export default function Home() {
             className="mt-16 sm:mt-20 flex items-center gap-8 sm:gap-14"
           >
             {[
-              { value: '99.7%', label: 'Accuracy' },
-              { value: '50ms', label: 'Latency' },
-              { value: '1B+', label: 'Parameters' },
+              { value: '99.7%', label: t.hero.accuracy },
+              { value: '50ms', label: t.hero.latency },
+              { value: '1B+', label: t.hero.parameters },
             ].map((stat, i) => (
               <div key={stat.label} className="flex items-center gap-8 sm:gap-14">
                 {i > 0 && (
@@ -528,20 +512,20 @@ export default function Home() {
         <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12 lg:px-16">
           <AnimatedSection className="mb-16 md:mb-20 text-center">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#2d8a8a]">
-              Our Services
+              {t.services.title}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
               Intelligence at{' '}
               <span className="gradient-text-nebula">Every Scale</span>
             </h2>
             <p className="mt-5 mx-auto max-w-xl text-base text-gray-400 leading-relaxed">
-              Six specialized AI practices, each built by domain experts, unified by a single mission: making intelligence your competitive advantage.
+              {t.services.subtitle}
             </p>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {services.map((service, i) => (
-              <ServiceCard key={service.title} {...service} index={i} />
+              <ServiceCard key={service.title} {...service} index={i} learnMoreLabel={t.services.learnMore} />
             ))}
           </div>
         </div>
@@ -587,21 +571,21 @@ export default function Home() {
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center px-6 text-center">
           <AnimatedSection>
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#2d8a8a]/80">
-              Enterprise-Grade AI
+              {t.parallax.badge}
             </p>
             <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.03em] text-white font-[family-name:var(--font-heading)] leading-[1.05]">
-              POWERING THE
+              {t.parallax.title1}
               <br />
-              <span className="gradient-text-nebula">FUTURE OF AI</span>
+              <span className="gradient-text-nebula">{t.parallax.title2}</span>
             </h2>
           </AnimatedSection>
 
           {/* Stats */}
           <AnimatedSection delay={0.3} className="mt-12 md:mt-16">
             <div className="flex flex-wrap items-center justify-center gap-10 sm:gap-16 md:gap-20">
-              <AnimatedStat value="500+" label="Models Deployed" index={0} />
-              <AnimatedStat value="99.9%" label="Uptime SLA" index={1} />
-              <AnimatedStat value="42" label="Countries Served" index={2} />
+              <AnimatedStat value="500+" label={t.parallax.modelsDeployed} index={0} />
+              <AnimatedStat value="99.9%" label={t.parallax.uptimeSla} index={1} />
+              <AnimatedStat value="42" label={t.parallax.countriesServed} index={2} />
             </div>
           </AnimatedSection>
         </div>
@@ -619,20 +603,20 @@ export default function Home() {
         <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12 lg:px-16">
           <AnimatedSection className="mb-16 md:mb-20 text-center">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#c4623a]">
-              Testimonials
+              {t.testimonials.title}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
               Trusted by{' '}
               <span className="gradient-text-nebula">Leaders</span>
             </h2>
             <p className="mt-5 mx-auto max-w-xl text-base text-gray-400 leading-relaxed">
-              Industry leaders rely on Heaven Interactive to power their most critical systems.
+              {t.testimonials.subtitle}
             </p>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-            {testimonials.map((t, i) => (
-              <TestimonialCard key={t.name} {...t} index={i} />
+            {testimonials.map((item, i) => (
+              <TestimonialCard key={item.name} {...item} index={i} />
             ))}
           </div>
         </div>
@@ -660,19 +644,17 @@ export default function Home() {
         <div className="relative z-10 mx-auto max-w-4xl px-6 md:px-12 text-center">
           <AnimatedSection>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] text-white font-[family-name:var(--font-heading)] leading-tight">
-              Ready to Transform
-              <br />
-              <span className="gradient-text-nebula">Your Business?</span>
+              {t.cta.title}
             </h2>
             <p className="mt-6 mx-auto max-w-lg text-base md:text-lg text-gray-400 leading-relaxed">
-              Join hundreds of forward-thinking companies already leveraging Heaven Interactive to outpace their competition.
+              {t.cta.subtitle}
             </p>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/contact"
                 className="group inline-flex items-center gap-2.5 rounded-full bg-[#2d8a8a] px-10 py-4 text-sm font-medium tracking-wider uppercase text-white transition-all duration-300 hover:bg-[#3aafaf] hover:shadow-[0_0_30px_rgba(45,138,138,0.35),0_0_60px_rgba(45,138,138,0.12)] active:scale-[0.98] animate-pulse-glow"
               >
-                Get Started
+                {t.cta.button}
                 <svg
                   width="16"
                   height="16"
@@ -692,7 +674,7 @@ export default function Home() {
                 href="/services"
                 className="inline-flex items-center gap-2 text-sm tracking-wider uppercase text-gray-400 hover:text-[#2d8a8a] transition-colors duration-300"
               >
-                View all services
+                {t.cta.viewAll}
                 <svg
                   width="14"
                   height="14"
