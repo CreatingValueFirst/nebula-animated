@@ -267,6 +267,46 @@ export default function ExplorePage() {
               <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_120px_rgba(0,0,0,0.5)]" />
             </div>
 
+            {/* Mobile hotspot info overlay - rendered outside overflow container */}
+            <AnimatePresence>
+              {activeHotspot && (
+                <motion.div
+                  key={activeHotspot}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 16 }}
+                  transition={{ duration: 0.25 }}
+                  className="block md:hidden absolute bottom-0 left-0 right-0 z-40"
+                >
+                  {(() => {
+                    const h = hotspots.find((hs) => hs.id === activeHotspot);
+                    if (!h) return null;
+                    return (
+                      <div className="bg-[#0a0a0f]/95 backdrop-blur-xl border-t border-white/[0.08] p-4">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="flex-1 min-w-0">
+                            <div className="h-[2px] w-8 rounded-full mb-2" style={{ backgroundColor: h.color }} />
+                            <a href={h.link} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-white font-[family-name:var(--font-heading)] hover:text-[#2d8a8a] transition-colors block">
+                              {h.label}
+                            </a>
+                            <p className="text-xs text-gray-400 mt-1">{h.description}</p>
+                          </div>
+                          <div className="flex items-center gap-3 shrink-0 pt-1">
+                            <a href={h.link} target="_blank" rel="noopener noreferrer" className="text-[10px] tracking-[0.15em] uppercase text-[#2d8a8a]" onClick={(e) => e.stopPropagation()}>
+                              Visit
+                            </a>
+                            <button onClick={() => setActiveHotspot(null)} className="text-[10px] tracking-[0.15em] uppercase text-gray-600 hover:text-gray-400">
+                              Close
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })()}
+                </motion.div>
+              )}
+            </AnimatePresence>
+
             {/* Bottom toolbar */}
             <div className="relative z-30 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-4 md:p-5 bg-black/60 backdrop-blur-xl border-t border-white/[0.06]">
               {/* Zoom controls */}
@@ -518,7 +558,7 @@ function Hotspot({
         />
       </button>
 
-      {/* Info card */}
+      {/* Info card - desktop only (mobile uses overlay outside container) */}
       <AnimatePresence>
         {isActive && (
           <motion.div
@@ -526,7 +566,7 @@ function Hotspot({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 8 }}
             transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="absolute z-30 w-56 sm:w-64 md:w-72"
+            className="absolute z-30 w-72 hidden md:block"
             style={{
               ...(hotspot.y > 45
                 ? { bottom: '100%', marginBottom: 12 }
