@@ -237,26 +237,7 @@ function ServiceCard({
 // ---------------------------------------------------------------------------
 // Testimonial Card
 // ---------------------------------------------------------------------------
-const testimonials = [
-  {
-    quote: "Heaven Interactive transformed our data pipeline. Their Neural Forge platform reduced our model training time by 73% while dramatically improving accuracy. The ROI was visible within the first month.",
-    name: 'Nikolay Dimitrov',
-    role: 'CTO at TechCorp - Sofia, Bulgaria',
-    initials: 'ND',
-  },
-  {
-    quote: "The Voice Cosmos agents handle 85% of our support calls autonomously now. Our customers can't tell the difference -- in fact, satisfaction scores went up. That's the definition of AI done right.",
-    name: 'Aleksandar Petrov',
-    role: 'VP Engineering at DataFlow - Sofia, Bulgaria',
-    initials: 'AP',
-  },
-  {
-    quote: "Working with the Quantum Mind consulting team was a masterclass in AI strategy. They helped us identify $2.4M in efficiency gains we were completely blind to before.",
-    name: 'Maria Ivanova',
-    role: 'Director of AI at CloudScale - Sofia, Bulgaria',
-    initials: 'MI',
-  },
-];
+// testimonials array moved inside Home() to access translation keys
 
 function TestimonialCard({
   quote,
@@ -309,6 +290,12 @@ function TestimonialCard({
 // ===========================================================================
 export default function Home() {
   const { t } = useLanguage();
+
+  const testimonials = [
+    { quote: t.home.testimonial1Quote, name: t.home.testimonial1Name, role: t.home.testimonial1Role, initials: 'ND' },
+    { quote: t.home.testimonial2Quote, name: t.home.testimonial2Name, role: t.home.testimonial2Role, initials: 'AP' },
+    { quote: t.home.testimonial3Quote, name: t.home.testimonial3Name, role: t.home.testimonial3Role, initials: 'MI' },
+  ];
 
   const services = [
     { title: t.services.neuralForge, description: t.services.neuralForgeDesc, href: '/services/neural-forge', icon: serviceIcons[0] },
@@ -492,7 +479,7 @@ export default function Home() {
               className="flex flex-col items-center gap-2"
             >
               <span className="text-[10px] tracking-[0.3em] uppercase text-gray-500">
-                Scroll
+                {t.home.scroll}
               </span>
               <div className="h-8 w-[1px] bg-gradient-to-b from-gray-500 to-transparent" />
             </motion.div>
@@ -515,8 +502,8 @@ export default function Home() {
               {t.services.title}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              Intelligence at{' '}
-              <span className="gradient-text-nebula">Every Scale</span>
+              {t.home.intelligenceAt}{' '}
+              <span className="gradient-text-nebula">{t.home.everyScale}</span>
             </h2>
             <p className="mt-5 mx-auto max-w-xl text-base text-gray-400 leading-relaxed">
               {t.services.subtitle}
@@ -606,8 +593,8 @@ export default function Home() {
               {t.testimonials.title}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              Trusted by{' '}
-              <span className="gradient-text-nebula">Leaders</span>
+              {t.home.trustedBy}{' '}
+              <span className="gradient-text-nebula">{t.home.leaders}</span>
             </h2>
             <p className="mt-5 mx-auto max-w-xl text-base text-gray-400 leading-relaxed">
               {t.testimonials.subtitle}

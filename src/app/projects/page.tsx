@@ -8,6 +8,7 @@ import {
   useTransform,
   useInView,
 } from 'framer-motion';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 // ---------------------------------------------------------------------------
 // Animation helpers
@@ -365,6 +366,7 @@ const projects: Project[] = [
 // Project Card Component
 // ---------------------------------------------------------------------------
 function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const { t } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.15 });
 
@@ -426,7 +428,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 <svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor" stroke="none">
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                 </svg>
-                Featured
+                {t.projects.featured}
               </span>
             )}
           </div>
@@ -478,7 +480,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               style={{ color: project.colorHex }}
             >
               <span className="transition-all duration-300 group-hover/btn:tracking-wider">
-                View Project
+                {t.projects.viewProject}
               </span>
               <span className="transition-transform duration-300 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-0.5">
                 {icons.externalLink}
@@ -495,6 +497,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 // PAGE
 // ===========================================================================
 export default function ProjectsPage() {
+  const { t } = useLanguage();
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -548,7 +551,7 @@ export default function ProjectsPage() {
           >
             <span className="h-1.5 w-1.5 rounded-full bg-[#2d8a8a] animate-pulse" />
             <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#2d8a8a]">
-              Portfolio
+              {t.projects.badge}
             </span>
           </motion.div>
 
@@ -559,8 +562,8 @@ export default function ProjectsPage() {
             transition={{ duration: 0.7, delay: 0.5 }}
             className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] text-white font-[family-name:var(--font-heading)] leading-[0.9]"
           >
-            OUR{' '}
-            <span className="gradient-text-nebula">PROJECTS</span>
+            {t.projects.title1}{' '}
+            <span className="gradient-text-nebula">{t.projects.title2}</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -570,7 +573,7 @@ export default function ProjectsPage() {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="mt-5 max-w-md text-base sm:text-lg text-gray-400 leading-relaxed"
           >
-            Real Projects. Real Results. Real Impact.
+            {t.projects.subtitle}
           </motion.p>
 
           {/* Decorative line */}
@@ -598,16 +601,14 @@ export default function ProjectsPage() {
           {/* Section Header */}
           <AnimatedSection className="mb-16 md:mb-20 text-center">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#2d8a8a]">
-              What We&apos;ve Built
+              {t.projects.whatWeBuilt}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              Crafted with{' '}
-              <span className="gradient-text-nebula">Precision</span>
+              {t.projects.craftedWith}{' '}
+              <span className="gradient-text-nebula">{t.projects.precision}</span>
             </h2>
             <p className="mt-6 max-w-2xl mx-auto text-base text-gray-400 leading-relaxed">
-              From AI voice platforms to immersive 3D experiences, every project
-              is built to deliver measurable outcomes and push the boundaries of
-              what&apos;s possible.
+              {t.projects.craftedDesc}
             </p>
           </AnimatedSection>
 
@@ -637,16 +638,16 @@ export default function ProjectsPage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <AnimatedSection className="mb-12 md:mb-16 text-center">
             <p className="text-xs tracking-[0.3em] uppercase text-[#2d8a8a]/70">
-              By the Numbers
+              {t.projects.byTheNumbers}
             </p>
           </AnimatedSection>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             {[
-              { target: 9, suffix: '', label: 'Live Projects' },
-              { target: 1, suffix: '', label: 'AI Voice Platform' },
-              { target: 29, suffix: '+', label: 'Languages' },
-              { target: 100, suffix: '%', label: 'Satisfaction' },
+              { target: 9, suffix: '', label: t.projects.liveProjects },
+              { target: 1, suffix: '', label: t.projects.aiVoicePlatform },
+              { target: 29, suffix: '+', label: t.projects.languages },
+              { target: 100, suffix: '%', label: t.projects.satisfaction },
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}
@@ -681,24 +682,22 @@ export default function ProjectsPage() {
         <div className="relative z-10 mx-auto max-w-4xl px-6 md:px-12 text-center">
           <AnimatedSection>
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#c4623a]">
-              Your Turn
+              {t.projects.yourTurn}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] text-white font-[family-name:var(--font-heading)] leading-tight mb-6">
-              Ready to Create Your
+              {t.projects.readyToCreate1}
               <br />
-              <span className="gradient-text-nebula">Success Story?</span>
+              <span className="gradient-text-nebula">{t.projects.readyToCreate2}</span>
             </h2>
             <p className="max-w-xl mx-auto text-base md:text-lg text-gray-400 leading-relaxed mb-10">
-              Let&apos;s build something extraordinary together. From concept to
-              launch, we turn ambitious ideas into production-ready digital
-              products.
+              {t.projects.readyDesc}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/contact"
                 className="group inline-flex items-center gap-2.5 rounded-full bg-[#2d8a8a] px-10 py-4 text-sm font-medium tracking-wider uppercase text-white transition-all duration-300 hover:bg-[#3aafaf] hover:shadow-[0_0_30px_rgba(45,138,138,0.35),0_0_60px_rgba(45,138,138,0.12)] active:scale-[0.98] animate-pulse-glow"
               >
-                Get Started
+                {t.projects.getStarted}
                 <span className="transition-transform duration-300 group-hover:translate-x-0.5">
                   {icons.arrow}
                 </span>
@@ -707,7 +706,7 @@ export default function ProjectsPage() {
                 href="/services"
                 className="inline-flex items-center gap-2 text-sm tracking-wider uppercase text-gray-400 hover:text-[#2d8a8a] transition-colors duration-300"
               >
-                Explore services
+                {t.projects.exploreServices}
                 {icons.arrow}
               </Link>
             </div>

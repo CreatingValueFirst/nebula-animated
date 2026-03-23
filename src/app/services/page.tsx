@@ -48,7 +48,7 @@ interface ServiceItem {
   slug: string;
   title: string;
   description: string;
-  stats: { label: string; value: string }[];
+  stats: { label: string; value: string; labelKey?: string }[];
   gradient: string;
   iconColor: string;
   icon: React.ReactNode;
@@ -61,9 +61,9 @@ const services: ServiceItem[] = [
     description:
       'Custom AI model training and fine-tuning built for your domain. From architecture design to distributed training at scale, we forge models that understand your data.',
     stats: [
-      { label: 'Models Trained', value: '2,400+' },
-      { label: 'Avg. Accuracy', value: '97.3%' },
-      { label: 'Training Time', value: '-60%' },
+      { label: 'Models Trained', value: '2,400+', labelKey: 'modelsTrained' },
+      { label: 'Avg. Accuracy', value: '97.3%', labelKey: 'avgAccuracy' },
+      { label: 'Training Time', value: '-60%', labelKey: 'trainingTime' },
     ],
     gradient: 'from-[#2d8a8a] to-[#4a9eff]',
     iconColor: '#2d8a8a',
@@ -81,9 +81,9 @@ const services: ServiceItem[] = [
     description:
       'Conversational AI voice agents that understand, respond, and connect in 35+ languages. Sub-100ms latency with emotion-aware adaptive dialogue.',
     stats: [
-      { label: 'Conversations', value: '500K+' },
-      { label: 'Languages', value: '35' },
-      { label: 'Satisfaction', value: '98.5%' },
+      { label: 'Conversations', value: '500K+', labelKey: 'conversations' },
+      { label: 'Languages', value: '35', labelKey: 'languages' },
+      { label: 'Satisfaction', value: '98.5%', labelKey: 'satisfaction' },
     ],
     gradient: 'from-[#c4623a] to-[#c4847a]',
     iconColor: '#c4623a',
@@ -101,9 +101,9 @@ const services: ServiceItem[] = [
     description:
       'Computer vision and image recognition that sees what others cannot. From medical imaging to industrial quality control, with 99.7% detection accuracy.',
     stats: [
-      { label: 'Accuracy', value: '99.7%' },
-      { label: 'Processing', value: 'Real-time' },
-      { label: 'Edge Deploy', value: '<50ms' },
+      { label: 'Accuracy', value: '99.7%', labelKey: 'accuracy' },
+      { label: 'Processing', value: 'Real-time', labelKey: 'processing' },
+      { label: 'Edge Deploy', value: '<50ms', labelKey: 'edgeDeploy' },
     ],
     gradient: 'from-[#4a9eff] to-[#2d8a8a]',
     iconColor: '#4a9eff',
@@ -120,9 +120,9 @@ const services: ServiceItem[] = [
     description:
       'Predictive analytics and data intelligence that transform raw data into strategic foresight. Uncover patterns invisible to the human eye.',
     stats: [
-      { label: 'Data Points', value: '12B+' },
-      { label: 'Predictions', value: '94% Acc' },
-      { label: 'ROI Boost', value: '340%' },
+      { label: 'Data Points', value: '12B+', labelKey: 'dataPoints' },
+      { label: 'Predictions', value: '94% Acc', labelKey: 'predictions' },
+      { label: 'ROI Boost', value: '340%', labelKey: 'roiBoost' },
     ],
     gradient: 'from-[#8b2020] to-[#c4623a]',
     iconColor: '#8b2020',
@@ -140,9 +140,9 @@ const services: ServiceItem[] = [
     description:
       'AI-powered code generation and development automation. From rapid prototyping to full-stack production systems, accelerating delivery by 10x.',
     stats: [
-      { label: 'Lines/Day', value: '50K+' },
-      { label: 'Bug Reduction', value: '78%' },
-      { label: 'Ship Speed', value: '10x' },
+      { label: 'Lines/Day', value: '50K+', labelKey: 'linesPerDay' },
+      { label: 'Bug Reduction', value: '78%', labelKey: 'bugReduction' },
+      { label: 'Ship Speed', value: '10x', labelKey: 'shipSpeed' },
     ],
     gradient: 'from-[#2d8a8a] to-[#c4623a]',
     iconColor: '#2d8a8a',
@@ -160,9 +160,9 @@ const services: ServiceItem[] = [
     description:
       'AI strategy consulting and full implementation. We map your business challenges to AI solutions, then build and deploy them end-to-end.',
     stats: [
-      { label: 'Clients', value: '180+' },
-      { label: 'Success Rate', value: '96%' },
-      { label: 'Avg. Timeline', value: '8 Weeks' },
+      { label: 'Clients', value: '180+', labelKey: 'clients' },
+      { label: 'Success Rate', value: '96%', labelKey: 'successRate' },
+      { label: 'Avg. Timeline', value: '8 Weeks', labelKey: 'avgTimeline' },
     ],
     gradient: 'from-[#4a9eff] to-[#c4847a]',
     iconColor: '#4a9eff',
@@ -248,7 +248,9 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
                     {stat.value}
                   </p>
                   <p className="mt-1 text-[11px] tracking-wider uppercase text-gray-500">
-                    {stat.label}
+                    {stat.labelKey
+                      ? (t.servicesPage as Record<string, string>)[stat.labelKey] ?? stat.label
+                      : stat.label}
                   </p>
                 </div>
               ))}
@@ -344,9 +346,7 @@ export default function ServicesPage() {
             transition={{ duration: 0.6, delay: 0.9 }}
             className="mt-6 max-w-lg text-base sm:text-lg text-gray-400 leading-relaxed"
           >
-            Six specialized divisions. One unified mission:
-            <br className="hidden sm:block" />
-            transform your business with intelligent systems.
+            {t.servicesPage.heroSubtitle}
           </motion.p>
 
           {/* Scroll indicator */}
@@ -383,15 +383,14 @@ export default function ServicesPage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <AnimatedSection className="mb-16 md:mb-20 text-center">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#2d8a8a]">
-              Capabilities
+              {t.servicesPage.capabilities}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              Built for the{' '}
-              <span className="gradient-text-nebula">Next Era</span>
+              {t.servicesPage.builtFor}{' '}
+              <span className="gradient-text-nebula">{t.servicesPage.nextEra}</span>
             </h2>
             <p className="mt-6 max-w-2xl mx-auto text-base text-gray-400 leading-relaxed">
-              Each service is a dedicated practice area with deep domain expertise,
-              battle-tested methodologies, and a relentless focus on measurable outcomes.
+              {t.servicesPage.capabilitiesDesc}
             </p>
           </AnimatedSection>
 

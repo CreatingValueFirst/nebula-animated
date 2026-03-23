@@ -17,6 +17,7 @@ export default function Footer() {
       title: t.footer.company,
       links: [
         { label: t.nav.about, href: '/about' },
+        { label: t.nav.art, href: '/art' },
         { label: t.nav.contact, href: '/contact' },
       ],
     },
@@ -42,9 +43,9 @@ export default function Footer() {
     {
       title: t.footer.connect,
       links: [
-        { label: 'GitHub', href: 'https://github.com', external: true },
-        { label: 'Twitter', href: 'https://twitter.com', external: true },
-        { label: 'LinkedIn', href: 'https://linkedin.com', external: true },
+        { label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61568535414612', external: true },
+        { label: 'GitHub', href: 'https://github.com/CreatingValueFirst?tab=repositories', external: true },
+        { label: 'LinkedIn', href: 'https://www.linkedin.com/in/dimitar-roussev-281906340/', external: true },
       ],
     },
   ];

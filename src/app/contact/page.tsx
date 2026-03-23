@@ -46,35 +46,12 @@ function AnimatedSection({
 }
 
 // ---------------------------------------------------------------------------
-// FAQ Data
+// FAQ Data type
 // ---------------------------------------------------------------------------
-const faqData = [
-  {
-    question: 'How long does implementation take?',
-    answer:
-      'Most implementations take 4-8 weeks depending on complexity. Simple API integrations can be live in as little as one week. Enterprise deployments with custom model training typically require 8-12 weeks. We provide a detailed timeline during the discovery phase.',
-  },
-  {
-    question: 'What industries do you serve?',
-    answer:
-      'We serve clients across healthcare, finance, legal, manufacturing, retail, and technology. Our AI solutions are industry-agnostic at the core, with domain-specific fine-tuning available for each sector. We have deep expertise in regulated industries where compliance and data security are paramount.',
-  },
-  {
-    question: 'Do you offer custom solutions?',
-    answer:
-      'Absolutely. While our core products (Neural Forge, Voice Cosmos, Vision Nebula, and others) cover most use cases, we offer full custom development for unique requirements. Our research team can build bespoke models trained on your proprietary data with enterprise-grade security.',
-  },
-  {
-    question: "What's your pricing model?",
-    answer:
-      'We offer flexible pricing based on usage and scale. Plans start at $2,500/month for startups, with enterprise pricing based on volume and features. All plans include dedicated support, SLA guarantees, and access to our model improvement pipeline. Contact us for a tailored quote.',
-  },
-  {
-    question: 'Do you provide ongoing support?',
-    answer:
-      'Yes. Every client gets a dedicated success manager, 24/7 technical support with guaranteed response times, and access to our continuous model improvement program. Enterprise clients receive quarterly business reviews and priority access to new features and research previews.',
-  },
-];
+interface FaqDataItem {
+  question: string;
+  answer: string;
+}
 
 // ---------------------------------------------------------------------------
 // Icons for contact info
@@ -102,12 +79,26 @@ const hoursIcon = (
     <polyline points="12 6 12 12 16 14" />
   </svg>
 );
+const facebookIcon = (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
 
 // ===========================================================================
 // PAGE
 // ===========================================================================
 export default function ContactPage() {
   const { t } = useLanguage();
+
+  const faqData: FaqDataItem[] = [
+    { question: t.contactPage.faq1Q, answer: t.contactPage.faq1A },
+    { question: t.contactPage.faq2Q, answer: t.contactPage.faq2A },
+    { question: t.contactPage.faq3Q, answer: t.contactPage.faq3A },
+    { question: t.contactPage.faq4Q, answer: t.contactPage.faq4A },
+    { question: t.contactPage.faq5Q, answer: t.contactPage.faq5A },
+  ];
+
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -125,6 +116,7 @@ export default function ContactPage() {
     { label: t.contact.phone, value: '+359 898 34 5752', icon: phoneIcon, href: 'tel:+359898345752' },
     { label: t.contact.hq, value: 'Sofia, Lozenets, Bulgaria', icon: hqIcon, href: 'https://maps.google.com/?q=Sofia+Lozenets+Bulgaria' },
     { label: t.contact.hours, value: t.contact.hoursValue, icon: hoursIcon, href: undefined },
+    { label: 'Facebook', value: 'Heaven Interactive', icon: facebookIcon, href: 'https://www.facebook.com/profile.php?id=61568535414612' },
   ];
 
   const serviceOptions = [
@@ -261,7 +253,7 @@ export default function ContactPage() {
                         onClick={() => setIsSubmitted(false)}
                         className="mt-6 text-sm text-[#2d8a8a] hover:text-[#3aafaf] transition-colors duration-300"
                       >
-                        Send another message
+                        {t.contactPage.sendAnother}
                       </button>
                     </motion.div>
                   ) : (
@@ -448,7 +440,7 @@ export default function ContactPage() {
                     {t.contact.scheduleCall}
                   </p>
                   <p className="text-xs text-gray-500 mb-4">
-                    Book a 30-minute discovery session with our team
+                    {t.contactPage.bookDiscoveryDesc}
                   </p>
                   <motion.button
                     onClick={() => setBookingOpen(true)}
@@ -456,7 +448,7 @@ export default function ContactPage() {
                     whileTap={{ scale: 0.98 }}
                     className="inline-flex items-center gap-2 rounded-lg bg-[#2d8a8a]/10 border border-[#2d8a8a]/30 px-5 py-2.5 text-xs font-semibold tracking-wider uppercase text-[#2d8a8a] transition-all duration-300 hover:bg-[#2d8a8a]/20 hover:border-[#2d8a8a]/50 hover:shadow-[0_0_20px_rgba(45,138,138,0.15)]"
                   >
-                    Book a Time
+                    {t.contactPage.bookATime}
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <rect width="18" height="18" x="3" y="4" rx="2" />
                       <line x1="16" x2="16" y1="2" y2="6" />
@@ -538,7 +530,7 @@ function FaqItem({
   isOpen,
   onToggle,
 }: {
-  faq: (typeof faqData)[number];
+  faq: FaqDataItem;
   index: number;
   isOpen: boolean;
   onToggle: () => void;

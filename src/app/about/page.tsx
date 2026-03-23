@@ -76,144 +76,6 @@ function AnimatedCounter({ value, suffix = '' }: { value: string; suffix?: strin
 }
 
 // ---------------------------------------------------------------------------
-// Timeline Data
-// ---------------------------------------------------------------------------
-const timelineEvents = [
-  {
-    year: '2024',
-    quarter: 'Q1',
-    title: 'Founded in Sofia, Bulgaria',
-    description:
-      'Two co-founders launched Heaven Interactive with a vision to build artificial intelligence that amplifies human potential across Eastern Europe and beyond.',
-  },
-  {
-    year: '2024',
-    quarter: 'Q3',
-    title: 'First Neural Architecture Breakthrough',
-    description:
-      'Published groundbreaking research on adaptive neural architectures, achieving state-of-the-art results across 14 benchmark datasets.',
-  },
-  {
-    year: '2025',
-    quarter: 'Q1',
-    title: 'Series A -- $25M Raised',
-    description:
-      'Led by Horizon Ventures with participation from key strategic partners. Team expanded to 50 members across engineering, research, and operations.',
-  },
-  {
-    year: '2025',
-    quarter: 'Q3',
-    title: 'Launched Voice Cosmos & Vision Nebula',
-    description:
-      'Two flagship products went live, serving over 200 enterprise clients in the first quarter. Voice Cosmos set new standards for real-time speech synthesis.',
-  },
-  {
-    year: '2026',
-    quarter: 'Q1',
-    title: 'Global Expansion',
-    description:
-      'Opened offices in London, Tokyo, and Berlin. Grew to 150+ team members and secured partnerships with multiple Fortune 500 companies.',
-  },
-];
-
-// ---------------------------------------------------------------------------
-// Values Data
-// ---------------------------------------------------------------------------
-const values = [
-  {
-    title: 'Innovation',
-    description:
-      'We push the boundaries of what AI can achieve. Every challenge is an opportunity to create something the world has never seen.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2v4" />
-        <path d="m6.34 6.34 2.83 2.83" />
-        <path d="M2 12h4" />
-        <path d="m6.34 17.66 2.83-2.83" />
-        <path d="M12 18v4" />
-        <path d="m17.66 17.66-2.83-2.83" />
-        <path d="M18 12h4" />
-        <path d="m17.66 6.34-2.83 2.83" />
-      </svg>
-    ),
-    gradient: 'from-[#2d8a8a]/10 to-[#4a9eff]/10',
-    iconColor: 'text-[#2d8a8a]',
-    iconBg: 'bg-[#2d8a8a]/10',
-  },
-  {
-    title: 'Transparency',
-    description:
-      'We believe trust is earned through openness. Our models, our methods, and our intentions are always clear to the people we serve.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M12 16v-4" />
-        <path d="M12 8h.01" />
-      </svg>
-    ),
-    gradient: 'from-[#4a9eff]/10 to-[#2d8a8a]/10',
-    iconColor: 'text-[#4a9eff]',
-    iconBg: 'bg-[#4a9eff]/10',
-  },
-  {
-    title: 'Impact',
-    description:
-      'Technology without purpose is noise. Every product we build is measured by the real-world difference it makes for the people who use it.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-      </svg>
-    ),
-    gradient: 'from-[#c4623a]/10 to-[#2d8a8a]/10',
-    iconColor: 'text-[#c4623a]',
-    iconBg: 'bg-[#c4623a]/10',
-  },
-  {
-    title: 'Excellence',
-    description:
-      'Good enough is never enough. We hold ourselves to the highest standard in research rigor, engineering quality, and client partnership.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-      </svg>
-    ),
-    gradient: 'from-[#2d8a8a]/10 to-[#c4623a]/10',
-    iconColor: 'text-[#2d8a8a]',
-    iconBg: 'bg-[#2d8a8a]/10',
-  },
-];
-
-// ---------------------------------------------------------------------------
-// Leadership Data
-// ---------------------------------------------------------------------------
-const leadership = [
-  {
-    name: 'Dimitar Roussev',
-    title: 'CEO & Co-Founder',
-    bio: 'Visionary entrepreneur driving AI innovation in Eastern Europe. Expert in voice AI, automation, and B2B solutions.',
-    pattern: 'radial-gradient(circle at 30% 30%, #2d8a8a 0%, transparent 50%), radial-gradient(circle at 70% 70%, #c4623a 0%, transparent 50%)',
-  },
-  {
-    name: 'Denis Bozhkov',
-    title: 'Creative Director & Co-Founder',
-    bio: 'Award-winning designer blending art and technology. Specializes in 3D visualization, WebGL, and immersive digital experiences.',
-    pattern: 'radial-gradient(circle at 60% 20%, #4a9eff 0%, transparent 50%), radial-gradient(circle at 30% 80%, #2d8a8a 0%, transparent 50%)',
-  },
-  {
-    name: 'Head of Engineering',
-    title: 'Head of Engineering',
-    bio: 'Building robust, scalable AI infrastructure that powers real-time voice agents and intelligent automation pipelines.',
-    pattern: 'radial-gradient(circle at 40% 60%, #c4623a 0%, transparent 50%), radial-gradient(circle at 80% 20%, #4a9eff 0%, transparent 50%)',
-  },
-  {
-    name: 'AI Research Lead',
-    title: 'AI Research Lead',
-    bio: 'Advancing the frontier of conversational AI, computer vision, and multimodal learning for production-grade applications.',
-    pattern: 'radial-gradient(circle at 70% 40%, #2d8a8a 0%, transparent 50%), radial-gradient(circle at 20% 70%, #c4623a 0%, transparent 50%)',
-  },
-];
-
-// ---------------------------------------------------------------------------
 // Partners
 // ---------------------------------------------------------------------------
 const partners = [
@@ -230,6 +92,102 @@ const partners = [
 // ===========================================================================
 export default function AboutPage() {
   const { t } = useLanguage();
+
+  const timelineEvents = [
+    { year: '2024', quarter: 'Q1', title: t.aboutPage.timeline1Title, description: t.aboutPage.timeline1Desc },
+    { year: '2024', quarter: 'Q3', title: t.aboutPage.timeline2Title, description: t.aboutPage.timeline2Desc },
+    { year: '2025', quarter: 'Q1', title: t.aboutPage.timeline3Title, description: t.aboutPage.timeline3Desc },
+    { year: '2025', quarter: 'Q3', title: t.aboutPage.timeline4Title, description: t.aboutPage.timeline4Desc },
+    { year: '2026', quarter: 'Q1', title: t.aboutPage.timeline5Title, description: t.aboutPage.timeline5Desc },
+  ];
+
+  const values = [
+    {
+      title: t.aboutPage.innovation,
+      description: t.aboutPage.innovationDesc,
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2v4" />
+          <path d="m6.34 6.34 2.83 2.83" />
+          <path d="M2 12h4" />
+          <path d="m6.34 17.66 2.83-2.83" />
+          <path d="M12 18v4" />
+          <path d="m17.66 17.66-2.83-2.83" />
+          <path d="M18 12h4" />
+          <path d="m17.66 6.34-2.83 2.83" />
+        </svg>
+      ),
+      gradient: 'from-[#2d8a8a]/10 to-[#4a9eff]/10',
+      iconColor: 'text-[#2d8a8a]',
+      iconBg: 'bg-[#2d8a8a]/10',
+    },
+    {
+      title: t.aboutPage.transparency,
+      description: t.aboutPage.transparencyDesc,
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 16v-4" />
+          <path d="M12 8h.01" />
+        </svg>
+      ),
+      gradient: 'from-[#4a9eff]/10 to-[#2d8a8a]/10',
+      iconColor: 'text-[#4a9eff]',
+      iconBg: 'bg-[#4a9eff]/10',
+    },
+    {
+      title: t.aboutPage.impact,
+      description: t.aboutPage.impactDesc,
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+        </svg>
+      ),
+      gradient: 'from-[#c4623a]/10 to-[#2d8a8a]/10',
+      iconColor: 'text-[#c4623a]',
+      iconBg: 'bg-[#c4623a]/10',
+    },
+    {
+      title: t.aboutPage.excellence,
+      description: t.aboutPage.excellenceDesc,
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+      ),
+      gradient: 'from-[#2d8a8a]/10 to-[#c4623a]/10',
+      iconColor: 'text-[#2d8a8a]',
+      iconBg: 'bg-[#2d8a8a]/10',
+    },
+  ];
+
+  const leadership = [
+    {
+      name: t.aboutPage.leader1Name,
+      title: t.aboutPage.leader1Title,
+      bio: t.aboutPage.leader1Bio,
+      pattern: 'radial-gradient(circle at 30% 30%, #2d8a8a 0%, transparent 50%), radial-gradient(circle at 70% 70%, #c4623a 0%, transparent 50%)',
+    },
+    {
+      name: t.aboutPage.leader2Name,
+      title: t.aboutPage.leader2Title,
+      bio: t.aboutPage.leader2Bio,
+      pattern: 'radial-gradient(circle at 60% 20%, #4a9eff 0%, transparent 50%), radial-gradient(circle at 30% 80%, #2d8a8a 0%, transparent 50%)',
+    },
+    {
+      name: t.aboutPage.leader3Title,
+      title: t.aboutPage.leader3Title,
+      bio: t.aboutPage.leader3Bio,
+      pattern: 'radial-gradient(circle at 40% 60%, #c4623a 0%, transparent 50%), radial-gradient(circle at 80% 20%, #4a9eff 0%, transparent 50%)',
+    },
+    {
+      name: t.aboutPage.leader4Title,
+      title: t.aboutPage.leader4Title,
+      bio: t.aboutPage.leader4Bio,
+      pattern: 'radial-gradient(circle at 70% 40%, #2d8a8a 0%, transparent 50%), radial-gradient(circle at 20% 70%, #c4623a 0%, transparent 50%)',
+    },
+  ];
+
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -306,7 +264,7 @@ export default function AboutPage() {
             className="flex flex-col items-center gap-2"
           >
             <span className="text-[10px] tracking-[0.3em] uppercase text-gray-500">
-              Scroll
+              {t.home.scroll}
             </span>
             <div className="h-8 w-[1px] bg-gradient-to-b from-gray-500 to-transparent" />
           </motion.div>
@@ -391,8 +349,8 @@ export default function AboutPage() {
               {t.about.timeline}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              Building the{' '}
-              <span className="gradient-text-nebula">Future</span>
+              {t.aboutPage.buildingThe}{' '}
+              <span className="gradient-text-nebula">{t.aboutPage.future}</span>
             </h2>
           </AnimatedSection>
 
@@ -543,7 +501,7 @@ function TimelineItem({
   index,
   isLeft,
 }: {
-  event: (typeof timelineEvents)[number];
+  event: { year: string; quarter: string; title: string; description: string };
   index: number;
   isLeft: boolean;
 }) {
@@ -610,7 +568,7 @@ function ValueCard({
   value,
   index,
 }: {
-  value: (typeof values)[number];
+  value: { title: string; description: string; icon: React.ReactNode; gradient: string; iconColor: string; iconBg: string };
   index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -653,7 +611,7 @@ function LeadershipCard({
   person,
   index,
 }: {
-  person: (typeof leadership)[number];
+  person: { name: string; title: string; bio: string; pattern: string };
   index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);

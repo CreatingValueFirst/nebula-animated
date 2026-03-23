@@ -2,6 +2,7 @@
 
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '../i18n/LanguageContext';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -32,7 +33,7 @@ const MONTHS = [
   'July', 'August', 'September', 'October', 'November', 'December',
 ];
 
-const STEP_LABELS = ['Date', 'Time', 'Details', 'Confirmed'];
+// STEP_LABELS moved inside BookingModal to use translation keys
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -71,10 +72,10 @@ function getFirstDayOfWeek(year: number, month: number): number {
 // ---------------------------------------------------------------------------
 // Step indicator
 // ---------------------------------------------------------------------------
-function StepIndicator({ current }: { current: number }) {
+function StepIndicator({ current, labels }: { current: number; labels: string[] }) {
   return (
     <div className="flex items-center justify-center gap-2 mb-6">
-      {STEP_LABELS.map((label, i) => (
+      {labels.map((label, i) => (
         <div key={label} className="flex items-center gap-2">
           <div className="flex flex-col items-center gap-1">
             <div
@@ -92,7 +93,7 @@ function StepIndicator({ current }: { current: number }) {
               {label}
             </span>
           </div>
-          {i < STEP_LABELS.length - 1 && (
+          {i < labels.length - 1 && (
             <div className={`w-8 h-px mb-4 transition-colors duration-500 ${
               i < current ? 'bg-[#2d8a8a]/50' : 'bg-white/[0.06]'
             }`} />
@@ -233,6 +234,8 @@ function TimeSlotGrid({
   selectedSlot: TimeSlot | null;
   onSelectSlot: (s: TimeSlot) => void;
 }) {
+  const { t } = useLanguage();
+
   if (loading) {
     return (
       <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
@@ -251,8 +254,8 @@ function TimeSlotGrid({
           <path d="m15 9-6 6" />
           <path d="m9 9 6 6" />
         </svg>
-        <p className="text-sm text-gray-500">No available slots for this date</p>
-        <p className="text-xs text-gray-600 mt-1">Try selecting a different day</p>
+        <p className="text-sm text-gray-500">{t.booking.noSlots}</p>
+        <p className="text-xs text-gray-600 mt-1">{t.booking.tryDifferent}</p>
       </div>
     );
   }
@@ -308,6 +311,9 @@ const slideVariants = {
 // Main BookingModal
 // ---------------------------------------------------------------------------
 export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
+  const { t } = useLanguage();
+  const stepLabels = [t.booking.stepDate, t.booking.stepTime, t.booking.stepDetails, t.booking.stepConfirmed];
+
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(1);
 
@@ -505,16 +511,16 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
               <div className="p-6 sm:p-8">
                 {/* Header */}
                 <div className="mb-2 pr-8">
-                  <p className="text-[10px] tracking-[0.3em] uppercase text-[#2d8a8a] mb-1.5">Discovery Session</p>
+                  <p className="text-[10px] tracking-[0.3em] uppercase text-[#2d8a8a] mb-1.5">{t.booking.discoverySession}</p>
                   <h2 className="text-xl font-bold tracking-[-0.02em] text-white font-[family-name:var(--font-heading)]">
-                    Schedule a Call
+                    {t.booking.scheduleACall}
                   </h2>
-                  <p className="text-xs text-gray-500 mt-1">Book a 30-minute session with our team</p>
+                  <p className="text-xs text-gray-500 mt-1">{t.booking.bookSession}</p>
                 </div>
 
                 {/* Step indicator */}
                 <div className="mt-5">
-                  <StepIndicator current={step} />
+                  <StepIndicator current={step} labels={stepLabels} />
                 </div>
 
                 {/* Step content with animated transitions */}
@@ -531,7 +537,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                         exit="exit"
                         transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
                       >
-                        <p className="text-xs text-gray-400 mb-4">Select a date for your discovery call</p>
+                        <p className="text-xs text-gray-400 mb-4">{t.booking.selectDate}</p>
                         <CalendarGrid
                           selectedDate={selectedDate}
                           onSelectDate={handleDateSelect}
@@ -556,7 +562,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                       >
                         <div className="flex items-center justify-between mb-4">
                           <div>
-                            <p className="text-xs text-gray-400">Available times for</p>
+                            <p className="text-xs text-gray-400">{t.booking.availableTimes}</p>
                             <p className="text-sm font-medium text-white mt-0.5">
                               {selectedDate ? formatReadableDate(formatDate(selectedDate)) : ''}
                             </p>
@@ -565,7 +571,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                             onClick={() => handleBack(0)}
                             className="text-[11px] tracking-wider uppercase text-[#2d8a8a] hover:text-[#3aafaf] transition-colors duration-300"
                           >
-                            Change date
+                            {t.booking.changeDate}
                           </button>
                         </div>
 
@@ -605,33 +611,33 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                                 {selectedDate ? new Date(selectedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : ''}
                                 {selectedSlot ? ` at ${formatTimeFromISO(selectedSlot.start)}` : ''}
                               </p>
-                              <p className="text-[11px] text-gray-600">30 min discovery call</p>
+                              <p className="text-[11px] text-gray-600">{t.booking.discoveryCall}</p>
                             </div>
                           </div>
                           <button
                             onClick={() => handleBack(1)}
                             className="text-[11px] tracking-wider uppercase text-[#2d8a8a] hover:text-[#3aafaf] transition-colors duration-300"
                           >
-                            Change
+                            {t.booking.change}
                           </button>
                         </div>
 
                         {/* Form */}
                         <div className="space-y-4">
                           <div>
-                            <label className="block text-[10px] tracking-[0.15em] uppercase text-gray-500 mb-1.5">Name</label>
+                            <label className="block text-[10px] tracking-[0.15em] uppercase text-gray-500 mb-1.5">{t.booking.name}</label>
                             <input
                               type="text"
                               value={name}
                               onChange={(e) => setName(e.target.value)}
-                              placeholder="Your full name"
+                              placeholder={t.booking.fullName}
                               required
                               className="w-full rounded-xl bg-white/[0.04] border border-white/[0.06] px-4 py-3 text-sm text-white placeholder-gray-600 outline-none transition-all duration-300 focus:border-[#2d8a8a]/40 focus:bg-white/[0.06] focus:ring-2 focus:ring-[#2d8a8a]/10"
                             />
                           </div>
 
                           <div>
-                            <label className="block text-[10px] tracking-[0.15em] uppercase text-gray-500 mb-1.5">Email</label>
+                            <label className="block text-[10px] tracking-[0.15em] uppercase text-gray-500 mb-1.5">{t.booking.email}</label>
                             <input
                               type="email"
                               value={email}
@@ -643,11 +649,11 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                           </div>
 
                           <div>
-                            <label className="block text-[10px] tracking-[0.15em] uppercase text-gray-500 mb-1.5">Notes <span className="text-gray-700 normal-case tracking-normal">(optional)</span></label>
+                            <label className="block text-[10px] tracking-[0.15em] uppercase text-gray-500 mb-1.5">{t.booking.notes} <span className="text-gray-700 normal-case tracking-normal">({t.booking.optional})</span></label>
                             <textarea
                               value={notes}
                               onChange={(e) => setNotes(e.target.value)}
-                              placeholder="Anything you'd like to discuss?"
+                              placeholder={t.booking.anythingToDiscuss}
                               rows={3}
                               className="w-full resize-none rounded-xl bg-white/[0.04] border border-white/[0.06] px-4 py-3 text-sm text-white placeholder-gray-600 outline-none transition-all duration-300 focus:border-[#2d8a8a]/40 focus:bg-white/[0.06] focus:ring-2 focus:ring-[#2d8a8a]/10"
                             />
@@ -667,7 +673,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                             className="relative w-full rounded-xl bg-[#2d8a8a] px-6 py-3.5 text-sm font-semibold tracking-wider uppercase text-white transition-all duration-300 hover:bg-[#2d8a8a]/90 hover:shadow-[0_0_30px_rgba(45,138,138,0.3)] disabled:opacity-40 disabled:cursor-not-allowed overflow-hidden"
                           >
                             <span className={`inline-flex items-center gap-2 transition-opacity duration-300 ${submitting ? 'opacity-0' : 'opacity-100'}`}>
-                              Confirm Booking
+                              {t.booking.confirmBooking}
                               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="m9 12 2 2 4-4" />
                                 <circle cx="12" cy="12" r="10" />
@@ -732,7 +738,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                           transition={{ delay: 0.3, duration: 0.4 }}
                           className="text-lg font-semibold text-white font-[family-name:var(--font-heading)] mb-1"
                         >
-                          Your call is booked!
+                          {t.booking.callBooked}
                         </motion.h3>
 
                         <motion.p
@@ -743,7 +749,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                         >
                           {selectedDate ? formatReadableDate(formatDate(selectedDate)) : ''}
                           {selectedSlot ? ` at ${formatTimeFromISO(selectedSlot.start)}` : ''}
-                          <span className="block text-xs text-gray-600 mt-1">30 min discovery call -- a calendar invite has been sent to your email</span>
+                          <span className="block text-xs text-gray-600 mt-1">{t.booking.calendarInvite}</span>
                         </motion.p>
 
                         {/* Meet link */}
@@ -763,7 +769,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                               <path d="m15 10 5-3v10l-5-3Z" />
                               <rect width="13" height="14" x="2" y="5" rx="2" />
                             </svg>
-                            Join via Google Meet
+                            {t.booking.joinMeet}
                           </motion.a>
                         )}
 
@@ -774,7 +780,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                           transition={{ delay: 0.6 }}
                           className="text-xs text-gray-500 hover:text-gray-300 transition-colors duration-300 mt-2"
                         >
-                          Close
+                          {t.booking.close}
                         </motion.button>
                       </motion.div>
                     )}
