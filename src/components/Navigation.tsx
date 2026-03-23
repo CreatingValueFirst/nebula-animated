@@ -13,8 +13,9 @@ export default function Navigation() {
 
   const navLinks = [
     { label: t.nav.services, href: '/services' },
-    { label: 'Projects', href: '/projects' },
+    { label: t.nav.projects, href: '/projects' },
     { label: t.nav.explore, href: '/explore' },
+    { label: t.nav.art, href: '/art' },
     { label: t.nav.about, href: '/about' },
     { label: t.nav.contact, href: '/contact' },
   ];
