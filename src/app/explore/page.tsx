@@ -55,11 +55,11 @@ const hotspots = [
     color: '#8b2020',
   },
   {
-    id: 'dashboards',
-    label: 'SaveMyTime Dashboards',
+    id: 'denisbozhkov',
+    label: 'Denis Bozhkov Art',
     description:
-      'Real-time AI agent monitoring dashboards',
-    link: 'https://www.savemytime.cloud',
+      'Procedural 3D canvas art and immersive digital gallery',
+    link: 'https://denisbozhkov-art.com/',
     x: 55,
     y: 15,
     color: '#c4847a',
@@ -526,12 +526,17 @@ function Hotspot({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 8 }}
             transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="absolute z-30 top-full mt-3 w-64 md:w-72 origin-top"
+            className="absolute z-30 w-56 sm:w-64 md:w-72"
             style={{
-              left: hotspot.x > 60 ? 'auto' : '50%',
-              right: hotspot.x > 60 ? '50%' : 'auto',
-              transform: `translateX(${hotspot.x > 60 ? '50%' : '-50%'}) scale(${cardScale})`,
-              transformOrigin: hotspot.x > 60 ? 'top right' : 'top left',
+              ...(hotspot.y > 45
+                ? { bottom: '100%', marginBottom: 12 }
+                : { top: '100%', marginTop: 12 }),
+              left: hotspot.x > 60 ? 'auto' : hotspot.x < 30 ? '0' : '50%',
+              right: hotspot.x > 60 ? '0' : 'auto',
+              transform: `translateX(${hotspot.x > 60 ? '0' : hotspot.x < 30 ? '0' : '-50%'}) scale(${cardScale})`,
+              transformOrigin: hotspot.y > 45
+                ? (hotspot.x > 60 ? 'bottom right' : 'bottom left')
+                : (hotspot.x > 60 ? 'top right' : 'top left'),
             }}
           >
             <div className="rounded-xl bg-[#0a0a0f]/95 backdrop-blur-xl border border-white/[0.08] p-5 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
