@@ -184,7 +184,7 @@ export default function ExplorePage() {
             transition={{ duration: 0.6, delay: 0.9 }}
             className="mt-6 text-sm text-gray-400 max-w-md"
           >
-            Click the glowing hotspots to discover our projects across the universe
+            {t.explorePage.clickHotspots}
           </motion.p>
 
           {/* Scroll indicator */}
@@ -200,7 +200,7 @@ export default function ExplorePage() {
               className="flex flex-col items-center gap-2"
             >
               <span className="text-[10px] tracking-[0.3em] uppercase text-gray-500">
-                Scroll to explore
+                {t.explorePage.scrollToExplore}
               </span>
               <div className="h-8 w-[1px] bg-gradient-to-b from-gray-500 to-transparent" />
             </motion.div>
@@ -224,7 +224,7 @@ export default function ExplorePage() {
           <span className="w-1 h-1 rounded-full bg-[#2d8a8a]/60" />
           <span className="text-xs tracking-[0.15em] text-gray-500">Sofia, Bulgaria</span>
           <span className="w-1 h-1 rounded-full bg-[#2d8a8a]/60" />
-          <span className="text-xs tracking-[0.15em] text-gray-500">Explore Our Universe</span>
+          <span className="text-xs tracking-[0.15em] text-gray-500">{t.explorePage.exploreUniverse}</span>
         </motion.div>
 
         {/* Main viewer container */}
@@ -367,10 +367,10 @@ export default function ExplorePage() {
             className="text-center mb-16"
           >
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#c4623a]">
-              Our Projects
+              {t.explorePage.ourProjects}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              What We&apos;re <span className="gradient-text-nebula">Building</span>
+              {t.explorePage.whatWereBuilding} <span className="gradient-text-nebula">{t.explorePage.building}</span>
             </h2>
           </motion.div>
 
@@ -423,10 +423,10 @@ export default function ExplorePage() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-[-0.03em] text-white font-[family-name:var(--font-heading)] mb-4">
-              Fascinated by what AI can reveal?
+              {t.explorePage.fascinatedByAI}
             </h2>
             <p className="text-base text-gray-400 leading-relaxed mb-8 max-w-xl mx-auto">
-              Our Vision Nebula product uses the same deep-learning techniques to analyze and enhance imagery across industries.
+              {t.explorePage.fascinatedDesc}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/about">
@@ -435,7 +435,7 @@ export default function ExplorePage() {
                   whileTap={{ scale: 0.98 }}
                   className="inline-flex items-center gap-2 rounded-full bg-[#2d8a8a] px-7 py-3.5 text-sm font-semibold tracking-wider uppercase text-white transition-all duration-300 hover:bg-[#2d8a8a]/90 hover:shadow-[0_0_30px_rgba(45,138,138,0.3)]"
                 >
-                  Learn More
+                  {t.explorePage.learnMore}
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M5 12h14" />
                     <path d="m12 5 7 7-7 7" />
@@ -448,7 +448,7 @@ export default function ExplorePage() {
                   whileTap={{ scale: 0.98 }}
                   className="inline-flex items-center gap-2 rounded-full border border-white/10 px-7 py-3.5 text-sm font-semibold tracking-wider uppercase text-gray-300 transition-all duration-300 hover:bg-white/[0.04] hover:border-white/20 hover:text-white"
                 >
-                  Contact Us
+                  {t.explorePage.contactUs}
                 </motion.span>
               </Link>
             </div>

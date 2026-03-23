@@ -35,9 +35,9 @@ export default function Footer() {
     {
       title: t.footer.resources,
       links: [
-        { label: 'Blog', href: '/explore' },
-        { label: 'Documentation', href: '/explore' },
-        { label: 'API Reference', href: '/explore' },
+        { label: t.footerResources.blog, href: '/explore' },
+        { label: t.footerResources.documentation, href: '/explore' },
+        { label: t.footerResources.apiReference, href: '/explore' },
       ],
     },
     {
