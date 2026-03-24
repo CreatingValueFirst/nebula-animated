@@ -9,6 +9,7 @@ import {
   AnimatePresence,
 } from 'framer-motion';
 import { useLanguage } from '../../i18n/LanguageContext';
+import CosmicVideo from '../../components/CosmicVideo';
 
 // ---------------------------------------------------------------------------
 // Hotspot Data
@@ -143,16 +144,11 @@ export default function ExplorePage() {
           HERO / INTRO
           ============================================================= */}
       <section ref={heroRef} className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
+        <CosmicVideo
+          baseName="cosmic-video-8-hd"
           poster="/nebula-4k.jpg"
-        >
-          <source src="/cosmic-video-8-hd.mp4" type="video/mp4" />
-        </video>
+          className="absolute inset-0 w-full h-full object-cover"
+        />
         <div className="absolute inset-0 bg-[#0a0a0f]/60" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f]/40 via-transparent to-[#0a0a0f]" />
 
@@ -237,19 +233,18 @@ export default function ExplorePage() {
                 transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="relative w-full h-full origin-center"
               >
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="absolute inset-0 w-full h-full object-cover transition-[filter] duration-700 ease-out"
+                <div
+                  className="absolute inset-0 w-full h-full transition-[filter] duration-700 ease-out"
                   style={{
                     filter: filterPresetsLocal[activeFilter].filter,
                   }}
-                  poster="/nebula-4k.jpg"
                 >
-                  <source src="/cosmic-video-ultimate.mp4" type="video/mp4" />
-                </video>
+                  <CosmicVideo
+                    baseName="cosmic-video-ultimate"
+                    poster="/nebula-4k.jpg"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </div>
 
                 {/* Hotspots */}
                 {hotspots.map((hotspot) => (

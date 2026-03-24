@@ -4,6 +4,7 @@ import React, { useRef } from 'react';
 
 import Link from 'next/link';
 import { useLanguage } from '../../i18n/LanguageContext';
+import CosmicVideo from '../../components/CosmicVideo';
 import {
   motion,
   useScroll,
@@ -204,16 +205,11 @@ export default function AboutPage() {
       <section ref={heroRef} className="relative h-[80vh] min-h-[600px] w-full overflow-hidden">
         {/* Parallax nebula background */}
         <motion.div className="absolute inset-[-10%] w-[120%] h-[120%]" style={{ y: heroY }}>
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
+          <CosmicVideo
+            baseName="cosmic-video-ultimate"
             poster="/nebula-4k.jpg"
-          >
-            <source src="/cosmic-video-ultimate.mp4" type="video/mp4" />
-          </video>
+            className="absolute inset-0 w-full h-full object-cover"
+          />
         </motion.div>
 
         {/* Overlays */}

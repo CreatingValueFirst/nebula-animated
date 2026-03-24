@@ -11,6 +11,7 @@ import {
   useInView,
 } from 'framer-motion';
 import { useLanguage } from '../i18n/LanguageContext';
+import CosmicVideo from '../components/CosmicVideo';
 
 // ---------------------------------------------------------------------------
 // Dynamic import: Remotion Player (no SSR)
@@ -322,19 +323,12 @@ export default function Home() {
           ================================================================ */}
       <section className="relative h-dvh w-full overflow-hidden">
         {/* Background Video - Runway Gen-4 cosmic animation */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          // @ts-expect-error -- fetchPriority is valid HTML on video but missing from React's VideoHTMLAttributes
-          fetchPriority="high"
-          className="absolute inset-0 w-full h-full object-cover"
+        <CosmicVideo
+          baseName="cosmic-video-ultimate"
           poster="/nebula-4k.jpg"
-        >
-          <source src="/cosmic-video-ultimate.mp4" type="video/mp4" />
-        </video>
+          className="absolute inset-0 w-full h-full object-cover"
+          priority={true}
+        />
 
         {/* Gradient overlay - clean cinematic fade */}
         <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/50 via-transparent to-[#0a0a0f]" />
@@ -530,16 +524,11 @@ export default function Home() {
           className="absolute inset-[-20%] w-[140%] h-[140%]"
           style={{ y: parallaxY }}
         >
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
+          <CosmicVideo
+            baseName="cosmic-video-9-hd"
             poster="/nebula-4k.jpg"
-          >
-            <source src="/cosmic-video-9-hd.mp4" type="video/mp4" />
-          </video>
+            className="w-full h-full object-cover"
+          />
         </motion.div>
 
         {/* Darkening overlay */}

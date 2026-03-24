@@ -4,6 +4,7 @@ import React, { useRef, useState } from 'react';
 
 import Link from 'next/link';
 import { useLanguage } from '../../i18n/LanguageContext';
+import CosmicVideo from '../../components/CosmicVideo';
 import BookingModal from '../../components/BookingModal';
 import {
   motion,
@@ -184,16 +185,11 @@ export default function ContactPage() {
           ============================================================= */}
       <section ref={heroRef} className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
         <motion.div className="absolute inset-[-10%] w-[120%] h-[120%]" style={{ y: heroY }}>
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
+          <CosmicVideo
+            baseName="cosmic-video-9-hd"
             poster="/nebula-4k.jpg"
-          >
-            <source src="/cosmic-video-9-hd.mp4" type="video/mp4" />
-          </video>
+            className="absolute inset-0 w-full h-full object-cover"
+          />
         </motion.div>
 
         <div className="absolute inset-0 bg-[#0a0a0f]/70" />
