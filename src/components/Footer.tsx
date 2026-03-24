@@ -60,7 +60,6 @@ export default function Footer() {
           fill
           className="object-cover opacity-[0.03]"
           sizes="100vw"
-          quality={90}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/90 to-[#0a0a0f]/80" />
       </div>

@@ -621,7 +621,6 @@ export default function Home() {
             fill
             className="object-cover opacity-[0.06]"
             sizes="100vw"
-            quality={90}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-transparent to-[#0a0a0f]" />
         </div>
