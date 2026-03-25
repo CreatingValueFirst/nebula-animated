@@ -1,21 +1,14 @@
 'use client';
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 
 interface CosmicVideoProps {
-  /** Base name without extension, e.g. "cosmic-video-ultimate" */
   baseName: string;
   poster?: string;
   className?: string;
   priority?: boolean;
 }
 
-/**
- * Responsive cosmic background video component.
- * - Desktop: 4K WebM (VP9) with MP4 fallback
- * - Mobile (<768px): 1080p WebM with MP4 fallback
- * - Poster shown while video loads
- */
 export default function CosmicVideo({
   baseName,
   poster = '/nebula-4k.jpg',
@@ -24,21 +17,67 @@ export default function CosmicVideo({
 }: CosmicVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isVisible, setIsVisible] = useState(priority);
 
   useEffect(() => {
     const mql = window.matchMedia('(max-width: 768px)');
     setIsMobile(mql.matches);
-
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mql.addEventListener('change', handler);
     return () => mql.removeEventListener('change', handler);
   }, []);
 
-  // Build source paths
+  // Intersection observer: only load/play video when visible
+  const observerRef = useCallback(
+    (node: HTMLVideoElement | null) => {
+      if (priority || !node) return;
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect();
+          }
+        },
+        { rootMargin: '200px' }
+      );
+      observer.observe(node);
+      return () => observer.disconnect();
+    },
+    [priority]
+  );
+
+  // Pause when off-screen to save resources
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [isVisible]);
+
   const suffix = isMobile ? '-mobile' : '';
   const webmSrc = `/${baseName}${suffix}.webm`;
   const mp4Src = `/${baseName}${suffix}.mp4`;
   const mobilePoster = isMobile ? '/nebula-mobile.jpg' : poster;
+
+  if (!isVisible && !priority) {
+    return (
+      <div
+        ref={observerRef as unknown as React.Ref<HTMLDivElement>}
+        className={className}
+        style={{ backgroundImage: `url(${mobilePoster})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      />
+    );
+  }
 
   return (
     <video

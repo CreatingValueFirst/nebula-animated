@@ -303,3 +303,17 @@ main {
     min-width: 44px;
   }
 }
+
+/* =============================================
+   Performance: GPU-accelerated video & animations
+   ============================================= */
+
+video {
+  will-change: auto;
+  transform: translateZ(0);
+}
+
+.glass {
+  will-change: auto;
+  transform: translateZ(0);
+}

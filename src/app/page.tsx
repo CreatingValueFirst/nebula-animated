@@ -3,7 +3,6 @@
 import React, { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
 import {
   motion,
   useScroll,
@@ -12,16 +11,6 @@ import {
 } from 'framer-motion';
 import { useLanguage } from '../i18n/LanguageContext';
 import CosmicVideo from '../components/CosmicVideo';
-
-// ---------------------------------------------------------------------------
-// Dynamic import: Remotion Player (no SSR)
-// ---------------------------------------------------------------------------
-const Player = dynamic(
-  () => import('@remotion/player').then((mod) => ({ default: mod.Player })),
-  { ssr: false }
-);
-
-import { CosmicComposition } from '../remotion/CosmicComposition';
 
 // ---------------------------------------------------------------------------
 // Animation Variants
@@ -610,6 +599,7 @@ export default function Home() {
             fill
             className="object-cover opacity-[0.06]"
             sizes="100vw"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-transparent to-[#0a0a0f]" />
         </div>
