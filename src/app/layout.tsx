@@ -70,11 +70,6 @@ export default function RootLayout({
     >
       <head>
         <link rel="manifest" href="/site.webmanifest" />
-        {/* Preload hero video poster for instant first paint */}
-        <link rel="preload" as="image" href="/nebula-4k.jpg" />
-        {/* DNS prefetch for any external resources */}
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
       </head>
       <body className="min-h-dvh flex flex-col bg-[#0a0a0f] antialiased">
         <LanguageProvider>

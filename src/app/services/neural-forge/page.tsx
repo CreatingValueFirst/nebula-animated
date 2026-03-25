@@ -246,7 +246,7 @@ export default function NeuralForgePage() {
       <section ref={heroRef} className="relative h-[85vh] min-h-[640px] w-full overflow-hidden">
         {/* Parallax nebula */}
         <motion.div className="absolute inset-[-20%] w-[140%] h-[140%]" style={{ y: heroImgY }}>
-          <Image src="/nebula-4k.jpg" alt="Neural Forge background" fill className="object-cover" sizes="100vw" priority />
+          <Image src="/nebula-4k.jpg" alt="Neural Forge background" fill className="object-cover" sizes="100vw" priority quality={90} />
         </motion.div>
 
         {/* Overlays */}

@@ -9,7 +9,6 @@ import {
   useInView,
 } from 'framer-motion';
 import { useLanguage } from '../../i18n/LanguageContext';
-import CosmicVideo from '../../components/CosmicVideo';
 
 // ---------------------------------------------------------------------------
 // Animation helpers
@@ -503,11 +502,16 @@ export default function ProjectsPage() {
           className="absolute inset-[-10%] w-[120%] h-[120%]"
           style={{ y: heroImgY }}
         >
-          <CosmicVideo
-            baseName="cosmic-video-9-hd"
-            poster="/nebula-4k.jpg"
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
             className="absolute inset-0 w-full h-full object-cover"
-          />
+            poster="/nebula-4k.jpg"
+          >
+            <source src="/cosmic-video-9-hd.mp4" type="video/mp4" />
+          </video>
         </motion.div>
 
         {/* Gradient overlays */}

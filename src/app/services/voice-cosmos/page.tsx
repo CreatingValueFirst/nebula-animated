@@ -121,14 +121,14 @@ function ChatBubble({
       <div
         className={`max-w-[85%] sm:max-w-[75%] rounded-2xl px-5 py-3.5 ${
           isAgent
-            ? 'bg-[#1a1a2e]/80 border border-[#c4623a]/15 backdrop-blur-md rounded-bl-sm'
+            ? 'glass border-[#c4623a]/10 rounded-bl-sm'
             : 'bg-[#2d8a8a]/10 border border-[#2d8a8a]/20 rounded-br-sm'
         }`}
       >
         <p className="text-[11px] tracking-wider uppercase mb-1.5 font-medium" style={{ color: isAgent ? '#c4623a' : '#2d8a8a' }}>
           {isAgent ? 'Voice Agent' : 'Caller'}
         </p>
-        <p className={`text-sm leading-relaxed ${isAgent ? 'text-gray-200' : 'text-gray-300'}`}>
+        <p className="text-sm text-gray-300 leading-relaxed">
           {message.text}
         </p>
       </div>
@@ -249,7 +249,7 @@ export default function VoiceCosmosPage() {
       <section ref={heroRef} className="relative h-[90vh] min-h-[700px] w-full overflow-hidden">
         {/* Parallax nebula */}
         <motion.div className="absolute inset-[-20%] w-[140%] h-[140%]" style={{ y: heroImgY }}>
-          <Image src="/nebula-4k.jpg" alt="Voice Cosmos background" fill className="object-cover" sizes="100vw" priority />
+          <Image src="/nebula-4k.jpg" alt="Voice Cosmos background" fill className="object-cover" sizes="100vw" priority quality={90} />
         </motion.div>
 
         {/* Overlays */}

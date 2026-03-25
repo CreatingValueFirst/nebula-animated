@@ -263,7 +263,7 @@ export default function VisionNebulaPage() {
       <section ref={heroRef} className="relative h-[90vh] min-h-[700px] w-full overflow-hidden">
         {/* Parallax nebula */}
         <motion.div className="absolute inset-[-20%] w-[140%] h-[140%]" style={{ y: heroImgY }}>
-          <Image src="/nebula-4k.jpg" alt="Vision Nebula background" fill className="object-cover" sizes="100vw" priority />
+          <Image src="/nebula-4k.jpg" alt="Vision Nebula background" fill className="object-cover" sizes="100vw" priority quality={90} />
         </motion.div>
 
         {/* Scanning line effect */}
