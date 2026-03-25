@@ -121,14 +121,14 @@ function ChatBubble({
       <div
         className={`max-w-[85%] sm:max-w-[75%] rounded-2xl px-5 py-3.5 ${
           isAgent
-            ? 'glass border-[#c4623a]/10 rounded-bl-sm'
+            ? 'bg-[#1a1a2e]/80 border border-[#c4623a]/15 backdrop-blur-md rounded-bl-sm'
             : 'bg-[#2d8a8a]/10 border border-[#2d8a8a]/20 rounded-br-sm'
         }`}
       >
         <p className="text-[11px] tracking-wider uppercase mb-1.5 font-medium" style={{ color: isAgent ? '#c4623a' : '#2d8a8a' }}>
           {isAgent ? 'Voice Agent' : 'Caller'}
         </p>
-        <p className="text-sm text-gray-300 leading-relaxed">
+        <p className={`text-sm leading-relaxed ${isAgent ? 'text-gray-200' : 'text-gray-300'}`}>
           {message.text}
         </p>
       </div>

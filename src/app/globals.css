@@ -303,3 +303,8 @@ main {
     min-width: 44px;
   }
 }
+
+/* GPU-accelerate video playback */
+video {
+  transform: translateZ(0);
+}
