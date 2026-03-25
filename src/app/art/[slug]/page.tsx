@@ -8,73 +8,38 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../../i18n/LanguageContext';
 
 // ---------------------------------------------------------------------------
-// Artworks Data
+// Artworks static config (titles + descriptions come from translations)
 // ---------------------------------------------------------------------------
-const artworks = [
-  {
-    slug: 'the-ancient-rite',
-    title: 'The Ancient Rite',
-    description:
-      'A dark mythological scene depicting a towering Slavic pagan deity wielding a spear amidst swirling smoke and fire. A stag with majestic antlers stands at the center, flanked by a veiled priestess in white and hooded figures bearing candles. The atmosphere is primordial and sacred -- a ritual frozen at the moment between worlds, where the boundary between mortal and divine dissolves into ember and shadow.',
-    accent: '#c4623a',
-  },
-  {
-    slug: 'the-starwanderer',
-    title: 'The Starwanderer',
-    description:
-      'A colossal hooded figure walks alone across a barren alien landscape, leaning on a weathered staff. Stars are woven into the very fabric of its flowing cloak, and small moons orbit silently nearby. The horizon glows with a warm twilight that seems to belong to no known sun. A meditation on solitude, cosmic purpose, and the quiet majesty of beings who measure their journeys in light-years.',
-    accent: '#4a9eff',
-  },
-  {
-    slug: 'cathedral-of-the-eclipse',
-    title: 'Cathedral of the Eclipse',
-    description:
-      'A skull-faced monolith merges with soaring gothic cathedral architecture, its stained-glass windows blazing with impossible color against the endless void. Astronauts drift weightlessly around the structure as a solar eclipse burns overhead like an angry eye. Sacred geometry meets deep space in a monument that could be tomb, temple, or both -- a cathedral built not by hands but by the gravity of forgotten prayers.',
-    accent: '#8b2020',
-  },
-  {
-    slug: 'prismatic-grazer',
-    title: 'Prismatic Grazer',
-    description:
-      'A crystalline dinosaur-like creature grazes peacefully in a field of indigo grass beneath a sky crowned with concentric rainbows. Its body is translucent, constructed from interlocking geometric facets that catch and scatter light like a living prism. A gentle titan from a parallel evolution where beauty became the dominant survival trait, moving through its world with the grace of stained glass come alive.',
-    accent: '#2d8a8a',
-  },
-  {
-    slug: 'stellar-bloom',
-    title: 'Stellar Bloom',
-    description:
-      'An ice-crystal flower unfurls in the absolute silence of deep space, connected to a distant sun by a river of golden particles. Its petals shimmer between cyan and white, refracting starlight into spectral ribbons. A moment of impossible beauty at the edge of a dying galaxy -- proof that even in the coldest reaches of existence, something within the universe still yearns to bloom.',
-    accent: '#3aafaf',
-  },
-  {
-    slug: 'digital-tide',
-    title: 'Digital Tide',
-    description:
-      'A luminous teal wave made of wireframe grids crashes through a dark ocean under an infinite canopy of stars. The water itself is data, each droplet a coordinate in an endless computational mesh. Where nature\'s chaos meets algorithmic precision, a new kind of beauty emerges -- neither designed nor accidental, but something the mathematics of the universe always intended.',
-    accent: '#2d8a8a',
-  },
-  {
-    slug: 'data-forest',
-    title: 'Data Forest',
-    description:
-      'Trees with bark of living shadow grow luminous cubic leaves that pulse with cyan light in an eternal digital twilight. The forest floor flows with currents of data, streams of information finding their way like water through roots. An ecosystem where organic life has merged irreversibly with computational substrate -- a place neither fully alive nor purely digital, but achingly beautiful in its liminal existence.',
-    accent: '#4a9eff',
-  },
-  {
-    slug: 'neural-blossom',
-    title: 'Neural Blossom',
-    description:
-      'A bioluminescent tree of neurons branches upward into a violet cosmos, each synaptic node glowing with its own inner light. The structure is simultaneously anatomical and botanical -- a map of consciousness rendered as a living organism that grows from primordial darkness toward understanding. Every branch is a thought, every glow a memory, every root a dream not yet dreamed.',
-    accent: '#c4847a',
-  },
-  {
-    slug: 'orbital-harvest',
-    title: 'Orbital Harvest',
-    description:
-      'Apples and stone fruits float in precise orbits around invisible gravitational centers, connected by spiraling golden threads that trace equations of desire. The barren landscape below speaks of entropy and endings, while the fruit above defies every law of decay. Newton\'s dream reimagined as surrealist poetry -- what if gravity was not a force but a form of longing?',
-    accent: '#c4623a',
-  },
+const artworkConfigs = [
+  { slug: 'the-ancient-rite', accent: '#c4623a' },
+  { slug: 'the-starwanderer', accent: '#4a9eff' },
+  { slug: 'cathedral-of-the-eclipse', accent: '#8b2020' },
+  { slug: 'prismatic-grazer', accent: '#2d8a8a' },
+  { slug: 'stellar-bloom', accent: '#3aafaf' },
+  { slug: 'digital-tide', accent: '#2d8a8a' },
+  { slug: 'data-forest', accent: '#4a9eff' },
+  { slug: 'neural-blossom', accent: '#c4847a' },
+  { slug: 'orbital-harvest', accent: '#c4623a' },
 ];
+
+function getDetailArtworks(t: ReturnType<typeof useLanguage>['t']) {
+  const data: Record<string, { title: string; description: string }> = {
+    'the-ancient-rite': { title: t.artworksData.theAncientRiteTitle, description: t.artworksData.theAncientRiteDesc },
+    'the-starwanderer': { title: t.artworksData.theStarwandererTitle, description: t.artworksData.theStarwandererDesc },
+    'cathedral-of-the-eclipse': { title: t.artworksData.cathedralOfTheEclipseTitle, description: t.artworksData.cathedralOfTheEclipseDesc },
+    'prismatic-grazer': { title: t.artworksData.prismaticGrazerTitle, description: t.artworksData.prismaticGrazerDesc },
+    'stellar-bloom': { title: t.artworksData.stellarBloomTitle, description: t.artworksData.stellarBloomDesc },
+    'digital-tide': { title: t.artworksData.digitalTideTitle, description: t.artworksData.digitalTideDesc },
+    'data-forest': { title: t.artworksData.dataForestTitle, description: t.artworksData.dataForestDesc },
+    'neural-blossom': { title: t.artworksData.neuralBlossomTitle, description: t.artworksData.neuralBlossomDesc },
+    'orbital-harvest': { title: t.artworksData.orbitalHarvestTitle, description: t.artworksData.orbitalHarvestDesc },
+  };
+  return artworkConfigs.map((cfg) => ({
+    ...cfg,
+    title: data[cfg.slug].title,
+    description: data[cfg.slug].description,
+  }));
+}
 
 // ---------------------------------------------------------------------------
 // Page Component
@@ -84,6 +49,7 @@ export default function ArtDetailPage() {
   const { t } = useLanguage();
   const slug = params.slug;
 
+  const artworks = getDetailArtworks(t);
   const currentIndex = artworks.findIndex((a) => a.slug === slug);
   const artwork = currentIndex !== -1 ? artworks[currentIndex] : null;
 

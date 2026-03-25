@@ -127,7 +127,7 @@ export default function ContactPage() {
   const contactInfo = [
     { label: t.contact.email, value: 'info@heaven-interactive.com', icon: emailIcon, href: 'mailto:info@heaven-interactive.com' },
     { label: t.contact.phone, value: '+359 898 34 5752', icon: phoneIcon, href: 'tel:+359898345752' },
-    { label: t.contact.hq, value: 'Sofia, Lozenets, Bulgaria', icon: hqIcon, href: 'https://maps.google.com/?q=Sofia+Lozenets+Bulgaria' },
+    { label: t.contact.hq, value: t.contactExtra.hqValue, icon: hqIcon, href: 'https://maps.google.com/?q=Sofia+Lozenets+Bulgaria' },
     { label: t.contact.hours, value: t.contact.hoursValue, icon: hoursIcon, href: undefined },
     { label: 'Facebook', value: 'Heaven Interactive', icon: facebookIcon, href: 'https://www.facebook.com/profile.php?id=61568535414612' },
     { label: 'GitHub', value: 'CreatingValueFirst', icon: githubIcon, href: 'https://github.com/CreatingValueFirst?tab=repositories' },
@@ -168,10 +168,10 @@ export default function ContactPage() {
         setIsSubmitted(true);
       } else {
         const data = await res.json();
-        alert(data.error || 'Failed to send. Please try again.');
+        alert(data.error || t.contactExtra.errorFailed);
       }
     } catch {
-      alert('Network error. Please try again.');
+      alert(t.contactExtra.errorNetwork);
     } finally {
       setIsSubmitting(false);
     }

@@ -1,4 +1,8 @@
 import { extraTranslations } from './translations-extra';
+import { serviceTranslationsNfVc } from './translations-nf-vc';
+import { serviceTranslationsVnDs } from './translations-vn-ds';
+import { serviceTranslationsCpQm } from './translations-cp-qm';
+import { pagesExtraTranslations } from './translations-pages-extra';
 
 const baseTranslations = {
   en: {
@@ -172,22 +176,14 @@ const baseTranslations = {
   },
 } as const;
 
-// Merge base + extra translations for each locale
-export const translations = {
-  en: { ...baseTranslations.en, ...extraTranslations.en },
-  bg: { ...baseTranslations.bg, ...extraTranslations.bg },
-  ru: { ...baseTranslations.ru, ...extraTranslations.ru },
-  es: { ...baseTranslations.es, ...extraTranslations.es },
-  zh: { ...baseTranslations.zh, ...extraTranslations.zh },
-  ja: { ...baseTranslations.ja, ...extraTranslations.ja },
-  tr: { ...baseTranslations.tr, ...extraTranslations.tr },
-  sr: { ...baseTranslations.sr, ...extraTranslations.sr },
-  mk: { ...baseTranslations.mk, ...extraTranslations.mk },
-  ro: { ...baseTranslations.ro, ...extraTranslations.ro },
-  it: { ...baseTranslations.it, ...extraTranslations.it },
-  de: { ...baseTranslations.de, ...extraTranslations.de },
-  el: { ...baseTranslations.el, ...extraTranslations.el },
-} as const;
+// Merge base + extra + service + page translations for each locale
+const locales = ['en', 'bg', 'ru', 'es', 'zh', 'ja', 'tr', 'sr', 'mk', 'ro', 'it', 'de', 'el'] as const;
+
+const allSources = [baseTranslations, extraTranslations, serviceTranslationsNfVc, serviceTranslationsVnDs, serviceTranslationsCpQm, pagesExtraTranslations] as Record<string, Record<string, unknown>>[];
+
+export const translations = Object.fromEntries(
+  locales.map((loc) => [loc, Object.assign({}, ...allSources.map((s) => s[loc] || {}))])
+) as { [K in (typeof locales)[number]]: typeof baseTranslations.en & typeof extraTranslations.en & typeof serviceTranslationsNfVc.en & typeof serviceTranslationsVnDs.en & typeof serviceTranslationsCpQm.en & typeof pagesExtraTranslations.en };
 
 export type Locale = keyof typeof translations;
 

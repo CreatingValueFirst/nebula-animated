@@ -127,6 +127,7 @@ const CODE_LINES = [
 ];
 
 function TypingCodeEditor() {
+  const { t } = useLanguage();
   const [visibleChars, setVisibleChars] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
@@ -174,7 +175,7 @@ function TypingCodeEditor() {
           <div className="w-3 h-3 rounded-full bg-[#c4623a]/40" />
           <div className="w-3 h-3 rounded-full bg-[#2d8a8a]/40" />
           <span className="ml-3 text-[11px] text-gray-600 tracking-wider">
-            model.ts
+            {t.codePulsarPage.codeEditorFilename}
           </span>
         </div>
         {/* Code area */}
@@ -209,6 +210,7 @@ function TypingCodeEditor() {
 // Before/After Timeline
 // ---------------------------------------------------------------------------
 function BeforeAfter() {
+  const { t } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.4 });
 
@@ -223,13 +225,13 @@ function BeforeAfter() {
           className="glass rounded-2xl md:rounded-r-none p-8 md:p-10 text-center md:border-r-0"
         >
           <p className="text-xs tracking-[0.3em] uppercase text-gray-500 mb-4">
-            Manual Development
+            {t.codePulsarPage.beforeLabel}
           </p>
           <div className="text-4xl sm:text-5xl font-bold text-white/30 font-[family-name:var(--font-heading)] mb-2">
-            6 months
+            {t.codePulsarPage.beforeValue}
           </div>
           <p className="text-sm text-gray-500">
-            Traditional sprint cycles, manual code review, extensive debugging
+            {t.codePulsarPage.beforeDesc}
           </p>
         </motion.div>
 
@@ -247,14 +249,13 @@ function BeforeAfter() {
           <div className="absolute inset-0 bg-gradient-to-br from-[#2d8a8a]/5 to-transparent pointer-events-none" />
           <div className="relative z-10">
             <p className="text-xs tracking-[0.3em] uppercase text-[#2d8a8a] mb-4">
-              With Code Pulsar
+              {t.codePulsarPage.afterLabel}
             </p>
             <div className="text-4xl sm:text-5xl font-bold gradient-text-nebula font-[family-name:var(--font-heading)] mb-2">
-              3 weeks
+              {t.codePulsarPage.afterValue}
             </div>
             <p className="text-sm text-gray-400">
-              AI-accelerated development, automated testing, intelligent
-              optimization
+              {t.codePulsarPage.afterDesc}
             </p>
           </div>
         </motion.div>
@@ -343,27 +344,23 @@ export default function CodePulsarPage() {
   const { t } = useLanguage();
   const features = [
     {
-      title: 'AI Code Generation & Completion',
-      description:
-        'Context-aware code generation that understands your entire codebase. From single functions to complete modules, our AI writes production-ready code that follows your team\'s conventions.',
+      title: t.codePulsarPage.feature1Title,
+      description: t.codePulsarPage.feature1Desc,
       icon: 'code',
     },
     {
-      title: 'Automated Testing & Bug Detection',
-      description:
-        'AI-driven test generation that achieves comprehensive coverage. Static analysis powered by deep learning catches bugs that traditional linters miss entirely.',
+      title: t.codePulsarPage.feature2Title,
+      description: t.codePulsarPage.feature2Desc,
       icon: 'shield',
     },
     {
-      title: 'Code Review & Optimization',
-      description:
-        'Intelligent code review that goes beyond syntax. Performance bottlenecks, security vulnerabilities, and architectural concerns identified before they reach production.',
+      title: t.codePulsarPage.feature3Title,
+      description: t.codePulsarPage.feature3Desc,
       icon: 'search',
     },
     {
-      title: 'Legacy Code Modernization',
-      description:
-        'Transform aging codebases into modern, maintainable architectures. Our AI understands legacy patterns and rewrites them following current best practices.',
+      title: t.codePulsarPage.feature4Title,
+      description: t.codePulsarPage.feature4Desc,
       icon: 'refresh',
     },
   ];
@@ -388,7 +385,7 @@ export default function CodePulsarPage() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mb-6 text-xs sm:text-sm tracking-[0.3em] uppercase text-[#c4623a]"
           >
-            AI-Powered Development
+            {t.codePulsarPage.heroLabel}
           </motion.p>
 
           <motion.h1
@@ -397,9 +394,9 @@ export default function CodePulsarPage() {
             transition={{ duration: 0.7, delay: 0.5 }}
             className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-[-0.03em] text-white font-[family-name:var(--font-heading)] leading-[0.9]"
           >
-            CODE
+            {t.codePulsarPage.heroTitle1}
             <br />
-            <span className="gradient-text-nebula">PULSAR</span>
+            <span className="gradient-text-nebula">{t.codePulsarPage.heroTitle2}</span>
           </motion.h1>
 
           <motion.p
@@ -408,7 +405,7 @@ export default function CodePulsarPage() {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="mt-6 max-w-lg text-base sm:text-lg text-gray-400 leading-relaxed"
           >
-            Code at the Speed of Thought
+            {t.codePulsarPage.heroSubtitle}
           </motion.p>
 
           {/* Code Editor */}
@@ -438,7 +435,7 @@ export default function CodePulsarPage() {
               className="flex flex-col items-center gap-2"
             >
               <span className="text-[10px] tracking-[0.3em] uppercase text-gray-500">
-                Explore
+                {t.codePulsarPage.scrollIndicator}
               </span>
               <div className="h-8 w-[1px] bg-gradient-to-b from-gray-500 to-transparent" />
             </motion.div>
@@ -456,11 +453,11 @@ export default function CodePulsarPage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <AnimatedSection className="text-center mb-16 md:mb-20">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#c4623a]">
-              Capabilities
+              {t.codePulsarPage.featuresLabel}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              Development{' '}
-              <span className="gradient-text-nebula">Superpowers</span>
+              {t.codePulsarPage.featuresTitle}
+              <span className="gradient-text-nebula">{t.codePulsarPage.featuresTitleAccent}</span>
             </h2>
           </AnimatedSection>
 
@@ -508,11 +505,11 @@ export default function CodePulsarPage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <div className="text-center mb-16 md:mb-20">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#4a9eff]">
-              Impact
+              {t.codePulsarPage.beforeAfterLabel}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              The{' '}
-              <span className="gradient-text-nebula">Acceleration</span>
+              {t.codePulsarPage.beforeAfterTitle}
+              <span className="gradient-text-nebula">{t.codePulsarPage.beforeAfterTitleAccent}</span>
             </h2>
           </div>
           <BeforeAfter />
@@ -528,9 +525,9 @@ export default function CodePulsarPage() {
         </div>
         <div className="relative z-10 mx-auto max-w-4xl px-6 md:px-12">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <StatCard value="10x" label="Faster Development" index={0} />
-            <StatCard value="60%" label="Fewer Bugs" index={1} />
-            <StatCard value="85%" label="Less Boilerplate" index={2} />
+            <StatCard value={t.codePulsarPage.stat1Value} label={t.codePulsarPage.stat1Label} index={0} />
+            <StatCard value={t.codePulsarPage.stat2Value} label={t.codePulsarPage.stat2Label} index={1} />
+            <StatCard value={t.codePulsarPage.stat3Value} label={t.codePulsarPage.stat3Label} index={2} />
           </div>
         </div>
       </section>
@@ -541,11 +538,11 @@ export default function CodePulsarPage() {
       <AnimatedSection className="relative py-28 md:py-36">
         <div className="relative z-10 mx-auto max-w-4xl px-6 md:px-12 text-center">
           <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#2d8a8a]">
-            Languages
+            {t.codePulsarPage.techStackLabel}
           </p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)] mb-12">
-            We Speak{' '}
-            <span className="gradient-text-nebula">Every Language</span>
+            {t.codePulsarPage.techStackTitle}
+            <span className="gradient-text-nebula">{t.codePulsarPage.techStackTitleAccent}</span>
           </h2>
           <TechStack />
         </div>
@@ -561,16 +558,14 @@ export default function CodePulsarPage() {
         <div className="relative z-10 mx-auto max-w-3xl px-6 md:px-12 text-center">
           <AnimatedSection>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)] mb-6">
-              Ready to{' '}
+              {t.codePulsarPage.ctaTitle}
               <span className="gradient-text-nebula">
-                Accelerate Development
+                {t.codePulsarPage.ctaTitleAccent}
               </span>
-              ?
+              {t.codePulsarPage.ctaTitleEnd}
             </h2>
             <p className="text-base md:text-lg text-gray-400 leading-relaxed mb-10 max-w-xl mx-auto">
-              Stop writing boilerplate. Start building the future. Let Code
-              Pulsar handle the heavy lifting while your team focuses on
-              what matters.
+              {t.codePulsarPage.ctaDescription}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link

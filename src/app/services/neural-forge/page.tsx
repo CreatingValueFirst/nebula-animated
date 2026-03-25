@@ -67,97 +67,46 @@ function StaggerCard({
 }
 
 // ---------------------------------------------------------------------------
-// Feature data
+// Feature icons (static, no text)
 // ---------------------------------------------------------------------------
-const features = [
-  {
-    title: 'Custom Architecture Design',
-    description:
-      'We design neural network architectures from scratch, tailored to your data type, volume, and performance requirements. No cookie-cutter solutions.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2L2 7l10 5 10-5-10-5z" />
-        <path d="M2 17l10 5 10-5" />
-        <path d="M2 12l10 5 10-5" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Transfer Learning & Fine-tuning',
-    description:
-      'Leverage foundation models and fine-tune them on your domain data. Achieve production accuracy with a fraction of the training data and compute.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="3" />
-        <path d="M12 1v4" />
-        <path d="M12 19v4" />
-        <path d="M5.64 5.64l2.83 2.83" />
-        <path d="M15.54 15.54l2.83 2.83" />
-        <path d="M1 12h4" />
-        <path d="M19 12h4" />
-        <path d="M5.64 18.36l2.83-2.83" />
-        <path d="M15.54 8.46l2.83-2.83" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Distributed Training at Scale',
-    description:
-      'Multi-GPU and multi-node training pipelines that handle terabytes of data. We optimize for throughput, not just accuracy -- because time to production matters.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="6" width="20" height="12" rx="2" />
-        <path d="M12 12h.01" />
-        <path d="M17 12h.01" />
-        <path d="M7 12h.01" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Model Optimization & Compression',
-    description:
-      'Quantization, pruning, and distillation to shrink models by 10x while maintaining 99%+ of original accuracy. Deploy on edge, mobile, or cloud.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-      </svg>
-    ),
-  },
+const featureIcons = [
+  (
+    <svg key="arch" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2L2 7l10 5 10-5-10-5z" />
+      <path d="M2 17l10 5 10-5" />
+      <path d="M2 12l10 5 10-5" />
+    </svg>
+  ),
+  (
+    <svg key="transfer" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="3" />
+      <path d="M12 1v4" />
+      <path d="M12 19v4" />
+      <path d="M5.64 5.64l2.83 2.83" />
+      <path d="M15.54 15.54l2.83 2.83" />
+      <path d="M1 12h4" />
+      <path d="M19 12h4" />
+      <path d="M5.64 18.36l2.83-2.83" />
+      <path d="M15.54 8.46l2.83-2.83" />
+    </svg>
+  ),
+  (
+    <svg key="distributed" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="6" width="20" height="12" rx="2" />
+      <path d="M12 12h.01" />
+      <path d="M17 12h.01" />
+      <path d="M7 12h.01" />
+    </svg>
+  ),
+  (
+    <svg key="optimize" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+    </svg>
+  ),
 ];
 
 // ---------------------------------------------------------------------------
-// Process timeline steps
-// ---------------------------------------------------------------------------
-const processSteps = [
-  {
-    step: '01',
-    title: 'Data Audit',
-    description: 'Deep analysis of your datasets, quality, biases, and gaps.',
-  },
-  {
-    step: '02',
-    title: 'Architecture',
-    description: 'Custom model design tuned for your use case and constraints.',
-  },
-  {
-    step: '03',
-    title: 'Training',
-    description: 'Distributed training with real-time monitoring and optimization.',
-  },
-  {
-    step: '04',
-    title: 'Validation',
-    description: 'Rigorous testing across edge cases, adversarial inputs, and production conditions.',
-  },
-  {
-    step: '05',
-    title: 'Deployment',
-    description: 'Production-grade serving with auto-scaling, monitoring, and rollback.',
-  },
-];
-
-// ---------------------------------------------------------------------------
-// Tech stack
+// Tech stack (brand names, not translated)
 // ---------------------------------------------------------------------------
 const techStack = [
   'PyTorch',
@@ -168,61 +117,6 @@ const techStack = [
   'ONNX',
   'TensorRT',
   'MLflow',
-];
-
-// ---------------------------------------------------------------------------
-// Pricing tiers
-// ---------------------------------------------------------------------------
-const pricingTiers = [
-  {
-    name: 'Starter',
-    price: '$5K',
-    period: '/mo',
-    description: 'For teams exploring AI with a focused use case.',
-    features: [
-      'Single model training',
-      'Up to 100GB training data',
-      'Standard architecture',
-      'Email support',
-      'Monthly optimization report',
-    ],
-    highlighted: false,
-    ctaKey: 'getStarted' as const,
-  },
-  {
-    name: 'Professional',
-    price: '$15K',
-    period: '/mo',
-    description: 'For organizations with production AI workloads.',
-    features: [
-      'Up to 5 concurrent models',
-      'Unlimited training data',
-      'Custom architecture design',
-      'Priority Slack support',
-      'A/B testing infrastructure',
-      'Model versioning & rollback',
-      'Weekly strategy calls',
-    ],
-    highlighted: true,
-    ctaKey: 'getStarted' as const,
-  },
-  {
-    name: 'Enterprise',
-    price: 'Custom',
-    period: '',
-    description: 'For large-scale AI transformation programs.',
-    features: [
-      'Unlimited models & data',
-      'Dedicated GPU cluster',
-      'On-premise deployment option',
-      'Dedicated ML engineering team',
-      '24/7 support with SLA',
-      'Custom compliance & security',
-      'Executive AI strategy sessions',
-    ],
-    highlighted: false,
-    ctaKey: 'contact' as const,
-  },
 ];
 
 // ===========================================================================
@@ -237,6 +131,54 @@ export default function NeuralForgePage() {
   });
   const heroImgY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
+  // -------------------------------------------------------------------------
+  // Translated data arrays (need access to `t`)
+  // -------------------------------------------------------------------------
+  const features = [
+    { title: t.neuralForgePage.feature1Title, description: t.neuralForgePage.feature1Desc, icon: featureIcons[0] },
+    { title: t.neuralForgePage.feature2Title, description: t.neuralForgePage.feature2Desc, icon: featureIcons[1] },
+    { title: t.neuralForgePage.feature3Title, description: t.neuralForgePage.feature3Desc, icon: featureIcons[2] },
+    { title: t.neuralForgePage.feature4Title, description: t.neuralForgePage.feature4Desc, icon: featureIcons[3] },
+  ];
+
+  const processSteps = [
+    { step: '01', title: t.neuralForgePage.processStep1Title, description: t.neuralForgePage.processStep1Desc },
+    { step: '02', title: t.neuralForgePage.processStep2Title, description: t.neuralForgePage.processStep2Desc },
+    { step: '03', title: t.neuralForgePage.processStep3Title, description: t.neuralForgePage.processStep3Desc },
+    { step: '04', title: t.neuralForgePage.processStep4Title, description: t.neuralForgePage.processStep4Desc },
+    { step: '05', title: t.neuralForgePage.processStep5Title, description: t.neuralForgePage.processStep5Desc },
+  ];
+
+  const pricingTiers = [
+    {
+      name: t.neuralForgePage.pricingTier1Name,
+      price: t.neuralForgePage.pricingTier1Price,
+      period: t.neuralForgePage.pricingTier1Period,
+      description: t.neuralForgePage.pricingTier1Desc,
+      features: t.neuralForgePage.pricingTier1Features,
+      highlighted: false,
+      ctaKey: 'getStarted' as const,
+    },
+    {
+      name: t.neuralForgePage.pricingTier2Name,
+      price: t.neuralForgePage.pricingTier2Price,
+      period: t.neuralForgePage.pricingTier2Period,
+      description: t.neuralForgePage.pricingTier2Desc,
+      features: t.neuralForgePage.pricingTier2Features,
+      highlighted: true,
+      ctaKey: 'getStarted' as const,
+    },
+    {
+      name: t.neuralForgePage.pricingTier3Name,
+      price: t.neuralForgePage.pricingTier3Price,
+      period: '',
+      description: t.neuralForgePage.pricingTier3Desc,
+      features: t.neuralForgePage.pricingTier3Features,
+      highlighted: false,
+      ctaKey: 'contact' as const,
+    },
+  ];
 
   return (
     <main className="flex flex-col">
@@ -279,9 +221,9 @@ export default function NeuralForgePage() {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-bold tracking-[-0.04em] font-[family-name:var(--font-heading)] leading-[0.85]"
           >
-            <span className="gradient-text-shimmer">NEURAL</span>
+            <span className="gradient-text-shimmer">{t.neuralForgePage.heroTitle1}</span>
             <br />
-            <span className="text-white">FORGE</span>
+            <span className="text-white">{t.neuralForgePage.heroTitle2}</span>
           </motion.h1>
 
           <motion.p
@@ -290,7 +232,7 @@ export default function NeuralForgePage() {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="mt-8 text-lg sm:text-xl md:text-2xl text-gray-300 font-[family-name:var(--font-heading)] tracking-wide"
           >
-            Train. Fine-tune. Deploy. <span className="text-[#2d8a8a]">At Scale.</span>
+            {t.neuralForgePage.heroSubtitle}<span className="text-[#2d8a8a]">{t.neuralForgePage.heroSubtitleAccent}</span>
           </motion.p>
 
           <motion.p
@@ -299,8 +241,7 @@ export default function NeuralForgePage() {
             transition={{ duration: 0.5, delay: 1.0 }}
             className="mt-4 max-w-md text-sm text-gray-500 leading-relaxed"
           >
-            Custom AI model architectures tailored to your domain,
-            trained on your data, deployed to production.
+            {t.neuralForgePage.heroDescription}
           </motion.p>
         </motion.div>
       </section>
@@ -319,23 +260,21 @@ export default function NeuralForgePage() {
             <AnimatedSection>
               <div className="relative">
                 <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#c4623a]">
-                  The Challenge
+                  {t.neuralForgePage.challengeLabel}
                 </p>
                 <h2 className="text-3xl sm:text-4xl font-bold tracking-[-0.02em] font-[family-name:var(--font-heading)] text-white mb-6">
-                  Most AI models are generic.
+                  {t.neuralForgePage.challengeTitle1}
                   <br />
-                  <span className="text-gray-500">Your data is not.</span>
+                  <span className="text-gray-500">{t.neuralForgePage.challengeTitle2}</span>
                 </h2>
                 <p className="text-base text-gray-400 leading-relaxed mb-6">
-                  Off-the-shelf models are trained on general data for general tasks.
-                  They miss the nuances of your domain -- the edge cases, the specialized
-                  vocabulary, the patterns that matter most to your business.
+                  {t.neuralForgePage.challengeDescription}
                 </p>
                 <div className="space-y-3">
                   {[
-                    'Generic models plateau at 80-85% accuracy on domain tasks',
-                    'Fine-tuning without architecture changes yields diminishing returns',
-                    'Training infrastructure is complex, expensive, and fragile',
+                    t.neuralForgePage.challengePoint1,
+                    t.neuralForgePage.challengePoint2,
+                    t.neuralForgePage.challengePoint3,
                   ].map((point) => (
                     <div key={point} className="flex items-start gap-3">
                       <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#c4623a] shrink-0" />
@@ -350,23 +289,21 @@ export default function NeuralForgePage() {
             <AnimatedSection delay={0.15}>
               <div className="relative">
                 <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#2d8a8a]">
-                  Our Approach
+                  {t.neuralForgePage.approachLabel}
                 </p>
                 <h2 className="text-3xl sm:text-4xl font-bold tracking-[-0.02em] font-[family-name:var(--font-heading)] text-white mb-6">
-                  Custom architectures.
+                  {t.neuralForgePage.approachTitle1}
                   <br />
-                  <span className="text-[#2d8a8a]">Your domain. Your data.</span>
+                  <span className="text-[#2d8a8a]">{t.neuralForgePage.approachTitle2}</span>
                 </h2>
                 <p className="text-base text-gray-400 leading-relaxed mb-6">
-                  We start from your data and work backwards to the model. Every
-                  architecture decision -- from attention mechanisms to loss functions --
-                  is informed by what your specific use case demands.
+                  {t.neuralForgePage.approachDescription}
                 </p>
                 <div className="space-y-3">
                   {[
-                    'Domain-specific architectures achieve 95-99% accuracy',
-                    'Transfer learning reduces training data needs by 10x',
-                    'Fully managed infrastructure with cost transparency',
+                    t.neuralForgePage.approachPoint1,
+                    t.neuralForgePage.approachPoint2,
+                    t.neuralForgePage.approachPoint3,
                   ].map((point) => (
                     <div key={point} className="flex items-start gap-3">
                       <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#2d8a8a] shrink-0" />
@@ -391,16 +328,16 @@ export default function NeuralForgePage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <AnimatedSection className="mb-16 md:mb-20 text-center">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#2d8a8a]">
-              Capabilities
+              {t.neuralForgePage.featuresLabel}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              What We <span className="gradient-text-nebula">Build</span>
+              {t.neuralForgePage.featuresTitle}<span className="gradient-text-nebula">{t.neuralForgePage.featuresTitleAccent}</span>
             </h2>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             {features.map((feature, i) => (
-              <StaggerCard key={feature.title} index={i}>
+              <StaggerCard key={i} index={i}>
                 <div className="group relative h-full rounded-2xl glass glass-hover p-8 md:p-10 transition-all duration-500">
                   <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-gradient-to-br from-[#2d8a8a]/5 to-transparent" />
                   <div className="relative z-10">
@@ -432,10 +369,10 @@ export default function NeuralForgePage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <AnimatedSection className="mb-16 md:mb-20 text-center">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#c4623a]">
-              Process
+              {t.neuralForgePage.processLabel}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              From Data to <span className="gradient-text-nebula">Production</span>
+              {t.neuralForgePage.processTitle}<span className="gradient-text-nebula">{t.neuralForgePage.processTitleAccent}</span>
             </h2>
           </AnimatedSection>
 
@@ -480,7 +417,7 @@ export default function NeuralForgePage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <AnimatedSection className="text-center">
             <p className="mb-6 text-xs tracking-[0.3em] uppercase text-gray-500">
-              Technology Stack
+              {t.neuralForgePage.techStackLabel}
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               {techStack.map((tech) => (
@@ -507,19 +444,19 @@ export default function NeuralForgePage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <AnimatedSection className="mb-16 md:mb-20 text-center">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#2d8a8a]">
-              Pricing
+              {t.neuralForgePage.pricingLabel}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              Invest in <span className="gradient-text-nebula">Intelligence</span>
+              {t.neuralForgePage.pricingTitle}<span className="gradient-text-nebula">{t.neuralForgePage.pricingTitleAccent}</span>
             </h2>
             <p className="mt-6 max-w-xl mx-auto text-base text-gray-400">
-              Transparent pricing. No hidden costs. Scale up or down as your needs evolve.
+              {t.neuralForgePage.pricingSubtitle}
             </p>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             {pricingTiers.map((tier, i) => (
-              <StaggerCard key={tier.name} index={i}>
+              <StaggerCard key={i} index={i}>
                 <div
                   className={`group relative h-full rounded-2xl p-8 md:p-10 transition-all duration-500 ${
                     tier.highlighted
@@ -531,7 +468,7 @@ export default function NeuralForgePage() {
                   {tier.highlighted && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                       <span className="inline-block rounded-full bg-[#2d8a8a] px-4 py-1 text-[10px] font-medium tracking-widest uppercase text-white">
-                        Most Popular
+                        {t.neuralForgePage.mostPopularBadge}
                       </span>
                     </div>
                   )}
@@ -563,8 +500,8 @@ export default function NeuralForgePage() {
 
                     {/* Features */}
                     <ul className="space-y-3 mb-10">
-                      {tier.features.map((feat) => (
-                        <li key={feat} className="flex items-start gap-3">
+                      {tier.features.map((feat, fi) => (
+                        <li key={fi} className="flex items-start gap-3">
                           <svg className="mt-0.5 h-4 w-4 shrink-0 text-[#2d8a8a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <polyline points="20 6 9 17 4 12" />
                           </svg>
@@ -603,11 +540,10 @@ export default function NeuralForgePage() {
         <div className="relative z-10 mx-auto max-w-4xl px-6 md:px-12 text-center">
           <AnimatedSection>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)] mb-6">
-              Ready to <span className="gradient-text-nebula">forge</span> your model?
+              {t.neuralForgePage.ctaTitle}<span className="gradient-text-nebula">{t.neuralForgePage.ctaTitleAccent}</span>{t.neuralForgePage.ctaTitleEnd}
             </h2>
             <p className="max-w-xl mx-auto text-base text-gray-400 leading-relaxed mb-10">
-              Every model we build starts with a conversation about your data.
-              Let us show you what is possible.
+              {t.neuralForgePage.ctaDescription}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link

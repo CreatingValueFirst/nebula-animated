@@ -409,46 +409,42 @@ export default function QuantumMindPage() {
   const approach = [
     {
       step: '01',
-      title: 'AI Readiness Assessment',
-      description:
-        'A deep audit of your data infrastructure, team capabilities, and business processes. We identify exactly where AI creates the highest leverage and what foundations need strengthening.',
+      title: t.quantumMindPage.approachStep1Title,
+      description: t.quantumMindPage.approachStep1Desc,
     },
     {
       step: '02',
-      title: 'Strategy & Roadmap Design',
-      description:
-        'A phased implementation roadmap tailored to your business reality. Prioritized by impact, de-risked by design, and aligned with your existing technology investments.',
+      title: t.quantumMindPage.approachStep2Title,
+      description: t.quantumMindPage.approachStep2Desc,
     },
     {
       step: '03',
-      title: 'Implementation & Integration',
-      description:
-        'Hands-on execution with our senior engineering teams. We build, deploy, and integrate AI systems that work within your existing architecture, not around it.',
+      title: t.quantumMindPage.approachStep3Title,
+      description: t.quantumMindPage.approachStep3Desc,
     },
     {
       step: '04',
-      title: 'Training & Knowledge Transfer',
-      description:
-        'Your team becomes self-sufficient. Comprehensive training programs, documentation, and ongoing mentorship ensure the intelligence we build stays and grows within your organization.',
+      title: t.quantumMindPage.approachStep4Title,
+      description: t.quantumMindPage.approachStep4Desc,
     },
   ];
 
   const consultants = [
     {
-      name: 'Dr. Elena Voss',
-      role: 'Chief AI Strategist',
+      name: t.quantumMindPage.consultant1Name,
+      role: t.quantumMindPage.consultant1Role,
       gradient: 'linear-gradient(135deg, #2d8a8a, #4a9eff)',
       shape: 'circle' as const,
     },
     {
-      name: 'Marcus Chen',
-      role: 'Head of ML Research',
+      name: t.quantumMindPage.consultant2Name,
+      role: t.quantumMindPage.consultant2Role,
       gradient: 'linear-gradient(135deg, #c4623a, #2d8a8a)',
       shape: 'hexagon' as const,
     },
     {
-      name: 'Sarah Okafor',
-      role: 'VP of Implementation',
+      name: t.quantumMindPage.consultant3Name,
+      role: t.quantumMindPage.consultant3Role,
       gradient: 'linear-gradient(135deg, #4a9eff, #c4623a)',
       shape: 'diamond' as const,
     },
@@ -465,39 +461,21 @@ export default function QuantumMindPage() {
 
   const engagements = [
     {
-      title: 'Advisory',
-      description:
-        'Ongoing strategic counsel for organizations navigating the AI landscape. Monthly strategy sessions, quarterly roadmap reviews, and priority access to our research team.',
-      features: [
-        'Monthly strategy sessions',
-        'Quarterly roadmap reviews',
-        'Priority research access',
-        'Executive briefings',
-      ],
+      title: t.quantumMindPage.engagement1Title,
+      description: t.quantumMindPage.engagement1Desc,
+      features: t.quantumMindPage.engagement1Features,
       accent: '#4a9eff',
     },
     {
-      title: 'Project-Based',
-      description:
-        'Focused engagements with defined scope, timeline, and deliverables. From proof-of-concept to production deployment, we deliver measurable outcomes on schedule.',
-      features: [
-        'Defined scope & timeline',
-        'Fixed deliverables',
-        'Milestone-based billing',
-        'Post-launch support',
-      ],
+      title: t.quantumMindPage.engagement2Title,
+      description: t.quantumMindPage.engagement2Desc,
+      features: t.quantumMindPage.engagement2Features,
       accent: '#2d8a8a',
     },
     {
-      title: 'Embedded Team',
-      description:
-        'Our engineers and strategists work alongside your team as an extension of your organization. Full integration with your processes, tools, and culture.',
-      features: [
-        'Dedicated team members',
-        'Full process integration',
-        'Knowledge transfer focus',
-        'Flexible scaling',
-      ],
+      title: t.quantumMindPage.engagement3Title,
+      description: t.quantumMindPage.engagement3Desc,
+      features: t.quantumMindPage.engagement3Features,
       accent: '#c4623a',
     },
   ];
@@ -525,7 +503,7 @@ export default function QuantumMindPage() {
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-[#4a9eff]/20 bg-[#4a9eff]/[0.06] px-5 py-2 text-xs tracking-[0.2em] uppercase text-[#4a9eff]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#4a9eff] animate-pulse" />
-              By Invitation
+              {t.quantumMindPage.heroBadge}
             </span>
           </motion.div>
 
@@ -535,7 +513,7 @@ export default function QuantumMindPage() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mb-6 text-xs sm:text-sm tracking-[0.3em] uppercase text-[#4a9eff]"
           >
-            AI Strategy & Consulting
+            {t.quantumMindPage.heroLabel}
           </motion.p>
 
           <motion.h1
@@ -544,9 +522,9 @@ export default function QuantumMindPage() {
             transition={{ duration: 0.7, delay: 0.5 }}
             className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-[-0.03em] text-white font-[family-name:var(--font-heading)] leading-[0.9]"
           >
-            QUANTUM
+            {t.quantumMindPage.heroTitle1}
             <br />
-            <span className="gradient-text-nebula">MIND</span>
+            <span className="gradient-text-nebula">{t.quantumMindPage.heroTitle2}</span>
           </motion.h1>
 
           <motion.p
@@ -555,7 +533,7 @@ export default function QuantumMindPage() {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="mt-6 max-w-lg text-base sm:text-lg text-gray-400 leading-relaxed"
           >
-            Strategic Intelligence for Visionary Leaders
+            {t.quantumMindPage.heroSubtitle}
           </motion.p>
 
           {/* Neural Network Visualization */}
@@ -585,7 +563,7 @@ export default function QuantumMindPage() {
               className="flex flex-col items-center gap-2"
             >
               <span className="text-[10px] tracking-[0.3em] uppercase text-gray-500">
-                Discover
+                {t.quantumMindPage.scrollIndicator}
               </span>
               <div className="h-8 w-[1px] bg-gradient-to-b from-gray-500 to-transparent" />
             </motion.div>
@@ -603,11 +581,11 @@ export default function QuantumMindPage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <AnimatedSection className="text-center mb-16 md:mb-20">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#4a9eff]">
-              Methodology
+              {t.quantumMindPage.approachLabel}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              Our{' '}
-              <span className="gradient-text-nebula">Approach</span>
+              {t.quantumMindPage.approachTitle}
+              <span className="gradient-text-nebula">{t.quantumMindPage.approachTitleAccent}</span>
             </h2>
           </AnimatedSection>
 
@@ -659,9 +637,9 @@ export default function QuantumMindPage() {
         </div>
         <div className="relative z-10 mx-auto max-w-4xl px-6 md:px-12">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <StatCard value="200+" label="Enterprises" index={0} />
-            <StatCard value="$2B+" label="Value Created" index={1} />
-            <StatCard value="15+" label="Industries" index={2} />
+            <StatCard value={t.quantumMindPage.stat1Value} label={t.quantumMindPage.stat1Label} index={0} />
+            <StatCard value={t.quantumMindPage.stat2Value} label={t.quantumMindPage.stat2Label} index={1} />
+            <StatCard value={t.quantumMindPage.stat3Value} label={t.quantumMindPage.stat3Label} index={2} />
           </div>
         </div>
       </section>
@@ -673,11 +651,11 @@ export default function QuantumMindPage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <div className="text-center mb-16 md:mb-20">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#2d8a8a]">
-              Leadership
+              {t.quantumMindPage.teamLabel}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              The{' '}
-              <span className="gradient-text-nebula">Architects</span>
+              {t.quantumMindPage.teamTitle}
+              <span className="gradient-text-nebula">{t.quantumMindPage.teamTitleAccent}</span>
             </h2>
           </div>
 
@@ -707,7 +685,7 @@ export default function QuantumMindPage() {
         <div className="relative z-10 mx-auto max-w-5xl px-6 md:px-12 text-center">
           <AnimatedSection>
             <p className="mb-12 text-xs tracking-[0.3em] uppercase text-gray-500">
-              Trusted by Fortune 500
+              {t.quantumMindPage.clientLogosLabel}
             </p>
           </AnimatedSection>
           <motion.div
@@ -734,11 +712,11 @@ export default function QuantumMindPage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <AnimatedSection className="text-center mb-16 md:mb-20">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#c4623a]">
-              Engagement
+              {t.quantumMindPage.engagementLabel}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              How We{' '}
-              <span className="gradient-text-nebula">Work Together</span>
+              {t.quantumMindPage.engagementTitle}
+              <span className="gradient-text-nebula">{t.quantumMindPage.engagementTitleAccent}</span>
             </h2>
           </AnimatedSection>
 
@@ -768,20 +746,18 @@ export default function QuantumMindPage() {
           <AnimatedSection>
             <div className="mb-8">
               <span className="inline-flex items-center gap-2 rounded-full border border-[#4a9eff]/20 bg-[#4a9eff]/[0.06] px-5 py-2 text-xs tracking-[0.2em] uppercase text-[#4a9eff]">
-                Limited Availability
+                {t.quantumMindPage.ctaBadge}
               </span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)] mb-6">
-              Ready for a{' '}
+              {t.quantumMindPage.ctaTitle}
               <span className="gradient-text-nebula">
-                Strategy Session
+                {t.quantumMindPage.ctaTitleAccent}
               </span>
-              ?
+              {t.quantumMindPage.ctaTitleEnd}
             </h2>
             <p className="text-base md:text-lg text-gray-400 leading-relaxed mb-10 max-w-xl mx-auto">
-              We take on a limited number of engagements each quarter to
-              ensure every client receives our full attention. Start with a
-              confidential strategy session.
+              {t.quantumMindPage.ctaDescription}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link

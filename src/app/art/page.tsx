@@ -58,70 +58,46 @@ function AnimatedSection({
 }
 
 // ---------------------------------------------------------------------------
-// Artworks Data
+// Artworks slug/image config (titles + teasers come from translations)
 // ---------------------------------------------------------------------------
-const artworks = [
-  {
-    slug: 'the-ancient-rite',
-    imagePath: '/art/the-ancient-rite.png',
-    title: 'The Ancient Rite',
-    teaser: 'A primordial Slavic ceremony where fire, smoke, and antlered spirits converge.',
-  },
-  {
-    slug: 'the-starwanderer',
-    imagePath: '/art/the-starwanderer.png',
-    title: 'The Starwanderer',
-    teaser: 'A colossal hooded figure walks the edge of twilight, cloaked in stars.',
-  },
-  {
-    slug: 'cathedral-of-the-eclipse',
-    imagePath: '/art/cathedral-of-the-eclipse.png',
-    title: 'Cathedral of the Eclipse',
-    teaser: 'Gothic architecture meets deep space -- a skull monolith under a burning eclipse.',
-  },
-  {
-    slug: 'prismatic-grazer',
-    imagePath: '/art/prismatic-grazer.png',
-    title: 'Prismatic Grazer',
-    teaser: 'A crystalline titan grazes beneath concentric rainbows in a parallel evolution.',
-  },
-  {
-    slug: 'stellar-bloom',
-    imagePath: '/art/stellar-bloom.png',
-    title: 'Stellar Bloom',
-    teaser: 'An ice-crystal flower unfurls in deep space, refracting the light of a dying galaxy.',
-  },
-  {
-    slug: 'digital-tide',
-    imagePath: '/art/digital-tide.png',
-    title: 'Digital Tide',
-    teaser: 'A luminous wireframe wave crashes where nature meets algorithm.',
-  },
-  {
-    slug: 'data-forest',
-    imagePath: '/art/data-forest.png',
-    title: 'Data Forest',
-    teaser: 'Trees of shadow grow luminous cubic leaves in a merged organic-digital ecosystem.',
-  },
-  {
-    slug: 'neural-blossom',
-    imagePath: '/art/neural-blossom.png',
-    title: 'Neural Blossom',
-    teaser: 'A bioluminescent neuron tree branches into violet sky -- consciousness made botanical.',
-  },
-  {
-    slug: 'orbital-harvest',
-    imagePath: '/art/orbital-harvest.png',
-    title: 'Orbital Harvest',
-    teaser: 'Fruit orbits invisible gravitational centers -- Newton\'s dream as surrealist poetry.',
-  },
-];
+const artworkSlugs = [
+  'the-ancient-rite',
+  'the-starwanderer',
+  'cathedral-of-the-eclipse',
+  'prismatic-grazer',
+  'stellar-bloom',
+  'digital-tide',
+  'data-forest',
+  'neural-blossom',
+  'orbital-harvest',
+] as const;
+
+function getArtworks(t: ReturnType<typeof useLanguage>['t']) {
+  const data: Record<string, { title: string; teaser: string }> = {
+    'the-ancient-rite': { title: t.artworksData.theAncientRiteTitle, teaser: t.artworksData.theAncientRiteTeaser },
+    'the-starwanderer': { title: t.artworksData.theStarwandererTitle, teaser: t.artworksData.theStarwandererTeaser },
+    'cathedral-of-the-eclipse': { title: t.artworksData.cathedralOfTheEclipseTitle, teaser: t.artworksData.cathedralOfTheEclipseTeaser },
+    'prismatic-grazer': { title: t.artworksData.prismaticGrazerTitle, teaser: t.artworksData.prismaticGrazerTeaser },
+    'stellar-bloom': { title: t.artworksData.stellarBloomTitle, teaser: t.artworksData.stellarBloomTeaser },
+    'digital-tide': { title: t.artworksData.digitalTideTitle, teaser: t.artworksData.digitalTideTeaser },
+    'data-forest': { title: t.artworksData.dataForestTitle, teaser: t.artworksData.dataForestTeaser },
+    'neural-blossom': { title: t.artworksData.neuralBlossomTitle, teaser: t.artworksData.neuralBlossomTeaser },
+    'orbital-harvest': { title: t.artworksData.orbitalHarvestTitle, teaser: t.artworksData.orbitalHarvestTeaser },
+  };
+  return artworkSlugs.map((slug) => ({
+    slug,
+    imagePath: `/art/${slug}.png`,
+    title: data[slug].title,
+    teaser: data[slug].teaser,
+  }));
+}
 
 // ===========================================================================
 // PAGE
 // ===========================================================================
 export default function ArtPage() {
   const { t } = useLanguage();
+  const artworks = getArtworks(t);
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -292,7 +268,7 @@ function ArtworkCard({
   artwork,
   index,
 }: {
-  artwork: (typeof artworks)[number];
+  artwork: { slug: string; imagePath: string; title: string; teaser: string };
   index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);

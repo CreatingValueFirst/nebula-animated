@@ -197,152 +197,146 @@ interface Project {
   colorHex: string;
 }
 
-const projects: Project[] = [
-  {
-    name: 'SaveMyTime AI Lab',
-    category: 'Voice AI',
-    description:
-      'Full-stack AI voice platform enabling businesses to deploy intelligent conversational agents that handle calls, bookings, and customer support in multiple languages.',
-    results: [
-      'Automated 85% of inbound customer calls',
-      'Sub-100ms voice response latency',
-      '29+ languages supported natively',
-    ],
-    tags: ['Next.js', 'ElevenLabs API', 'Voice AI', 'PWA'],
-    impact: 'Reduced client support costs by 60% within the first month of deployment.',
-    url: 'https://savemytime.dev/',
-    featured: true,
-    icon: icons.microphone,
-    color: 'emerald',
-    colorHex: '#10b981',
-  },
-  {
-    name: 'LiveTranslations',
-    category: 'AI Video',
-    description:
-      'AI-powered video dubbing and translation platform that preserves the original speaker\'s voice, tone, and emotion across 29+ languages with studio-quality output.',
-    results: [
-      'Studio-quality AI voice synthesis',
-      '29+ language pairs available',
-      'Integrated Stripe billing with usage tiers',
-    ],
-    tags: ['Next.js', 'ElevenLabs API', 'AI Voice Synthesis', 'Stripe'],
-    impact: 'Enabled content creators to reach global audiences without re-recording.',
-    url: 'https://livetranslations.video/',
-    featured: true,
-    icon: icons.video,
-    color: 'amber',
-    colorHex: '#f59e0b',
-  },
-  {
-    name: 'YourDreams.bio',
-    category: 'Biotech AI',
-    description:
-      'Immersive 3D biotech visualization platform combining AI dream analysis with interactive WebGL rendering, creating a unique intersection of neuroscience and technology.',
-    results: [
-      'Real-time 3D DNA visualization with WebGL',
-      'AI-powered dream pattern analysis',
-      'Interactive React Three Fiber experience',
-    ],
-    tags: ['Next.js 16', 'React Three Fiber', 'WebGL', '3D Rendering'],
-    impact: 'Pioneered a new category of biotech-meets-AI consumer experiences.',
-    url: 'https://www.yourdreams.bio/',
-    featured: true,
-    icon: icons.dna,
-    color: 'cyan',
-    colorHex: '#06b6d4',
-  },
-  {
-    name: 'YourLongevity.bio',
-    category: 'Health AI',
-    description:
-      'Personalized health analytics dashboard powered by AI that tracks biomarkers, lifestyle patterns, and delivers actionable longevity insights with predictive modeling.',
-    results: [
-      'AI-driven biomarker trend analysis',
-      'Personalized longevity score algorithm',
-      'Real-time health data sync & visualization',
-    ],
-    tags: ['Next.js 14', 'TypeScript', 'Zustand', 'AI Analytics'],
-    impact: 'Empowered users to make data-driven health decisions with AI precision.',
-    url: 'https://www.yourlongevity.bio/dashboard',
-    featured: true,
-    icon: icons.heart,
-    color: 'rose',
-    colorHex: '#f43f5e',
-  },
-  {
-    name: 'Ratrix',
-    category: 'E-commerce',
-    description:
-      'Professional B2B e-commerce platform for pest control and HACCP compliance services, featuring product catalogs, quote engines, and multi-language support.',
-    results: [
-      'Full product catalog with filtering',
-      'B2B quote request system',
-      'Multi-language SEO optimization',
-    ],
-    tags: ['Custom E-commerce', 'B2B Platform'],
-    impact: 'Increased qualified B2B leads by 340% through optimized digital presence.',
-    url: 'https://ratrix.eu/',
-    featured: false,
-    icon: icons.shoppingCart,
-    color: 'purple',
-    colorHex: '#a855f7',
-  },
-  {
-    name: 'Business Outreach Optimizer',
-    category: 'Automation',
-    description:
-      'Intelligent campaign management platform with real-time email analytics, automated follow-up sequences, and AI-powered lead scoring for B2B outreach at scale.',
-    results: [
-      '3,200+ leads managed across campaigns',
-      'Automated multi-step email sequences',
-      'Real-time deliverability analytics',
-    ],
-    tags: ['React', 'Email Analytics', 'Campaign Management'],
-    impact: 'Scaled outreach operations from manual to fully automated pipeline.',
-    url: 'https://business-outreach-optimizer.com/',
-    featured: false,
-    icon: icons.zap,
-    color: 'teal',
-    colorHex: '#2d8a8a',
-  },
-  {
-    name: 'Denis Bozhkov Art',
-    category: 'Portfolio',
-    description:
-      'Artistic portfolio with procedural 3D canvas graphics and dynamic visual compositions, showcasing the intersection of generative art and modern web technology.',
-    results: [
-      'Procedural generative art engine',
-      'GPU-accelerated 3D canvas rendering',
-      'Fluid responsive gallery experience',
-    ],
-    tags: ['React', '3D Canvas', 'Procedural Graphics'],
-    impact: 'Transformed a traditional art portfolio into an immersive digital gallery.',
-    url: 'https://denisbozhkov-art.com/',
-    featured: true,
-    icon: icons.palette,
-    color: 'pink',
-    colorHex: '#ec4899',
-  },
-  {
-    name: 'Sunny Clean BG',
-    category: 'Services',
-    description:
-      'Mobile-first service business website with advanced SEO architecture, online booking integration, and optimized conversion funnels for a professional cleaning company.',
-    results: [
-      'Page 1 Google rankings for key terms',
-      'Mobile-first responsive design',
-      'Online booking conversion funnel',
-    ],
-    tags: ['WordPress', 'SEO', 'Mobile-First'],
-    impact: 'Tripled organic traffic and doubled booking conversions within 90 days.',
-    url: 'https://sunnyclean.bg/',
-    featured: false,
-    icon: icons.building,
-    color: 'blue',
-    colorHex: '#4a9eff',
-  },
-];
+function getProjects(t: ReturnType<typeof useLanguage>['t']): Project[] {
+  return [
+    {
+      name: t.projectsData.savemytimeName,
+      category: t.projectsData.savemytimeCategory,
+      description: t.projectsData.savemytimeDesc,
+      results: [
+        t.projectsData.savemytimeResult1,
+        t.projectsData.savemytimeResult2,
+        t.projectsData.savemytimeResult3,
+      ],
+      tags: ['Next.js', 'ElevenLabs API', 'Voice AI', 'PWA'],
+      impact: t.projectsData.savemytimeImpact,
+      url: 'https://savemytime.dev/',
+      featured: true,
+      icon: icons.microphone,
+      color: 'emerald',
+      colorHex: '#10b981',
+    },
+    {
+      name: t.projectsData.livetranslationsName,
+      category: t.projectsData.livetranslationsCategory,
+      description: t.projectsData.livetranslationsDesc,
+      results: [
+        t.projectsData.livetranslationsResult1,
+        t.projectsData.livetranslationsResult2,
+        t.projectsData.livetranslationsResult3,
+      ],
+      tags: ['Next.js', 'ElevenLabs API', 'AI Voice Synthesis', 'Stripe'],
+      impact: t.projectsData.livetranslationsImpact,
+      url: 'https://livetranslations.video/',
+      featured: true,
+      icon: icons.video,
+      color: 'amber',
+      colorHex: '#f59e0b',
+    },
+    {
+      name: t.projectsData.yourdreamsName,
+      category: t.projectsData.yourdreamsCategory,
+      description: t.projectsData.yourdreamsDesc,
+      results: [
+        t.projectsData.yourdreamsResult1,
+        t.projectsData.yourdreamsResult2,
+        t.projectsData.yourdreamsResult3,
+      ],
+      tags: ['Next.js 16', 'React Three Fiber', 'WebGL', '3D Rendering'],
+      impact: t.projectsData.yourdreamsImpact,
+      url: 'https://www.yourdreams.bio/',
+      featured: true,
+      icon: icons.dna,
+      color: 'cyan',
+      colorHex: '#06b6d4',
+    },
+    {
+      name: t.projectsData.yourlongevityName,
+      category: t.projectsData.yourlongevityCategory,
+      description: t.projectsData.yourlongevityDesc,
+      results: [
+        t.projectsData.yourlongevityResult1,
+        t.projectsData.yourlongevityResult2,
+        t.projectsData.yourlongevityResult3,
+      ],
+      tags: ['Next.js 14', 'TypeScript', 'Zustand', 'AI Analytics'],
+      impact: t.projectsData.yourlongevityImpact,
+      url: 'https://www.yourlongevity.bio/dashboard',
+      featured: true,
+      icon: icons.heart,
+      color: 'rose',
+      colorHex: '#f43f5e',
+    },
+    {
+      name: t.projectsData.ratrixName,
+      category: t.projectsData.ratrixCategory,
+      description: t.projectsData.ratrixDesc,
+      results: [
+        t.projectsData.ratrixResult1,
+        t.projectsData.ratrixResult2,
+        t.projectsData.ratrixResult3,
+      ],
+      tags: ['Custom E-commerce', 'B2B Platform'],
+      impact: t.projectsData.ratrixImpact,
+      url: 'https://ratrix.eu/',
+      featured: false,
+      icon: icons.shoppingCart,
+      color: 'purple',
+      colorHex: '#a855f7',
+    },
+    {
+      name: t.projectsData.outreachName,
+      category: t.projectsData.outreachCategory,
+      description: t.projectsData.outreachDesc,
+      results: [
+        t.projectsData.outreachResult1,
+        t.projectsData.outreachResult2,
+        t.projectsData.outreachResult3,
+      ],
+      tags: ['React', 'Email Analytics', 'Campaign Management'],
+      impact: t.projectsData.outreachImpact,
+      url: 'https://business-outreach-optimizer.com/',
+      featured: false,
+      icon: icons.zap,
+      color: 'teal',
+      colorHex: '#2d8a8a',
+    },
+    {
+      name: t.projectsData.denisartName,
+      category: t.projectsData.denisartCategory,
+      description: t.projectsData.denisartDesc,
+      results: [
+        t.projectsData.denisartResult1,
+        t.projectsData.denisartResult2,
+        t.projectsData.denisartResult3,
+      ],
+      tags: ['React', '3D Canvas', 'Procedural Graphics'],
+      impact: t.projectsData.denisartImpact,
+      url: 'https://denisbozhkov-art.com/',
+      featured: true,
+      icon: icons.palette,
+      color: 'pink',
+      colorHex: '#ec4899',
+    },
+    {
+      name: t.projectsData.sunnycleanName,
+      category: t.projectsData.sunnycleanCategory,
+      description: t.projectsData.sunnycleanDesc,
+      results: [
+        t.projectsData.sunnycleanResult1,
+        t.projectsData.sunnycleanResult2,
+        t.projectsData.sunnycleanResult3,
+      ],
+      tags: ['WordPress', 'SEO', 'Mobile-First'],
+      impact: t.projectsData.sunnycleanImpact,
+      url: 'https://sunnyclean.bg/',
+      featured: false,
+      icon: icons.building,
+      color: 'blue',
+      colorHex: '#4a9eff',
+    },
+  ];
+}
 
 // ---------------------------------------------------------------------------
 // Project Card Component
@@ -480,6 +474,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 // ===========================================================================
 export default function ProjectsPage() {
   const { t } = useLanguage();
+  const projects = getProjects(t);
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,

@@ -134,7 +134,7 @@ function DataGrid() {
 // ---------------------------------------------------------------------------
 // Animated Bar Chart
 // ---------------------------------------------------------------------------
-function AnimatedBarChart() {
+function AnimatedBarChart({ legendTraditional, legendAI }: { legendTraditional: string; legendAI: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.4 });
 
@@ -147,13 +147,13 @@ function AnimatedBarChart() {
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-sm bg-white/20" />
           <span className="text-xs text-gray-500 uppercase tracking-wider">
-            Traditional
+            {legendTraditional}
           </span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-sm bg-[#2d8a8a]" />
           <span className="text-xs text-gray-500 uppercase tracking-wider">
-            AI-Powered
+            {legendAI}
           </span>
         </div>
       </div>
@@ -200,17 +200,12 @@ function AnimatedBarChart() {
 // ---------------------------------------------------------------------------
 // Data Flow Pipeline
 // ---------------------------------------------------------------------------
-function DataFlowPipeline() {
+function DataFlowPipeline({ stepLabels }: { stepLabels: string[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
-  const steps = [
-    { label: 'Raw Data', icon: 'db' },
-    { label: 'Processing', icon: 'cpu' },
-    { label: 'AI Models', icon: 'brain' },
-    { label: 'Insights', icon: 'chart' },
-    { label: 'Action', icon: 'rocket' },
-  ];
+  const icons = ['db', 'cpu', 'brain', 'chart', 'rocket'];
+  const steps = stepLabels.map((label, i) => ({ label, icon: icons[i] }));
 
   return (
     <div ref={ref} className="w-full max-w-4xl mx-auto">
@@ -375,47 +370,43 @@ export default function DataSingularityPage() {
   const { t } = useLanguage();
   const features = [
     {
-      title: 'Predictive Modeling & Forecasting',
-      description:
-        'Machine learning models that see patterns invisible to the human eye. Forecast revenue, demand, churn, and market shifts with precision that transforms uncertainty into strategy.',
+      title: t.dataSingularityPage.feature1Title,
+      description: t.dataSingularityPage.feature1Desc,
       color: '#2d8a8a',
     },
     {
-      title: 'Anomaly Detection & Risk Assessment',
-      description:
-        'Real-time surveillance of your data streams. Our AI catches outliers, fraud signals, and system anomalies before they cascade into costly failures.',
+      title: t.dataSingularityPage.feature2Title,
+      description: t.dataSingularityPage.feature2Desc,
       color: '#c4623a',
     },
     {
-      title: 'Customer Behavior Analysis',
-      description:
-        'Deep behavioral segmentation powered by neural networks. Understand not just what your customers do, but predict what they will do next.',
+      title: t.dataSingularityPage.feature3Title,
+      description: t.dataSingularityPage.feature3Desc,
       color: '#4a9eff',
     },
     {
-      title: 'Real-time Data Pipelines',
-      description:
-        'Stream processing architecture that ingests, transforms, and serves insights at the speed of your business. Sub-second latency from event to action.',
+      title: t.dataSingularityPage.feature4Title,
+      description: t.dataSingularityPage.feature4Desc,
       color: '#2d8a8a',
     },
   ];
 
   const industries = [
     {
-      name: 'Finance',
-      desc: 'Risk modeling, fraud detection, algorithmic trading signals',
+      name: t.dataSingularityPage.industry1Name,
+      desc: t.dataSingularityPage.industry1Desc,
     },
     {
-      name: 'E-commerce',
-      desc: 'Demand forecasting, dynamic pricing, recommendation engines',
+      name: t.dataSingularityPage.industry2Name,
+      desc: t.dataSingularityPage.industry2Desc,
     },
     {
-      name: 'Healthcare',
-      desc: 'Patient outcome prediction, resource optimization, diagnostics',
+      name: t.dataSingularityPage.industry3Name,
+      desc: t.dataSingularityPage.industry3Desc,
     },
     {
-      name: 'Energy',
-      desc: 'Grid load forecasting, predictive maintenance, consumption analysis',
+      name: t.dataSingularityPage.industry4Name,
+      desc: t.dataSingularityPage.industry4Desc,
     },
   ];
 
@@ -438,7 +429,7 @@ export default function DataSingularityPage() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mb-6 text-xs sm:text-sm tracking-[0.3em] uppercase text-[#2d8a8a]"
           >
-            Predictive Analytics
+            {t.dataSingularityPage.heroLabel}
           </motion.p>
 
           <motion.h1
@@ -447,9 +438,9 @@ export default function DataSingularityPage() {
             transition={{ duration: 0.7, delay: 0.5 }}
             className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-[-0.03em] text-white font-[family-name:var(--font-heading)] leading-[0.9]"
           >
-            DATA
+            {t.dataSingularityPage.heroTitle1}
             <br />
-            <span className="gradient-text-nebula">SINGULARITY</span>
+            <span className="gradient-text-nebula">{t.dataSingularityPage.heroTitle2}</span>
           </motion.h1>
 
           <motion.p
@@ -458,7 +449,7 @@ export default function DataSingularityPage() {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="mt-6 max-w-lg text-base sm:text-lg text-gray-400 leading-relaxed"
           >
-            Turn Data Into Destiny
+            {t.dataSingularityPage.heroSubtitle}
           </motion.p>
 
           {/* Data Grid */}
@@ -488,7 +479,7 @@ export default function DataSingularityPage() {
               className="flex flex-col items-center gap-2"
             >
               <span className="text-[10px] tracking-[0.3em] uppercase text-gray-500">
-                Explore
+                {t.dataSingularityPage.scrollIndicator}
               </span>
               <div className="h-8 w-[1px] bg-gradient-to-b from-gray-500 to-transparent" />
             </motion.div>
@@ -506,15 +497,15 @@ export default function DataSingularityPage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <div className="text-center mb-16">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#2d8a8a]">
-              Performance
+              {t.dataSingularityPage.chartLabel}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              AI-Powered Predictions
+              {t.dataSingularityPage.chartTitle1}
               <br />
-              <span className="gradient-text-nebula">vs Traditional</span>
+              <span className="gradient-text-nebula">{t.dataSingularityPage.chartTitle2}</span>
             </h2>
           </div>
-          <AnimatedBarChart />
+          <AnimatedBarChart legendTraditional={t.dataSingularityPage.chartLegendTraditional} legendAI={t.dataSingularityPage.chartLegendAI} />
         </div>
       </AnimatedSection>
 
@@ -528,11 +519,11 @@ export default function DataSingularityPage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <AnimatedSection className="text-center mb-16 md:mb-20">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#c4623a]">
-              Capabilities
+              {t.dataSingularityPage.featuresLabel}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              Intelligence{' '}
-              <span className="gradient-text-nebula">Stack</span>
+              {t.dataSingularityPage.featuresTitle}
+              <span className="gradient-text-nebula">{t.dataSingularityPage.featuresTitleAccent}</span>
             </h2>
           </AnimatedSection>
 
@@ -578,11 +569,11 @@ export default function DataSingularityPage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <div className="text-center mb-16 md:mb-20">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#4a9eff]">
-              Industries
+              {t.dataSingularityPage.industriesLabel}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              Where Data Becomes{' '}
-              <span className="gradient-text-nebula">Power</span>
+              {t.dataSingularityPage.industriesTitle}
+              <span className="gradient-text-nebula">{t.dataSingularityPage.industriesTitleAccent}</span>
             </h2>
           </div>
 
@@ -621,9 +612,9 @@ export default function DataSingularityPage() {
         </div>
         <div className="relative z-10 mx-auto max-w-4xl px-6 md:px-12">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <StatCard value="3.2x" label="ROI Average" index={0} />
-            <StatCard value="40%" label="Cost Reduction" index={1} />
-            <StatCard value="89%" label="Forecast Accuracy" index={2} />
+            <StatCard value={t.dataSingularityPage.stat1Value} label={t.dataSingularityPage.stat1Label} index={0} />
+            <StatCard value={t.dataSingularityPage.stat2Value} label={t.dataSingularityPage.stat2Label} index={1} />
+            <StatCard value={t.dataSingularityPage.stat3Value} label={t.dataSingularityPage.stat3Label} index={2} />
           </div>
         </div>
       </section>
@@ -635,14 +626,14 @@ export default function DataSingularityPage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <div className="text-center mb-16 md:mb-20">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#2d8a8a]">
-              Architecture
+              {t.dataSingularityPage.pipelineLabel}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              End-to-End{' '}
-              <span className="gradient-text-nebula">Pipeline</span>
+              {t.dataSingularityPage.pipelineTitle}
+              <span className="gradient-text-nebula">{t.dataSingularityPage.pipelineTitleAccent}</span>
             </h2>
           </div>
-          <DataFlowPipeline />
+          <DataFlowPipeline stepLabels={[t.dataSingularityPage.pipelineStep1, t.dataSingularityPage.pipelineStep2, t.dataSingularityPage.pipelineStep3, t.dataSingularityPage.pipelineStep4, t.dataSingularityPage.pipelineStep5]} />
         </div>
       </AnimatedSection>
 
@@ -656,15 +647,14 @@ export default function DataSingularityPage() {
         <div className="relative z-10 mx-auto max-w-3xl px-6 md:px-12 text-center">
           <AnimatedSection>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)] mb-6">
-              Ready to{' '}
+              {t.dataSingularityPage.ctaTitle}
               <span className="gradient-text-nebula">
-                Unlock Your Data
+                {t.dataSingularityPage.ctaTitleAccent}
               </span>
-              ?
+              {t.dataSingularityPage.ctaTitleEnd}
             </h2>
             <p className="text-base md:text-lg text-gray-400 leading-relaxed mb-10 max-w-xl mx-auto">
-              Your data holds the answers. Let our AI find the questions you
-              haven&apos;t thought to ask yet.
+              {t.dataSingularityPage.ctaDescription}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link

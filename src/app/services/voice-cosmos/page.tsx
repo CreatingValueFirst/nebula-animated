@@ -90,7 +90,7 @@ function WaveformBar({ index }: { index: number }) {
 }
 
 // ---------------------------------------------------------------------------
-// Chat bubble for demo
+// Chat bubble for demo (messages are NOT translated per instructions)
 // ---------------------------------------------------------------------------
 const chatMessages = [
   { role: 'user' as const, text: 'Hi, I need to reschedule my appointment for tomorrow.' },
@@ -102,9 +102,13 @@ const chatMessages = [
 function ChatBubble({
   message,
   index,
+  agentLabel,
+  callerLabel,
 }: {
   message: { role: 'user' | 'agent'; text: string };
   index: number;
+  agentLabel: string;
+  callerLabel: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.5 });
@@ -126,7 +130,7 @@ function ChatBubble({
         }`}
       >
         <p className="text-[11px] tracking-wider uppercase mb-1.5 font-medium" style={{ color: isAgent ? '#c4623a' : '#2d8a8a' }}>
-          {isAgent ? 'Voice Agent' : 'Caller'}
+          {isAgent ? agentLabel : callerLabel}
         </p>
         <p className={`text-sm leading-relaxed ${isAgent ? 'text-gray-200' : 'text-gray-300'}`}>
           {message.text}
@@ -137,96 +141,41 @@ function ChatBubble({
 }
 
 // ---------------------------------------------------------------------------
-// Features
+// Feature icons (static, no text)
 // ---------------------------------------------------------------------------
-const features = [
-  {
-    title: 'Natural Language Understanding',
-    description:
-      'Multilingual NLU that grasps intent, context, and nuance across 35+ languages. Your agent understands colloquialisms, accents, and complex queries.',
-    stat: '35+ Languages',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Real-time Voice Synthesis',
-    description:
-      'Sub-100ms text-to-speech with natural prosody, breathing patterns, and emotional inflection. Indistinguishable from human conversation.',
-    stat: '<100ms Latency',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Emotion Detection & Adaptation',
-    description:
-      'Detects frustration, urgency, joy, and hesitation in real-time. The agent adapts tone, pace, and empathy level to match the caller\'s emotional state.',
-    stat: '12 Emotions',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M8 14s1.5 2 4 2 4-2 4-2" />
-        <line x1="9" y1="9" x2="9.01" y2="9" />
-        <line x1="15" y1="9" x2="15.01" y2="9" />
-      </svg>
-    ),
-  },
-  {
-    title: 'CRM & Calendar Integration',
-    description:
-      'Connects to Salesforce, HubSpot, Google Calendar, and 200+ tools via API. The agent books, updates, and follows up without human intervention.',
-    stat: '200+ Integrations',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-        <line x1="16" y1="2" x2="16" y2="6" />
-        <line x1="8" y1="2" x2="8" y2="6" />
-        <line x1="3" y1="10" x2="21" y2="10" />
-      </svg>
-    ),
-  },
+const featureIcons = [
+  (
+    <svg key="nlu" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </svg>
+  ),
+  (
+    <svg key="tts" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+    </svg>
+  ),
+  (
+    <svg key="emotion" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+      <line x1="9" y1="9" x2="9.01" y2="9" />
+      <line x1="15" y1="9" x2="15.01" y2="9" />
+    </svg>
+  ),
+  (
+    <svg key="crm" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+      <line x1="16" y1="2" x2="16" y2="6" />
+      <line x1="8" y1="2" x2="8" y2="6" />
+      <line x1="3" y1="10" x2="21" y2="10" />
+    </svg>
+  ),
 ];
 
 // ---------------------------------------------------------------------------
-// Use cases
+// Use case colors (static)
 // ---------------------------------------------------------------------------
-const useCases = [
-  {
-    title: 'Customer Support',
-    description: '24/7 intelligent support that resolves 80% of inquiries without human escalation.',
-    color: '#c4623a',
-  },
-  {
-    title: 'Sales Qualification',
-    description: 'Qualify inbound leads in real-time, capture intent, and route hot prospects instantly.',
-    color: '#2d8a8a',
-  },
-  {
-    title: 'Appointment Booking',
-    description: 'Seamless scheduling that checks availability, confirms, and sends reminders.',
-    color: '#4a9eff',
-  },
-  {
-    title: 'Survey Collection',
-    description: 'Conversational surveys with 3x higher completion rates than traditional forms.',
-    color: '#c4847a',
-  },
-];
-
-// ---------------------------------------------------------------------------
-// Stats
-// ---------------------------------------------------------------------------
-const stats = [
-  { value: '500K+', label: 'Conversations Handled' },
-  { value: '35', label: 'Languages Supported' },
-  { value: '98.5%', label: 'Customer Satisfaction' },
-  { value: '<100ms', label: 'Response Latency' },
-];
+const useCaseColors = ['#c4623a', '#2d8a8a', '#4a9eff', '#c4847a'];
 
 // ===========================================================================
 // PAGE
@@ -240,6 +189,30 @@ export default function VoiceCosmosPage() {
   });
   const heroImgY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
+  // -------------------------------------------------------------------------
+  // Translated data arrays (need access to `t`)
+  // -------------------------------------------------------------------------
+  const features = [
+    { title: t.voiceCosmosPage.feature1Title, description: t.voiceCosmosPage.feature1Desc, stat: t.voiceCosmosPage.feature1Stat, icon: featureIcons[0] },
+    { title: t.voiceCosmosPage.feature2Title, description: t.voiceCosmosPage.feature2Desc, stat: t.voiceCosmosPage.feature2Stat, icon: featureIcons[1] },
+    { title: t.voiceCosmosPage.feature3Title, description: t.voiceCosmosPage.feature3Desc, stat: t.voiceCosmosPage.feature3Stat, icon: featureIcons[2] },
+    { title: t.voiceCosmosPage.feature4Title, description: t.voiceCosmosPage.feature4Desc, stat: t.voiceCosmosPage.feature4Stat, icon: featureIcons[3] },
+  ];
+
+  const useCases = [
+    { title: t.voiceCosmosPage.useCase1Title, description: t.voiceCosmosPage.useCase1Desc, color: useCaseColors[0] },
+    { title: t.voiceCosmosPage.useCase2Title, description: t.voiceCosmosPage.useCase2Desc, color: useCaseColors[1] },
+    { title: t.voiceCosmosPage.useCase3Title, description: t.voiceCosmosPage.useCase3Desc, color: useCaseColors[2] },
+    { title: t.voiceCosmosPage.useCase4Title, description: t.voiceCosmosPage.useCase4Desc, color: useCaseColors[3] },
+  ];
+
+  const stats = [
+    { value: t.voiceCosmosPage.stat1Value, label: t.voiceCosmosPage.stat1Label },
+    { value: t.voiceCosmosPage.stat2Value, label: t.voiceCosmosPage.stat2Label },
+    { value: t.voiceCosmosPage.stat3Value, label: t.voiceCosmosPage.stat3Label },
+    { value: t.voiceCosmosPage.stat4Value, label: t.voiceCosmosPage.stat4Label },
+  ];
 
   return (
     <main className="flex flex-col">
@@ -290,7 +263,7 @@ export default function VoiceCosmosPage() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-bold tracking-[-0.04em] font-[family-name:var(--font-heading)] leading-[0.85]"
           >
-            <span className="text-white">VOICE</span>
+            <span className="text-white">{t.voiceCosmosPage.heroTitle1}</span>
             <br />
             <span
               style={{
@@ -300,7 +273,7 @@ export default function VoiceCosmosPage() {
                 backgroundClip: 'text',
               }}
             >
-              COSMOS
+              {t.voiceCosmosPage.heroTitle2}
             </span>
           </motion.h1>
 
@@ -310,7 +283,7 @@ export default function VoiceCosmosPage() {
             transition={{ duration: 0.6, delay: 0.9 }}
             className="mt-8 text-lg sm:text-xl md:text-2xl text-gray-300 font-[family-name:var(--font-heading)] tracking-wide"
           >
-            AI Voices That <span className="text-[#c4623a]">Understand</span>, Respond, and Connect
+            {t.voiceCosmosPage.heroSubtitle}<span className="text-[#c4623a]">{t.voiceCosmosPage.heroSubtitleAccent}</span>{t.voiceCosmosPage.heroSubtitleEnd}
           </motion.p>
 
           <motion.p
@@ -319,8 +292,7 @@ export default function VoiceCosmosPage() {
             transition={{ duration: 0.5, delay: 1.1 }}
             className="mt-4 max-w-md text-sm text-gray-500 leading-relaxed"
           >
-            Deploy conversational AI agents that handle calls, qualify leads,
-            and delight customers -- in any language.
+            {t.voiceCosmosPage.heroDescription}
           </motion.p>
 
           {/* Scroll indicator */}
@@ -336,7 +308,7 @@ export default function VoiceCosmosPage() {
               className="flex flex-col items-center gap-2"
             >
               <span className="text-[10px] tracking-[0.3em] uppercase text-gray-500">
-                Listen
+                {t.voiceCosmosPage.scrollIndicator}
               </span>
               <div className="h-8 w-[1px] bg-gradient-to-b from-gray-500 to-transparent" />
             </motion.div>
@@ -357,24 +329,22 @@ export default function VoiceCosmosPage() {
             {/* Left: text */}
             <AnimatedSection>
               <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#c4623a]">
-                Live Demo
+                {t.voiceCosmosPage.liveDemoLabel}
               </p>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)] mb-6">
-                A conversation,
+                {t.voiceCosmosPage.liveDemoTitle1}
                 <br />
-                <span className="gradient-text-nebula">not a script.</span>
+                <span className="gradient-text-nebula">{t.voiceCosmosPage.liveDemoTitle2}</span>
               </h2>
               <p className="text-base text-gray-400 leading-relaxed mb-8">
-                Our voice agents do not follow rigid decision trees. They engage in
-                natural, flowing dialogue -- understanding context, remembering earlier
-                parts of the conversation, and adapting in real time.
+                {t.voiceCosmosPage.liveDemoDescription}
               </p>
               <div className="space-y-4">
                 {[
-                  'Handles interruptions and topic changes gracefully',
-                  'Remembers context across the entire conversation',
-                  'Knows when to escalate to a human agent',
-                  'Captures structured data from unstructured speech',
+                  t.voiceCosmosPage.liveDemoPoint1,
+                  t.voiceCosmosPage.liveDemoPoint2,
+                  t.voiceCosmosPage.liveDemoPoint3,
+                  t.voiceCosmosPage.liveDemoPoint4,
                 ].map((point) => (
                   <div key={point} className="flex items-start gap-3">
                     <svg className="mt-0.5 h-4 w-4 shrink-0 text-[#c4623a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -401,15 +371,21 @@ export default function VoiceCosmosPage() {
                     <div className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-green-500 border-2 border-[#0a0a0f]" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-white">Heaven Voice Agent</p>
-                    <p className="text-[11px] text-green-400">Active now</p>
+                    <p className="text-sm font-medium text-white">{t.voiceCosmosPage.chatHeaderName}</p>
+                    <p className="text-[11px] text-green-400">{t.voiceCosmosPage.chatHeaderStatus}</p>
                   </div>
                 </div>
 
                 {/* Messages */}
                 <div className="space-y-4">
                   {chatMessages.map((msg, i) => (
-                    <ChatBubble key={i} message={msg} index={i} />
+                    <ChatBubble
+                      key={i}
+                      message={msg}
+                      index={i}
+                      agentLabel={t.voiceCosmosPage.chatBubbleLabelAgent}
+                      callerLabel={t.voiceCosmosPage.chatBubbleLabelCaller}
+                    />
                   ))}
                 </div>
 
@@ -430,7 +406,7 @@ export default function VoiceCosmosPage() {
                       />
                     ))}
                   </div>
-                  <span className="text-[11px] text-gray-600">Agent is listening...</span>
+                  <span className="text-[11px] text-gray-600">{t.voiceCosmosPage.chatTypingIndicator}</span>
                 </motion.div>
               </div>
             </div>
@@ -449,16 +425,16 @@ export default function VoiceCosmosPage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <AnimatedSection className="mb-16 md:mb-20 text-center">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#c4623a]">
-              Capabilities
+              {t.voiceCosmosPage.featuresLabel}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              Engineered for <span className="gradient-text-nebula">Natural Speech</span>
+              {t.voiceCosmosPage.featuresTitle}<span className="gradient-text-nebula">{t.voiceCosmosPage.featuresTitleAccent}</span>
             </h2>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             {features.map((feature, i) => (
-              <StaggerCard key={feature.title} index={i}>
+              <StaggerCard key={i} index={i}>
                 <div className="group relative h-full rounded-2xl glass glass-hover p-8 md:p-10 transition-all duration-500">
                   <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-gradient-to-br from-[#c4623a]/5 to-transparent" />
                   <div className="relative z-10">
@@ -495,16 +471,16 @@ export default function VoiceCosmosPage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <AnimatedSection className="mb-16 md:mb-20 text-center">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#2d8a8a]">
-              Use Cases
+              {t.voiceCosmosPage.useCasesLabel}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              Where Voice AI <span className="gradient-text-nebula">Excels</span>
+              {t.voiceCosmosPage.useCasesTitle}<span className="gradient-text-nebula">{t.voiceCosmosPage.useCasesTitleAccent}</span>
             </h2>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
             {useCases.map((uc, i) => (
-              <StaggerCard key={uc.title} index={i}>
+              <StaggerCard key={i} index={i}>
                 <div className="group relative rounded-2xl glass glass-hover p-8 md:p-10 transition-all duration-500">
                   <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl transition-opacity duration-500 opacity-40 group-hover:opacity-100" style={{ background: `linear-gradient(to right, ${uc.color}, transparent)` }} />
                   <div className="relative z-10">
@@ -531,8 +507,8 @@ export default function VoiceCosmosPage() {
           <AnimatedSection>
             <div className="rounded-2xl glass p-10 md:p-14">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-                {stats.map((stat) => (
-                  <div key={stat.label} className="text-center">
+                {stats.map((stat, i) => (
+                  <div key={i} className="text-center">
                     <p className="text-3xl md:text-4xl lg:text-5xl font-bold text-white font-[family-name:var(--font-heading)] tracking-tight">
                       {stat.value}
                     </p>
@@ -558,7 +534,7 @@ export default function VoiceCosmosPage() {
         <div className="relative z-10 mx-auto max-w-4xl px-6 md:px-12 text-center">
           <AnimatedSection>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)] mb-6">
-              Ready to deploy your{' '}
+              {t.voiceCosmosPage.ctaTitle}
               <span
                 style={{
                   background: 'linear-gradient(135deg, #c4623a, #c4847a)',
@@ -567,13 +543,12 @@ export default function VoiceCosmosPage() {
                   backgroundClip: 'text',
                 }}
               >
-                voice agent
+                {t.voiceCosmosPage.ctaTitleAccent}
               </span>
-              ?
+              {t.voiceCosmosPage.ctaTitleEnd}
             </h2>
             <p className="max-w-xl mx-auto text-base text-gray-400 leading-relaxed mb-10">
-              From first call to full deployment in under 2 weeks.
-              Let us build the voice of your brand.
+              {t.voiceCosmosPage.ctaDescription}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link

@@ -11,81 +11,15 @@ import {
 import { useLanguage } from '../../i18n/LanguageContext';
 
 // ---------------------------------------------------------------------------
-// Hotspot Data
+// Hotspot Data (static parts only - labels/descriptions come from t)
 // ---------------------------------------------------------------------------
-const hotspots = [
-  {
-    id: 'savemytime',
-    label: 'SaveMyTime AI Lab',
-    description:
-      'Voice AI platform with 24/7 customer automation',
-    link: 'https://savemytime.dev/',
-    x: 38,
-    y: 55,
-    color: '#2d8a8a',
-  },
-  {
-    id: 'livetranslations',
-    label: 'LiveTranslations',
-    description:
-      'AI video dubbing in 29 languages',
-    link: 'https://livetranslations.video/',
-    x: 62,
-    y: 30,
-    color: '#4a9eff',
-  },
-  {
-    id: 'yourdreams',
-    label: 'YourDreams.bio',
-    description:
-      '3D DNA visualization meets AI dream analysis',
-    link: 'https://www.yourdreams.bio/',
-    x: 75,
-    y: 60,
-    color: '#c4623a',
-  },
-  {
-    id: 'yourlongevity',
-    label: 'YourLongevity.bio',
-    description:
-      'AI-powered longevity tracking platform',
-    link: 'https://www.yourlongevity.bio/dashboard',
-    x: 28,
-    y: 35,
-    color: '#8b2020',
-  },
-  {
-    id: 'denisbozhkov',
-    label: 'Denis Bozhkov Art',
-    description:
-      'Procedural 3D canvas art and immersive digital gallery',
-    link: 'https://denisbozhkov-art.com/',
-    x: 55,
-    y: 15,
-    color: '#c4847a',
-  },
+const hotspotConfigs = [
+  { id: 'savemytime', link: 'https://savemytime.dev/', x: 38, y: 55, color: '#2d8a8a' },
+  { id: 'livetranslations', link: 'https://livetranslations.video/', x: 62, y: 30, color: '#4a9eff' },
+  { id: 'yourdreams', link: 'https://www.yourdreams.bio/', x: 75, y: 60, color: '#c4623a' },
+  { id: 'yourlongevity', link: 'https://www.yourlongevity.bio/dashboard', x: 28, y: 35, color: '#8b2020' },
+  { id: 'denisbozhkov', link: 'https://denisbozhkov-art.com/', x: 55, y: 15, color: '#c4847a' },
 ];
-
-// ---------------------------------------------------------------------------
-// Filter presets (CSS filter simulations)
-// ---------------------------------------------------------------------------
-const filterPresets: Record<string, { label: string; filter: string; description: string }> = {
-  normal: {
-    label: 'Visible',
-    filter: 'none',
-    description: 'Standard visible-light composite',
-  },
-  infrared: {
-    label: 'Infrared',
-    filter: 'hue-rotate(180deg) saturate(1.5) brightness(1.1)',
-    description: 'Simulated near-infrared view',
-  },
-  hydrogen: {
-    label: 'H-Alpha',
-    filter: 'hue-rotate(-30deg) saturate(2) contrast(1.2) brightness(0.9)',
-    description: 'Simulated hydrogen-alpha emission',
-  },
-};
 
 // ===========================================================================
 // PAGE
@@ -103,21 +37,39 @@ export default function ExplorePage() {
   const [activeFilter, setActiveFilter] = useState<string>('normal');
   const [zoom, setZoom] = useState(1);
 
+  const hotspots = hotspotConfigs.map((cfg) => {
+    const labelMap: Record<string, string> = {
+      savemytime: t.exploreData.hotspotSavemytimeLabel,
+      livetranslations: t.exploreData.hotspotLivetranslationsLabel,
+      yourdreams: t.exploreData.hotspotYourdreamsLabel,
+      yourlongevity: t.exploreData.hotspotYourlongevityLabel,
+      denisbozhkov: t.exploreData.hotspotDenisbozhkovLabel,
+    };
+    const descMap: Record<string, string> = {
+      savemytime: t.exploreData.hotspotSavemytimeDesc,
+      livetranslations: t.exploreData.hotspotLivetranslationsDesc,
+      yourdreams: t.exploreData.hotspotYourdreamsDesc,
+      yourlongevity: t.exploreData.hotspotYourlongevityDesc,
+      denisbozhkov: t.exploreData.hotspotDenisbozhkovDesc,
+    };
+    return { ...cfg, label: labelMap[cfg.id], description: descMap[cfg.id] };
+  });
+
   const filterPresetsLocal: Record<string, { label: string; filter: string; description: string }> = {
     normal: {
       label: t.explore.visible,
       filter: 'none',
-      description: 'Standard visible-light composite',
+      description: t.exploreData.filterDescNormal,
     },
     infrared: {
       label: t.explore.infrared,
       filter: 'hue-rotate(180deg) saturate(1.5) brightness(1.1)',
-      description: 'Simulated near-infrared view',
+      description: t.exploreData.filterDescInfrared,
     },
     hydrogen: {
       label: t.explore.hAlpha,
       filter: 'hue-rotate(-30deg) saturate(2) contrast(1.2) brightness(0.9)',
-      description: 'Simulated hydrogen-alpha emission',
+      description: t.exploreData.filterDescHydrogen,
     },
   };
 
@@ -294,7 +246,7 @@ export default function ExplorePage() {
                         </div>
                         <div className="flex items-center gap-3 md:gap-4 shrink-0">
                           <a href={h.link} target="_blank" rel="noopener noreferrer" className="text-[10px] md:text-xs tracking-[0.15em] uppercase text-[#2d8a8a] font-semibold hover:text-[#3aafaf] transition-colors" onClick={(e) => e.stopPropagation()}>
-                            Visit Project
+                            {t.exploreData.visitProject}
                           </a>
                           <button onClick={() => setActiveHotspot(null)} className="text-gray-600 hover:text-gray-400 transition-colors">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
@@ -347,7 +299,7 @@ export default function ExplorePage() {
               {/* Filter toggles */}
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-[10px] tracking-[0.2em] uppercase text-gray-500 mr-2 hidden sm:inline">
-                  Filter
+                  {t.exploreData.filterLabel}
                 </span>
                 {Object.entries(filterPresetsLocal).map(([key, preset]) => (
                   <button
@@ -508,7 +460,7 @@ function Hotspot({
   isActive,
   onToggle,
 }: {
-  hotspot: (typeof hotspots)[number];
+  hotspot: { id: string; label: string; description: string; link: string; x: number; y: number; color: string };
   isActive: boolean;
   onToggle: (id: string) => void;
   zoom?: number;

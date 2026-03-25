@@ -151,102 +151,98 @@ function DetectionBox({
   );
 }
 
-// ---------------------------------------------------------------------------
-// Features
-// ---------------------------------------------------------------------------
-const features = [
-  {
-    title: 'Object Detection & Classification',
-    description:
-      'State-of-the-art detection models that identify and classify thousands of object categories in real-time. From YOLO to custom architectures for your domain.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-        <rect x="7" y="7" width="10" height="10" rx="1" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Facial Recognition & Analysis',
-    description:
-      'Privacy-first facial analysis for age estimation, sentiment detection, and identity verification. GDPR-compliant with on-device processing options.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M8 14s1.5 2 4 2 4-2 4-2" />
-        <line x1="9" y1="9" x2="9.01" y2="9" />
-        <line x1="15" y1="9" x2="15.01" y2="9" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Medical Image Processing',
-    description:
-      'FDA-pathway diagnostic imaging AI for radiology, pathology, and dermatology. Assistive detection that helps clinicians catch what the eye might miss.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Industrial Quality Control',
-    description:
-      'Automated visual inspection for manufacturing lines. Detect defects at microscopic scale with sub-millisecond processing and zero false negatives.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        <path d="m9 12 2 2 4-4" />
-      </svg>
-    ),
-  },
-];
-
-// ---------------------------------------------------------------------------
-// Industries
-// ---------------------------------------------------------------------------
-const industries = [
-  {
-    name: 'Healthcare',
-    description: 'Diagnostic imaging, pathology analysis, patient monitoring, surgical assistance.',
-    color: '#4a9eff',
-    stat: '15+ Hospital Partners',
-  },
-  {
-    name: 'Manufacturing',
-    description: 'Defect detection, assembly verification, predictive maintenance, safety compliance.',
-    color: '#2d8a8a',
-    stat: '99.99% Uptime',
-  },
-  {
-    name: 'Retail',
-    description: 'Shelf analytics, customer flow, inventory monitoring, loss prevention.',
-    color: '#c4623a',
-    stat: '40% Shrink Reduction',
-  },
-  {
-    name: 'Security',
-    description: 'Perimeter monitoring, anomaly detection, crowd analytics, access control.',
-    color: '#c4847a',
-    stat: '24/7 Surveillance',
-  },
-];
-
-// ---------------------------------------------------------------------------
-// Accuracy stats
-// ---------------------------------------------------------------------------
-const accuracyStats = [
-  { value: '99.7%', label: 'Detection Accuracy', detail: 'Across all benchmarks' },
-  { value: 'Real-time', label: 'Processing Speed', detail: '30+ FPS on edge devices' },
-  { value: '<50ms', label: 'Edge Inference', detail: 'NVIDIA Jetson & Apple Neural' },
-  { value: '10M+', label: 'Images Processed', detail: 'Monthly across deployments' },
-];
-
 // ===========================================================================
 // PAGE
 // ===========================================================================
 export default function VisionNebulaPage() {
   const { t } = useLanguage();
+
+  // -------------------------------------------------------------------------
+  // Features (inside component to access translation keys)
+  // -------------------------------------------------------------------------
+  const features = [
+    {
+      title: t.visionNebulaPage.feature1Title,
+      description: t.visionNebulaPage.feature1Desc,
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+          <rect x="7" y="7" width="10" height="10" rx="1" />
+        </svg>
+      ),
+    },
+    {
+      title: t.visionNebulaPage.feature2Title,
+      description: t.visionNebulaPage.feature2Desc,
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+          <line x1="9" y1="9" x2="9.01" y2="9" />
+          <line x1="15" y1="9" x2="15.01" y2="9" />
+        </svg>
+      ),
+    },
+    {
+      title: t.visionNebulaPage.feature3Title,
+      description: t.visionNebulaPage.feature3Desc,
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+        </svg>
+      ),
+    },
+    {
+      title: t.visionNebulaPage.feature4Title,
+      description: t.visionNebulaPage.feature4Desc,
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
+      ),
+    },
+  ];
+
+  // -------------------------------------------------------------------------
+  // Industries
+  // -------------------------------------------------------------------------
+  const industries = [
+    {
+      name: t.visionNebulaPage.industry1Name,
+      description: t.visionNebulaPage.industry1Desc,
+      color: '#4a9eff',
+      stat: t.visionNebulaPage.industry1Stat,
+    },
+    {
+      name: t.visionNebulaPage.industry2Name,
+      description: t.visionNebulaPage.industry2Desc,
+      color: '#2d8a8a',
+      stat: t.visionNebulaPage.industry2Stat,
+    },
+    {
+      name: t.visionNebulaPage.industry3Name,
+      description: t.visionNebulaPage.industry3Desc,
+      color: '#c4623a',
+      stat: t.visionNebulaPage.industry3Stat,
+    },
+    {
+      name: t.visionNebulaPage.industry4Name,
+      description: t.visionNebulaPage.industry4Desc,
+      color: '#c4847a',
+      stat: t.visionNebulaPage.industry4Stat,
+    },
+  ];
+
+  // -------------------------------------------------------------------------
+  // Accuracy stats
+  // -------------------------------------------------------------------------
+  const accuracyStats = [
+    { value: t.visionNebulaPage.metric1Value, label: t.visionNebulaPage.metric1Label, detail: t.visionNebulaPage.metric1Detail },
+    { value: t.visionNebulaPage.metric2Value, label: t.visionNebulaPage.metric2Label, detail: t.visionNebulaPage.metric2Detail },
+    { value: t.visionNebulaPage.metric3Value, label: t.visionNebulaPage.metric3Label, detail: t.visionNebulaPage.metric3Detail },
+    { value: t.visionNebulaPage.metric4Value, label: t.visionNebulaPage.metric4Label, detail: t.visionNebulaPage.metric4Detail },
+  ];
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -298,7 +294,7 @@ export default function VisionNebulaPage() {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-bold tracking-[-0.04em] font-[family-name:var(--font-heading)] leading-[0.85]"
           >
-            <span className="text-white">VISION</span>
+            <span className="text-white">{t.visionNebulaPage.heroTitle1}</span>
             <br />
             <span
               style={{
@@ -308,7 +304,7 @@ export default function VisionNebulaPage() {
                 backgroundClip: 'text',
               }}
             >
-              NEBULA
+              {t.visionNebulaPage.heroTitle2}
             </span>
           </motion.h1>
 
@@ -318,7 +314,7 @@ export default function VisionNebulaPage() {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="mt-8 text-lg sm:text-xl md:text-2xl text-gray-300 font-[family-name:var(--font-heading)] tracking-wide"
           >
-            See What Others <span className="text-[#4a9eff]">Can&apos;t</span>
+            {t.visionNebulaPage.heroSubtitle}<span className="text-[#4a9eff]">{t.visionNebulaPage.heroSubtitleAccent}</span>
           </motion.p>
 
           <motion.p
@@ -327,8 +323,7 @@ export default function VisionNebulaPage() {
             transition={{ duration: 0.5, delay: 1.0 }}
             className="mt-4 max-w-md text-sm text-gray-500 leading-relaxed"
           >
-            Computer vision and image recognition systems that detect,
-            classify, and understand visual data in real-time.
+            {t.visionNebulaPage.heroDescription}
           </motion.p>
 
           {/* Scroll indicator */}
@@ -344,7 +339,7 @@ export default function VisionNebulaPage() {
               className="flex flex-col items-center gap-2"
             >
               <span className="text-[10px] tracking-[0.3em] uppercase text-gray-500">
-                Analyze
+                {t.visionNebulaPage.scrollIndicator}
               </span>
               <div className="h-8 w-[1px] bg-gradient-to-b from-gray-500 to-transparent" />
             </motion.div>
@@ -363,13 +358,13 @@ export default function VisionNebulaPage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <AnimatedSection className="mb-16 md:mb-20 text-center">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#4a9eff]">
-              Live Analysis
+              {t.visionNebulaPage.demoLabel}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              Detection in <span className="gradient-text-nebula">Action</span>
+              {t.visionNebulaPage.demoTitle}<span className="gradient-text-nebula">{t.visionNebulaPage.demoTitleAccent}</span>
             </h2>
             <p className="mt-6 max-w-xl mx-auto text-base text-gray-400">
-              Watch our models analyze and annotate visual data in real-time.
+              {t.visionNebulaPage.demoSubtitle}
             </p>
           </AnimatedSection>
 
@@ -391,17 +386,17 @@ export default function VisionNebulaPage() {
               {/* Detection boxes */}
               <DetectionBox
                 x="10%" y="15%" width="25%" height="30%"
-                label="Nebula Core" confidence="99.8%"
+                label={t.visionNebulaPage.detectionBox1Label} confidence={t.visionNebulaPage.detectionBox1Confidence}
                 color="#4a9eff" delay={0}
               />
               <DetectionBox
                 x="55%" y="25%" width="20%" height="25%"
-                label="Star Cluster" confidence="97.2%"
+                label={t.visionNebulaPage.detectionBox2Label} confidence={t.visionNebulaPage.detectionBox2Confidence}
                 color="#2d8a8a" delay={0.8}
               />
               <DetectionBox
                 x="30%" y="55%" width="35%" height="30%"
-                label="Dust Lane" confidence="95.6%"
+                label={t.visionNebulaPage.detectionBox3Label} confidence={t.visionNebulaPage.detectionBox3Confidence}
                 color="#c4623a" delay={1.6}
               />
 
@@ -413,14 +408,14 @@ export default function VisionNebulaPage() {
                   transition={{ delay: 0.5 }}
                   className="glass rounded-lg px-4 py-3"
                 >
-                  <p className="text-[10px] tracking-widest uppercase text-[#4a9eff] mb-1">Analysis Status</p>
+                  <p className="text-[10px] tracking-widest uppercase text-[#4a9eff] mb-1">{t.visionNebulaPage.analysisStatusLabel}</p>
                   <div className="flex items-center gap-2">
                     <motion.div
                       className="h-1.5 w-1.5 rounded-full bg-green-400"
                       animate={{ opacity: [1, 0.4, 1] }}
                       transition={{ duration: 1.5, repeat: Infinity }}
                     />
-                    <p className="text-[11px] text-gray-300">Processing -- 3 objects detected</p>
+                    <p className="text-[11px] text-gray-300">{t.visionNebulaPage.analysisStatusText}</p>
                   </div>
                 </motion.div>
               </div>
@@ -429,10 +424,10 @@ export default function VisionNebulaPage() {
               <div className="absolute bottom-0 left-0 right-0 z-30 bg-gradient-to-t from-black/80 to-transparent px-6 py-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <span className="text-[10px] tracking-wider uppercase text-gray-500">Model: YOLO-v9 Custom</span>
-                    <span className="text-[10px] tracking-wider uppercase text-gray-500">FPS: 32</span>
+                    <span className="text-[10px] tracking-wider uppercase text-gray-500">{t.visionNebulaPage.modelLabel}</span>
+                    <span className="text-[10px] tracking-wider uppercase text-gray-500">{t.visionNebulaPage.fpsLabel}</span>
                   </div>
-                  <span className="text-[10px] tracking-wider uppercase text-[#4a9eff]">Real-time Inference</span>
+                  <span className="text-[10px] tracking-wider uppercase text-[#4a9eff]">{t.visionNebulaPage.inferenceLabel}</span>
                 </div>
               </div>
 
@@ -454,10 +449,10 @@ export default function VisionNebulaPage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <AnimatedSection className="mb-16 md:mb-20 text-center">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#4a9eff]">
-              Capabilities
+              {t.visionNebulaPage.featuresLabel}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              What Our Eyes <span className="gradient-text-nebula">See</span>
+              {t.visionNebulaPage.featuresTitle}<span className="gradient-text-nebula">{t.visionNebulaPage.featuresTitleAccent}</span>
             </h2>
           </AnimatedSection>
 
@@ -495,10 +490,10 @@ export default function VisionNebulaPage() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
           <AnimatedSection className="mb-16 md:mb-20 text-center">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#2d8a8a]">
-              Industries
+              {t.visionNebulaPage.industriesLabel}
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)]">
-              Where We <span className="gradient-text-nebula">Deploy</span>
+              {t.visionNebulaPage.industriesTitle}<span className="gradient-text-nebula">{t.visionNebulaPage.industriesTitleAccent}</span>
             </h2>
           </AnimatedSection>
 
@@ -541,7 +536,7 @@ export default function VisionNebulaPage() {
             <div className="rounded-2xl glass p-10 md:p-14 border border-[#4a9eff]/10">
               {/* Section label */}
               <p className="mb-8 text-center text-xs tracking-[0.3em] uppercase text-[#4a9eff]">
-                Performance Metrics
+                {t.visionNebulaPage.metricsLabel}
               </p>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
                 {accuracyStats.map((stat) => (
@@ -574,7 +569,7 @@ export default function VisionNebulaPage() {
         <div className="relative z-10 mx-auto max-w-4xl px-6 md:px-12 text-center">
           <AnimatedSection>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] font-[family-name:var(--font-heading)] mb-6">
-              Ready to enhance your{' '}
+              {t.visionNebulaPage.ctaTitle}
               <span
                 style={{
                   background: 'linear-gradient(135deg, #4a9eff, #2d8a8a)',
@@ -583,13 +578,12 @@ export default function VisionNebulaPage() {
                   backgroundClip: 'text',
                 }}
               >
-                vision
+                {t.visionNebulaPage.ctaTitleAccent}
               </span>
-              ?
+              {t.visionNebulaPage.ctaTitleEnd}
             </h2>
             <p className="max-w-xl mx-auto text-base text-gray-400 leading-relaxed mb-10">
-              From proof-of-concept to production deployment, we will build
-              computer vision systems that see what matters most to your business.
+              {t.visionNebulaPage.ctaDescription}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
